@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from myApp import views
 urlpatterns = [
-    # url , view(處理)
+    # url , view(處理)functions
     path('admin/', admin.site.urls),
+    path('sayHellow/', views.sayHellow),
+    path('',views.definepage),
+
 ]
