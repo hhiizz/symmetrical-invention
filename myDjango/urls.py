@@ -19,7 +19,7 @@ from myApp import views
 urlpatterns = [
     # url , view(處理)functions
     path('admin/', admin.site.urls),
-    path('sayHellow/', views.sayHellow),
+    path('sayHello/<str:username>/<str:page>', views.sayHello),
     path('',views.definepage),
 
 ]
