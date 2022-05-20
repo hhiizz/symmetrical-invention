@@ -121,7 +121,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # 把新增的static 資料夾新增
-STATICFILES_DISR = [
+STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 # Default primary key field type

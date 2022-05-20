@@ -18,8 +18,8 @@ from django.urls import path
 from myApp import views
 urlpatterns = [
     # url , view(處理)functions
+    path('sayHello4/<str:username>/<str:page>', views.sayHello4),
     path('admin/', admin.site.urls),
     path('sayHello/<str:username>/<str:page>', views.sayHello),
     path('',views.definepage),
-
 ]
