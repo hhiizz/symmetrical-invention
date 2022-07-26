@@ -17,18 +17,14 @@ from cgi import test
 from django.contrib import admin
 from django.urls import path
 from myApp import views
+from mysql_member import views as mysqlviews
+
 urlpatterns = [
     # url , view(處理)functions
-    path('sayHello4/<str:username>/<str:page>', views.sayHello4),
-    path('admin/', admin.site.urls),
-    path('sayHello/<str:username>/<str:page>', views.sayHello),
     path('',views.definepage),
-    path('test-dict',views.test_dict),
-    path('dice',views.dice),
-    path('dice2',views.dice2),
-    path('dice3/<str:username>',views.dice3),
-    path('show',views.show),
-    path('filter',views.filter),
-
-
+    path('sing_up',mysqlviews.sing_up),
+    path('sing_in',mysqlviews.sing_in),
+    path('user-id/',mysqlviews.post_user),
+    path('long-in/',mysqlviews.longin_post),
+    path('sing_out/',mysqlviews.sing_out),
 ]
