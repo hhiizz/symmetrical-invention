@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from cgi import test
 from django.contrib import admin
 from django.urls import path
@@ -22,9 +23,14 @@ from mysql_member import views as mysqlviews
 urlpatterns = [
     # url , view(處理)functions
     path('',views.definepage),
-    path('sing_up',mysqlviews.sing_up),
-    path('sing_in',mysqlviews.sing_in),
+    path('sing_up/',mysqlviews.sing_up),
+    path('sing_in/',mysqlviews.sing_in),
     path('user-id/',mysqlviews.post_user),
     path('long-in/',mysqlviews.longin_post),
     path('sing_out/',mysqlviews.sing_out),
+    path('search/<str:user_name>/',mysqlviews.like),
+    path('search_job/',views.search_job),
+    path('search_job/<str:user_name>',views.search_job_username),
+    path('search_job_skill/',views.search_job_skill),
+    path('<str:user_name>/',views.definepage_useranme),
 ]

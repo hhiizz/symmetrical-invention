@@ -9,7 +9,8 @@
     <title>find work</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cover/">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  </head>
 
 
 
@@ -20,6 +21,7 @@
 alert('{{message}}')
 </script>
 {% endif %}
+
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -98,6 +100,25 @@ alert('{{message}}')
         justify-content: center;
         margin-left: 13%;
         }
+        .dropdown-menu{
+          display:none;
+          background:#ffffff;
+          opacity: .5;
+          margin-top: 40px;
+          margin-left: 95px;
+        }
+        .ahe{
+          margin: 20px;
+          padding-top: 30px;
+          justify-content: center;
+          text-align: center;
+          color: #000;
+          text-decoration: none;
+        }
+        .back{
+          background-image:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('{% static "images/findjob.jpg" %}');
+          background-color: aliceblue;
+        }
     </style>
 
 
@@ -105,28 +126,35 @@ alert('{{message}}')
     {% load static %}
     <link href="{% static 'cover.css' %}" rel="stylesheet" type="text/css">
   </head>
-  <body class="d-flex h-100 text-center text-white bg-dark" style="width:100%">
+  <body class="d-flex h-100 text-center text-white bg-dark back" >
 
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" >
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" style="max-width: 70rem;">
   {% if user_name %}
-  <header class="mb-auto" >
+  <header class="mb-auto " >
     <div >
-      <h3 class="float-md-start mb-0" style="margin: left -300px;">Find job</h3>
+      <h3 class="float-md-start mb-0" style="opacity :1;">Find job</h3>
       <nav class="nav nav-masthead justify-content-center float-md-end">
-        <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">主頁</a>
-        <a class="nav-link fw-bold py-1 px-0" href="#">收尋</a>
-        <a class="nav-link fw-bold py-1 px-0" href="D:/專題/sing_up/index.html">{{user_name |  truncatechars_html:5 }}的帳號</a>
+        <a class="nav-link fw-bold py-1 px-0" href="http://127.0.0.1:8000/{{user_name}}">主頁</a>
+        <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="http://127.0.0.1:8000/search_job/{{user_name}}">查尋</a>
+        <a class="btn dropdown-toggle nav-link fw-bold py-1 px-0" id="dropdown-toggle"style="font-size: 14px;color:rgba(255, 255, 255, .5);" >{{user_name |  truncatechars_html:5 }}的帳號</a>
+          </button>
+          <span class="dropdown-menu" id="dropdown-menu" style="min-width:110px;height: 110px;">
+            <a class="ahe" href="http://127.0.0.1:8000/search/{{user_name}}" id="userserver">用戶中心</a><br><hr>
+            <a href="http://127.0.0.1:8000/sing_out" class="ahe" style="padding-left:12px;">登出</a>
+          <span>
+
+
         <!-- <a class="nav-link fw-bold py-1 px-0" href="http://127.0.0.1:8000/sing_out" >{{user_name}}</a> -->
       </nav>
     </div>
   </header>
   {% else %}
-  <header class="mb-auto" >
+  <header class="mb-auto " >
     <div >
       <h3 class="float-md-start mb-0" style="margin: left -300px;">Find job</h3>
       <nav class="nav nav-masthead justify-content-center float-md-end">
-        <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">主頁</a>
-        <a class="nav-link fw-bold py-1 px-0" href="#">收尋</a>
+        <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="http://127.0.0.1:8000/search_job">主頁</a>
+        <a class="nav-link fw-bold py-1 px-0" href="http://127.0.0.1:8000/sing_in">收尋</a>
         <a class="nav-link fw-bold py-1 px-0" href="http://127.0.0.1:8000/sing_in">登入</a>
       </nav>
     </div>
@@ -135,33 +163,54 @@ alert('{{message}}')
 
   <main class="px-3 " >
     <div class="search bar1 ">
-      <form class="flex-container">
+      <form class="flex-container" method="GET" action="http://127.0.0.1:8000/search_job_skill/">
         {% csrf_token %}
-          <input type="text" placeholder="请输入您要搜索的内容...">
+          <input type="text" placeholder="请输入您要搜索的内容..." id="get_skill" name="get_skill">
+          <label for="get_skill"></label>
           <button type="submit" id="button_fun">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telegram" viewBox="0 0 16 16">
             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
             </svg>
           </button>
-      </form>
+          <input type="hidden" name="user_name" value="{{user_name}}">
+          <input type="hidden" name="page" value="1">
   </div>
-  <form action="/">
-    <input type="radio" style="color:cornflowerblue;" id ="sofeware" name="job" >
-    <label for="sofeware">軟體工程師</label>
-    <input type="radio" style="color:cornflowerblue;" id="hardware" name="job" >
-    <label for="hardware">硬體工程師</label>
-    <input type="radio" style="color:cornflowerblue;" id="firmware" name="job" >
-    <label for="firmware">韌體工程師</label>
-  </form>
+      <input type="radio" style="color:cornflowerblue;" id ="sofeware" name="job" value="軟體工程師" >
+      <label for="sofeware">軟體工程師</label>
+      <input type="radio" style="color:cornflowerblue;" id="hardware" name="job" value="硬體工程師">
+      <label for="hardware">硬體工程師</label>
+      <input type="radio" style="color:cornflowerblue;" id="firmware" name="job" value="韌體工程師">
+      <label for="firmware">韌體工程師</label>
+    </form>
   </main>
 
+</body>
+  <script>
+    var slide = 0;
 
+    function change(n){
+      $("#dropdown-menu").slideToggle("");
+      if (n == 1) {
+          slide = 0;
+          $(".fa-chevron-up").attr("style", "display:none")
+          $(".fa-chevron-down").attr("style", "display:block")
+      }
+      else {
+          slide = 1;
+          $(".fa-chevron-up").attr("style", "display:block")
+          $(".fa-chevron-down").attr("style", "display:none")
+      }
+    }
+    $(function () {
+        $("#dropdown-toggle").click(function () {
+            change(slide)
+        });
+    })
+  </script>
   <footer class="mt-auto text-white-50">
     <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
   </footer>
 </div>
 
 
-
-  </body>
 </html>

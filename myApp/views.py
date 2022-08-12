@@ -1,16 +1,38 @@
 from itertools import count
 from time import time
+from turtle import title
 from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import datetime
+from django import forms
 import random
+import pymysql
+from .models import getjob
+
+from .forms import GETSKILL
 # def sayHello4(request,username,page):
 #     now = datetime.now
 #     return render(request,'hello4.html',locals())#自動打包
 # def sayHello(request):
 #     return HttpResponse("<h3 style ='border-width:3px;border-style:dashed;border-color:#FFAC55;'>收到請求 Hellow!</h3>")
 def definepage(request):
+    return render(request,'heroes/index.html',locals())
+def definepage_useranme(request,user_name):
+    return render(request,'heroes/index.html',locals())
+def search_job(request):
     return render(request,'cover/index.html',locals())
+def search_job_username(request,user_name):
+    return render(request,'cover/index.html',locals())
+def search_job_skill(request):
+    if request.method== 'GET':
+        get_skill = request.GET['get_skill']
+        type_skill = request.GET['job']
+        user_name = request.GET['user_name']
+        page = int(request.GET['page'])
+        skill = get_skill.split(" ")
+        xxxx = getjob.objects.all()
+        return render(request,'search_job/search.html',locals())
+
 # def sayHello(request,username,page):
 #     username =username
 #     page = page

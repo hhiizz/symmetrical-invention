@@ -19,18 +19,13 @@
 body {
   text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
-  background-image: url(findjob.jpg);
-  background-size: cover;
-}
-.x{
-  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
-  background-image: url(findjob.jpg);
+  background-image:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('{% static "findjob.jpg" %}');
   background-size: cover;
 }
 
+
 .cover-container {
-  max-width: 60em;
+  max-width: 70rem;
 }
 
 

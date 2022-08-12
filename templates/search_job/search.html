@@ -1,0 +1,172 @@
+<style>
+    .divjob{
+        padding:20px;
+        height:auto;
+        line-height: 40px;
+    }
+    .divin{
+        width: 102%;
+        background-color: rgb(177, 192, 192);
+        margin-top:0px;
+        justify-content: center;
+        height: 200px;
+        border-radius: 5px;
+        margin-left: -17px;
+        box-shadow : 0px  10px  10px -10px  #333 ;
+    }
+    .flex{
+        display:flex;flex-wrap: nowrap;
+        flex-grow:0;
+    }
+    .diviner{
+        width:60%;
+        background-color:rgb(75, 64, 49,0.2); ;
+        align-self: center;
+        border-radius: 5px;
+    }
+    #skill{
+        width:32%;
+        background-color:rgb(75, 64, 49,0.2); ;
+        align-self: center;
+        height:50px;
+        border: none;
+        border-radius:5px;
+
+    }
+    #sub{
+        margin-left: 10px;
+        border-radius: 5px;
+        height:50px;
+        align-self: center;
+        background-color: rgb(213, 241, 231);
+    }
+    #opin{
+        height:110px;
+    }
+    .job_div{
+        overflow: hidden;
+        margin-left:10%;
+        width:1200px;
+        height: auto;
+        border: 2px solid rgb(18, 17, 17);
+        margin-top:35px;
+        border-radius: 5px;
+        color:black;
+        font-family:sans-serif;
+        padding-left:20px;
+        padding-top: 10px;
+        background-color: rgb(183, 173, 173);
+    }
+    h3,h5{
+        font-weight:bold;
+    }
+    hr.y{
+    height:380;
+    width:5px;
+    border-width:0;
+    color:#000;
+    background-color:rgba(20, 8, 8, 0.51);
+    }
+    .job_local{
+        margin-top: 30px;
+    }
+    a.title:hover{
+        color: darkorange;
+        font-size: 25px;
+        font-weight: bolder;
+    }
+    a.title{
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .font_bold{
+        font-weight: bold;
+    }
+</style>
+{% extends 'search_job/base.html'%}
+{%block main2%}
+
+<div class="divin flex" >
+    <div class="diviner flex" >
+        <input id="skill" value="{{get_skill}}">
+        <input id="skill" value="{{get_local}}" style="margin-right:0.8%;margin-left:2.2%;">
+        <select id="skill" value="{{get_skill}}" style="margin-left:1%;">
+            <option value="軟體工程師" id="opin">軟體工程師</option>
+            <option value="硬體工程師" id="opin">硬體工程師</option>
+            <option value="韌體工程師" id="opin">韌體工程師</option>
+        </select>
+    </div>
+    <input type="submit" id="sub">
+</div>
+<div class="job_div">
+    {% for i in xxxx %}
+        {% if i.website == "1111" %}
+        <div class=" flex">
+            <div style="padding:15;">
+                {% load static %}
+                <img alt="1111" style="width:70px;" height="70px" src="{% static 'images/1111.png' %}">
+            </div>
+            <div  class="divjob"style="text-align:left; width:59%;">
+                <h4><a class="title" href="{{i.href}}">{{i.title}}</a></h4>
+                <h5  class="font_bold job_local" >{{i.local}}</h5>
+                <p  class="font_bold" style="padding-top:5px;">{{i.company}}</p>
+                <p class="job_line_he30">
+                    {{i.content | truncatechars_html:220}}
+                </p>
+                <p class="font_bold">
+                    薪資:{{i.salary}}
+                </p>
+            </div>
+            <hr class="y">
+            <div  class="divjob" style="width:40%;text-align: left;">
+                <div class="flex">
+                <p>發布日期:{{i.date}}</p>
+
+                </div>
+                <p class="font_bold">所需技能:{{i.skill}}</p>
+                <p>經驗:{{i.experience}}</p>
+                <p>學歷:{{i.Education}}</p>
+                <p>附加條件:{{i.Additional_conditions | truncatechars_html:150}}</p>
+            </div>
+        </div>
+        <hr style="border-top:3px dashed #1c5a89;" width="98%">
+        {% else %}
+        <div class=" flex">
+            <div style="padding:15;">
+                {% load static %}
+                <img alt="1111" style="width:70px;" height="70px" src="{% static 'images/104.png' %}">
+            </div>
+            <div  class="divjob"style="text-align:left; width:59%;">
+                <h4><a class="title" href="{{i.href}}">{{i.title}}</a></h4>
+                <h5  class="font_bold job_local" >{{i.local}}</h5>
+                <p  class="font_bold" style="padding-top:5px;">{{i.company}}</p>
+                <p class="job_line_he30">
+                    {{i.content | truncatechars_html:220}}
+                </p>
+                <p class="font_bold">
+                    薪資:{{i.salary}}
+                </p>
+            </div>
+            <hr class="y">
+            <div  class="divjob" style="width:40%;text-align: left;">
+                <div class="flex">
+                <p>發布日期:{{i.date}}</p>
+
+                </div>
+                <p class="font_bold">所需技能:{{i.skill}}</p>
+                <p>經驗:{{i.experience}}</p>
+                <p>學歷:{{i.Education}}</p>
+                <p>附加條件:{{i.Additional_conditions | truncatechars_html:150}}</p>
+            </div>
+        </div>
+        <hr style="border-top:3px dashed #1c5a89;" width="98%">
+        {% endif %}
+    {% endfor %}
+</div>
+<p>{{type_skill}}</p>
+<p>{{user_name}}</p>
+<div>
+    <p>第{{page}}頁</p>
+</div>
+{% endblock %}
+

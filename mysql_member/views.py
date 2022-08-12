@@ -34,7 +34,15 @@ def post_user(request):
             form.is_valid()
             usernapo = dict()
             user_name =  form.cleaned_data['user_name']
+            for i in user_name:
+                if( not (i.isdigit() or i.isalpha())):
+                    message = '用戶名只能出現大小寫英文和數字'
+                    return render(request,'sing_in/sing_up.html',locals())
             pass_word =  form.cleaned_data['user_password']
+            for i in pass_word:
+                if( not (i.isdigit() or i.isalpha())):
+                    message = '密碼只能出現大小寫英文和數字'
+                    return render(request,'sing_in/sing_up.html',locals())
             try:
                 user_name = Member.objects.get(username=user_name)
                 message = '用戶名重複'
@@ -48,7 +56,6 @@ def post_user(request):
                 return render(request,'sing_in/sing_in.html',locals())
         else:
             form = NameForm()
-    return render(request, 'sing_in/sing_up.html', {'form': form})
 
 def longin_post(request):
     if request.method == 'POST':
@@ -63,7 +70,7 @@ def longin_post(request):
                     message = '密碼錯誤'
                     if(Member.objects.get(username=user_name,password=pass_word)):
                         message ="登入成功!"
-                return render(request,'cover/index.html',locals())
+                return render(request,'heroes/index.html',locals())
             except:
                 return render(request,'sing_in/sing_up.html',locals())
         else:
@@ -71,4 +78,6 @@ def longin_post(request):
     # return render(request,'cover/index.html',locals())
 
 def sing_out(request):
-    return render(request,'cover/index.html')
+    return render(request,'heroes/index.html')
+def like(request,user_name):
+    return render(request,'cover/member_server.html',locals())
