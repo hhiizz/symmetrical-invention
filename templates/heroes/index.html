@@ -3,7 +3,8 @@
 {%block main2%}
 {% load static %}
 <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
-
+{% load static %}
+<link href="{% static 'css/heroes.css' %}" rel="stylesheet">
 <style>
   .bd-placeholder-img {
     font-size: 1.125rem;
@@ -88,7 +89,7 @@
 
 <body>
 
-<main >
+<main style="max-width:100%;">
   <div class="px-4 py-5 my-5 text-center back1" >
     <h1 class="display-5 fw-bold ">Centered hero</h1>
     <div class="col-lg-6 mx-auto">
@@ -184,13 +185,27 @@
 
   <div class="b-example-divider mb-0"></div>
 </main>
-
 {% load static %}
 <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
 
 
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}
 
 {%block main%}
@@ -263,11 +278,11 @@
     color: white;
   }
   .back3{
-    background-image:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),url('{% static "images/back3.jpg" %}');
+    background-image:linear-gradient(rgba(112, 161, 168, 0.5), rgba(0,0,0,0.7)),url('{% static "images/back3.jpg" %}');
     background-size: cover;
   }
   .back4{
-    background-image:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),url('{% static "images/back4.jpg" %}');
+    background-image:linear-gradient(rgba(183, 203, 230, 0.5),  rgba(0,0,0,0.7)),url('{% static "images/back4.jpg" %}');
     background-size: cover;
   }
   div.back1,div.back2, div.b-example-divider{

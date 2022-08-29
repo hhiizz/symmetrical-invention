@@ -124,8 +124,26 @@ alert('{{message}}')
           background-repeat: no-repeat;
           width: 102%;
           height:100px;
+          display: fixed;
         }
-
+      @media (max-width: 769px) {
+      div.mb-auto div h3{
+        margin-left:-80%;
+        text-align: center;
+        display: inline-block;
+      }
+      div.mb-auto div nav{
+        position: absolute;
+        top: 1.8%;
+        left: 56%;
+        width: 50%;
+        margin: 0px;
+      }
+      /* a.ahe:hover{
+        color: #9E9C9C;
+        background-color: rgb(167, 129, 129);
+      }*/
+    }
 
     </style>
 
@@ -141,12 +159,12 @@ alert('{{message}}')
     <div class="backdiv2" >
       <h3 class="float-md-start mb-0 mag" style="align-items:center;">Find job</h3>
       <nav class="nav nav-masthead justify-content-center float-md-end" style="margin-right:207px;">
-        <a class="nav-link fw-bold py-1 px-0 " aria-current="page" href="http://127.0.0.1:8000/{{user_name}}">主頁</a>
-        <a class="nav-link fw-bold py-1 px-0 active" href="http://127.0.0.1:8000/search_job/{{user_name}}">查尋</a>
+        <a class="nav-link fw-bold py-1 px-0 " aria-current="page" href="/myApp/{{user_name}}">主頁</a>
+        <a class="nav-link fw-bold py-1 px-0 active" href="/myApp/search_job/{{user_name}}">查尋</a>
         <a class="btn dropdown-toggle nav-link fw-bold py-1 px-0" id="dropdown-toggle"style="font-size: 14px;color:rgba(255, 255, 255, .5);" >{{user_name |  truncatechars_html:5 }}的帳號</a>
           <span class="dropdown-menu" id="dropdown-menu" style="min-width:110px;height:110px;margin-top: 40px; margin-left: 90px;">
-            <a class="ahe" href="http://127.0.0.1:8000/search/{{user_name}}" id="userserver">用戶中心</a><br><hr>
-            <a href="http://127.0.0.1:8000/sing_out" class="ahe" style="padding-left:12px;">登出</a>
+            <a class="ahe" href="/member/search/{{user_name}}" id="userserver">用戶中心</a><br><hr>
+            <a href="/member/sing_out" class="ahe" style="padding-left:12px;">登出</a>
           <span>
         <!-- <a class="nav-link fw-bold py-1 px-0" href="http://127.0.0.1:8000/sing_out" >{{user_name}}</a> -->
       </nav>

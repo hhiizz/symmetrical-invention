@@ -16,7 +16,7 @@
 
     {% load static %}
     <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
-
+    {% load static %}
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -68,6 +68,58 @@
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
       }
+      .alert{
+        width: 110%;
+        height: 100%;
+        position:absolute;
+        background-color: rgb(255, 255, 255);
+        display: none;
+      }
+      .mistake{
+        border:2px groove rgb(224, 118, 118);
+        color:rgb(190, 86, 86);
+        padding: 10px;
+        background-color: rgb(238, 191, 200);
+        display: none;
+
+      }
+      #id_user_name:focus{
+        transition: 0.5s;
+      }
+      #id_user_password:focus{
+        transition: 0.5s;
+      }
+      button:hover{
+        transition: 0.5s;
+        background-color: rgb(64, 77, 101)!important;
+      }
+      .long_in{
+        display: none;
+        line-height: 1;
+        border-radius: 50px;
+        box-shadow: 10px 10px;
+        background-color: rgb(255, 254, 253);
+        width: 110%;
+        height: 115%;
+        top:-10%;
+        left: -5%;
+        position: absolute;
+        z-index: 1;
+      }
+      .long_in img{
+        width: 35%;
+        height: 40%;
+        text-shadow: 5px ;
+        margin-left: 32%;
+        margin-top: 13%;
+      }
+      .long_in h3{
+        margin-left: 35%;
+        font:bolder;
+      }
+      .long_in p{
+        margin-left:27%;
+      }
 
     </style>
 
@@ -86,33 +138,83 @@
         <h2 class="fw-bold mb-0">Sign up</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <div class="long_in" id="long_in">
+        {% load static %}
+        <img src="{% static 'images/sing_up.png'%}">
+        <h3>恭喜註冊成功</h3>
+      </br>
+        <p id="long_in_wait">正在為您轉跳登入畫面中，請稍後......3</p>
+      </div>
       <div class="modal-body p-5 pt-0">
-        <form action="/user-id/" method="POST">
+
+        <form action="/member/user-id/" method="POST">
           {% csrf_token %}
+          <div class="mistake" id="mistake">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+              <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+            </svg>
+            {{message}}
+          </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control rounded-3" id="id_user_name" value="" name="user_name"autofocus>
+            <input type="text" class="form-control rounded-3" id="id_user_name" value=""  name="user_name"autofocus >
             <label for="id_user_name">帳號</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control rounded-3" id="id_user_password"  name="user_password" value="">
+            <input type="password" class="form-control rounded-3" id="id_user_password"  name="user_password"  value="">
             <label for="id_user_password">密碼</label>
           </div>
-          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" style="background-color: rgb(64, 77, 101);"type="submit">註冊</button>
+          <input type="radio" name="lookpass" id="lookpass" onclick="getpass()">
+          <label for="lookpass" onclick="getpass()">密碼可見</label>
+          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" style="background-color: rgb(64, 77, 101); margin-top: 10px;"type="submit">註冊</button>
         </form>
+        <form hidden action="/member/long-in/"id="sing-in"  method="POST">
+          {% csrf_token %}
+          <input hidden  type="text" class="form-control rounded-3" id="user_name" value="{{usernapo.user_name}}" name='user_name' placeholder="username" >
+          <input hidden type="password" class="form-control rounded-3" id="user_password" name='user_password' placeholder="Password" value="{{usernapo.user_password}}">
+        </form>
+      </div>
       </div>
     </div>
   </div>
 </div>
 
 
-
-    {% if message %}
+  {% if message %}
+    {% if message == "註冊成功!" %}
       <script>
-      alert('{{message}}')
+          x = document.getElementById('long_in').style.display="block";
+          let time = 3;
+          for(var c =1;c<=3;c++){
+            setTimeout(function(){
+              time-=1;
+              inn = document.getElementById('long_in_wait');
+              inn.innerHTML = '正在為您轉跳登入畫面中，請稍後......'+ time ;
+              if(time==0){
+              document.getElementById('sing-in').submit();
+              }
+            },1000*c);
+          }
+      </script>
+    {% else %}
+      <script>
+        x = document.getElementById('mistake')
+        x.style.display="block";
+        document.getElementById('id_user_name').style.marginTop="15px";
       </script>
     {% endif %}
+  {% endif %}
+    <script>
+      function getpass(){
+        type =document.getElementById('id_user_password')
+        if(type.type=='text'){
+          type.type='password';
+          document.getElementById('lookpass').checked  = false;
+        }else{
+          type.type='text';
+        }
+      }
 
-
-
+    </script>
   </body>
 </html>

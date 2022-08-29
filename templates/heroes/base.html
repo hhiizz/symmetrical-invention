@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.98.0">
@@ -35,7 +35,6 @@ alert('{{message}}')
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
-
       }
 
       .b-example-divider {
@@ -102,11 +101,12 @@ alert('{{message}}')
         margin-left: 13%;
         }
         .dropdown-menu{
+          position:absolute;
+          top:40px;
           display:none;
           background:#ffffff;
-          opacity: .5;
-          margin-top: 40px;
-          margin-left: 95px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          width: 50px;
         }
         .ahe{
           margin: 20px;
@@ -118,8 +118,39 @@ alert('{{message}}')
         }
         h3.mag{
           margin-left:207px;
-        }
-
+            }
+      @media (max-width: 769px) {
+      header.mb-auto div h3{
+        margin-left:-80%;
+        text-align: center;
+        display: inline-block;
+      }
+      header.mb-auto div nav#b1{
+        position: absolute;
+        top: 1.8%;
+        left: 56%;
+        width: 50%;
+        margin: 0px;
+      }
+      header.mb-auto div nav#b2{
+        position: absolute;
+        top: 1.8%;
+        left: 62%;
+        width: 50%;
+        margin: 0px;
+      }
+      /* a.ahe:hover{
+        color: #9E9C9C;
+        background-color: rgb(167, 129, 129);
+      }*/
+    }
+    #dropdown-toggle{
+      position: relative;;
+    }
+    #dropdown-toggle:hover .dropdown-menu{
+        display: block;
+        transition: 0.5s;
+      }
 
 
     </style>
@@ -134,17 +165,17 @@ alert('{{message}}')
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" style="max-width: 100%;background-image:none;">
   {% if user_name %}
   <header class="mb-auto">
-    <div >
+    <div>
       <h3 class="float-md-start mb-0 mag">Find job</h3>
-      <nav class="nav nav-masthead justify-content-center float-md-end" style="margin-right:207px;">
-        <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="http://127.0.0.1:8000/{{user_name}}">主頁</a>
-        <a class="nav-link fw-bold py-1 px-0" href="http://127.0.0.1:8000/search_job/{{user_name}}">查尋</a>
-        <a class="btn dropdown-toggle nav-link fw-bold py-1 px-0" id="dropdown-toggle"style="font-size: 14px;color:rgba(255, 255, 255, .5);" >{{user_name |  truncatechars_html:5 }}的帳號</a>
-          <span class="dropdown-menu" id="dropdown-menu" style="min-width:110px;height:110px;margin-top: 40px; margin-left: 90px;">
-            <a class="ahe" href="http://127.0.0.1:8000/search/{{user_name}}" id="userserver">用戶中心</a><br><hr>
-            <a href="http://127.0.0.1:8000/sing_out" class="ahe" style="padding-left:12px;">登出</a>
+      <nav class="nav nav-masthead justify-content-center float-md-end" id="b1" style="margin-right:207px;">
+        <a class="nav-link fw-bold py-1 px-0 active" id="1"aria-current="page" href="/myApp/{{user_name}}">主頁</a>
+        <a class="nav-link fw-bold py-1 px-0" id ="2"href="/myApp/search_job/{{user_name}}">查尋</a>
+        <div class="btn dropdown-toggle nav-link fw-bold py-1 px-0" id="dropdown-toggle" style="font-size: 14px;color:rgba(255, 255, 255, .5);" >{{user_name |  truncatechars_html:5 }}的帳號
+          <span class="dropdown-menu" id="dropdown-menu" >
+            <a class="ahe" href="/member/search/{{user_name}}" id="userserver">用戶中心</a><br><hr>
+            <a href="/member/sing_out" class="ahe" style="padding-left:12px;">登出</a>
           <span>
-        <!-- <a class="nav-link fw-bold py-1 px-0" href="http://127.0.0.1:8000/sing_out" >{{user_name}}</a> -->
+        </div>
       </nav>
     </div>
   </header>
@@ -152,14 +183,14 @@ alert('{{message}}')
   {% else %}
   <header class="mb-auto" >
     <div >
-      <h3 class="float-md-start mb-0" style="margin-left:207px;">Find job</h3>
-      <nav class="nav nav-masthead justify-content-center float-md-end" style="margin-right:207px;">
-        <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="http://127.0.0.1:8000">主頁</a>
-        <a class="nav-link fw-bold py-1 px-0" href="http://127.0.0.1:8000/sing_in">收尋</a>
-        <a class="nav-link fw-bold py-1 px-0" href="http://127.0.0.1:8000/sing_in">登入</a>
+      <h3 class="float-md-start mb-0 mag">Find job</h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end" id='b2'style="margin-right:207px;">
+        <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="">主頁</a>
+        <a class="nav-link fw-bold py-1 px-0" href="/member/sing_in">收尋</a>
+        <a class="nav-link fw-bold py-1 px-0" href="/member/sing_in">登入</a>
         <span class="dropdown-menu" id="dropdown-menu" style="min-width:110px;height:110px;margin-top: 40px; margin-left: 90px;">
-          <a class="ahe" href="http://127.0.0.1:8000/search/{{user_name}}" id="userserver">用戶中心</a><br><hr>
-          <a href="http://127.0.0.1:8000/sing_out" class="ahe" style="padding-left:12px;">登出</a>
+          <a class="ahe" href="/member/search/{{user_name}}" id="userserver">用戶中心</a><br><hr>
+          <a href="/member/sing_out" class="ahe" style="padding-left:12px;">登出</a>
         <span>
       </nav>
     </div>
@@ -184,10 +215,15 @@ alert('{{message}}')
         $(".fa-chevron-down").attr("style", "display:none")
     }
   }
-  $(function () {
-      $("#dropdown-toggle").click(function () {
-          change(slide)
-      });
-  })
+  function onmous(){
+    document.getElementById('dropdown-menu').style.display='block';
+    document.getElementById('dropdown-menu').style.transition='0.5s';
+
+  }
+  function out(){
+    document.getElementById('dropdown-menu').style.display='none';
+    document.getElementById('dropdown-menu').style.transition='0.5s';
+  }
+
 </script>
 </html>

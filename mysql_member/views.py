@@ -7,7 +7,7 @@ import pymysql
 import datetime
 from .forms import NameForm
 from .forms import LongForm
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from django import forms
 # Create your views here.
 
@@ -43,17 +43,24 @@ def post_user(request):
                 if( not (i.isdigit() or i.isalpha())):
                     message = '密碼只能出現大小寫英文和數字'
                     return render(request,'sing_in/sing_up.html',locals())
+            if(len(user_name)>16 or len(pass_word)>16 or len(user_name)<6 or len(pass_word)<6):
+                message = '帳號密碼為6~16位數'
+                return render(request,'sing_in/sing_up.html',locals())
             try:
                 user_name = Member.objects.get(username=user_name)
                 message = '用戶名重複'
                 return render(request,'sing_in/sing_up.html',locals())
             except :
-                member=Member(username=user_name,password=pass_word,datetime=datetime.date.today())
+                try:
+                    max_id = int(Member.objects.last().id)
+                except:
+                    max_id = 1
+                member=Member(user_id=max_id,username=user_name,password=pass_word,datetime=datetime.date.today())
                 member.save()
                 message = '註冊成功!'
                 usernapo['user_name'] = user_name
                 usernapo['user_password'] = pass_word
-                return render(request,'sing_in/sing_in.html',locals())
+                return render(request,'sing_in/sing_up.html',locals())
         else:
             form = NameForm()
 
@@ -64,15 +71,15 @@ def longin_post(request):
             form.is_valid()
             user_name =  form.cleaned_data['user_name']
             pass_word =  form.cleaned_data['user_password']
-            message = '沒有此帳號'
             try:
-                if(Member.objects.get(username=user_name)):
-                    message = '密碼錯誤'
-                    if(Member.objects.get(username=user_name,password=pass_word)):
-                        message ="登入成功!"
-                return render(request,'heroes/index.html',locals())
+                if(Member.objects.get(username=user_name,password=pass_word)):
+                    return render(request,'heroes/index.html',locals())
+                elif(Member.objects.get(username=user_name)):
+                    message = '您的帳號錯誤或密碼錯誤'
+                    return render(request,'sing_in/sing_in.html',locals())
             except:
-                return render(request,'sing_in/sing_up.html',locals())
+                message = '您的帳號錯誤或密碼錯誤'
+                return render(request,'sing_in/sing_in.html',locals())
         else:
             form = LongForm()
     # return render(request,'cover/index.html',locals())
@@ -81,3 +88,7 @@ def sing_out(request):
     return render(request,'heroes/index.html')
 def like(request,user_name):
     return render(request,'cover/member_server.html',locals())
+
+
+def love(request):
+    return JsonResponse({'message':'success'})

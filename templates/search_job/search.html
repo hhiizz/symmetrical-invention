@@ -1,3 +1,4 @@
+
 <style>
     .divjob{
         padding:20px;
@@ -46,7 +47,7 @@
     .job_div{
         overflow: hidden;
         margin-left:10%;
-        width:1200px;
+        width:80%;
         height: auto;
         border: 2px solid rgb(18, 17, 17);
         margin-top:35px;
@@ -82,91 +83,318 @@
     .font_bold{
         font-weight: bold;
     }
+    .pagediv{
+        width: auto;
+    }
+    span.pagediv p{
+        display: inline;
+    }
+    .text-al{
+        text-align: center;
+    }
+    option.text-al{
+        border-radius: 5px;
+    }
+    div.divjob img{
+        position: absolute;
+        margin-top: -30px;
+        margin-left: 310px;
+    }
+    .love{
+        border: none;
+        position: absolute;
+        left:96%;
+        top:8%;
+        background-color: rgba(130, 211, 211, 0);
+
+    }
+    button.love #love1{
+        display: block;
+        position: absolute;
+    }
+    button.love #love2{
+        position: absolute;
+        display:none;
+        color: rgb(238, 40, 69);
+    }
+    #love1:hover{
+        color: rgb(191, 104, 121);
+    }
+    .diviner input,.diviner select{
+        text-indent: 10px;
+    }
+    .relative{
+        position: relative;
+    }
+    .job_name h4{
+        display:inline;
+    }
+    .number_img1{
+       position: absolute;
+        top: 8%;
+        left: 8%;
+        width: 80px;
+        height: 75px;
+    }
+    .number_img{
+       position: absolute;
+        top: 8%;
+        left: 8%;
+        width: 80px;
+        height: 100px;
+    }
+
 </style>
 {% extends 'search_job/base.html'%}
 {%block main2%}
-
+<form  method="GET" action="/myApp/search_job_skill/">
+{% csrf_token %}
 <div class="divin flex" >
+
     <div class="diviner flex" >
-        <input id="skill" value="{{get_skill}}">
-        <input id="skill" value="{{get_local}}" style="margin-right:0.8%;margin-left:2.2%;">
-        <select id="skill" value="{{get_skill}}" style="margin-left:1%;">
+        <input type="search" id="skill" value="{{get_skill}}" name="get_skill">
+
+        <input type="search" id="skill" value="{{get_local}}" name="get_local" style="margin-right:0.8%;margin-left:2.2%;">
+
+        <select id="skill" value="{{type_job}}" style="margin-left:1%;" name="job">
             <option value="軟體工程師" id="opin">軟體工程師</option>
             <option value="硬體工程師" id="opin">硬體工程師</option>
             <option value="韌體工程師" id="opin">韌體工程師</option>
         </select>
+
     </div>
-    <input type="submit" id="sub">
+    <button type="submit" id="sub" value="1 no" name="page" >提交</button>
 </div>
 <div class="job_div">
-    {% for i in xxxx %}
-        {% if i.website == "1111" %}
-        <div class=" flex">
-            <div style="padding:15;">
-                {% load static %}
-                <img alt="1111" style="width:70px;" height="70px" src="{% static 'images/1111.png' %}">
-            </div>
-            <div  class="divjob"style="text-align:left; width:59%;">
-                <h4><a class="title" href="{{i.href}}">{{i.title}}</a></h4>
-                <h5  class="font_bold job_local" >{{i.local}}</h5>
-                <p  class="font_bold" style="padding-top:5px;">{{i.company}}</p>
-                <p class="job_line_he30">
-                    {{i.content | truncatechars_html:220}}
-                </p>
-                <p class="font_bold">
-                    薪資:{{i.salary}}
-                </p>
-            </div>
-            <hr class="y">
-            <div  class="divjob" style="width:40%;text-align: left;">
-                <div class="flex">
-                <p>發布日期:{{i.date}}</p>
+        {% for i,n in dict_number.items %}
+            {% if i.website == "1111" %}
+                <div class=" flex">
+                    <div style="padding:15;">
+                        {% load static %}
+                        <img alt="1111" style="width:70px;" height="70px" src="{% static 'images/1111.png' %}">
+                    </div>
+                    <div  class="divjob"style="text-align:left; width:59%;">
+                        <span id="job_name" class="relative">
+                                <h4><a class="title" href="{{i.href}}">{{i.title}}</a></h4>
+                                <button type="button" onclick="love('{{ forloop.counter }}')" class="love" target="nm_iframe">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart love1" viewBox="0 0 16 16" id="love1" >
+                                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill love2" viewBox="0 0 16 16" id="love2">
+                                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                    </svg>
+                                </button>
+                        </span>
 
-                </div>
-                <p class="font_bold">所需技能:{{i.skill}}</p>
-                <p>經驗:{{i.experience}}</p>
-                <p>學歷:{{i.Education}}</p>
-                <p>附加條件:{{i.Additional_conditions | truncatechars_html:150}}</p>
-            </div>
-        </div>
-        <hr style="border-top:3px dashed #1c5a89;" width="98%">
-        {% else %}
-        <div class=" flex">
-            <div style="padding:15;">
-                {% load static %}
-                <img alt="1111" style="width:70px;" height="70px" src="{% static 'images/104.png' %}">
-            </div>
-            <div  class="divjob"style="text-align:left; width:59%;">
-                <h4><a class="title" href="{{i.href}}">{{i.title}}</a></h4>
-                <h5  class="font_bold job_local" >{{i.local}}</h5>
-                <p  class="font_bold" style="padding-top:5px;">{{i.company}}</p>
-                <p class="job_line_he30">
-                    {{i.content | truncatechars_html:220}}
-                </p>
-                <p class="font_bold">
-                    薪資:{{i.salary}}
-                </p>
-            </div>
-            <hr class="y">
-            <div  class="divjob" style="width:40%;text-align: left;">
-                <div class="flex">
-                <p>發布日期:{{i.date}}</p>
+                        <h5  class="font_bold job_local" >{{i.local}}</h5>
 
+                        <p  class="font_bold" style="padding-top:5px;">{{i.company}}</p>
+
+                        <p class="job_line_he30">
+                            {{i.content | truncatechars_html:220}}
+                        </p>
+
+                        <p class="font_bold">
+                            薪資:{{i.salary}}
+                        </p>
+
+                    </div>
+                    <hr class="y">
+
+                    <div  class="divjob relative" style="width:40%;text-align: left;">
+
+                        <div class="font_bold flex" style="flex-wrap:wrap; width:80%;">所需技能:
+
+                            {% load new_tage %}
+                            {% for getskill in i.skill|split:" " %}
+                                {% if getskill|lower in skill|lower %}
+                                    <p style="color:green;" class="skill">{{getskill}} &nbsp</p>
+                                {% elif getskill == "無" %}
+                                    <p>無</p>
+                                {% else %}
+                                    <p style="color:red;" class="skill">{{getskill}} &nbsp</p>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if n > 0 %}
+                                {% load static %}
+                                <img src="{% static 'images/1.png' %}" class="number_img1"><img>
+                            {%elif n >= -10 %}
+                                {% load static %}
+                                <img src="{% static 'images/2.png' %}" class="number_img"><img>
+                            {%elif n >= -20 %}
+                                {% load static %}
+                                <img src="{% static 'images/3.png' %}" class="number_img"><img>
+                            {%elif n >= -30 %}
+                                {% load static %}
+                                <img src="{% static 'images/4.png' %}" class="number_img"><img>
+                            {% else %}
+                                {% load static %}
+                                <img src="{% static 'images/5.png' %}" class="number_img"><img>
+                            {% endif %}
+                        </div>
+
+                        <p>發布日期:{{i.date}}</p>
+                        <p>經驗:{{i.experience}}</p>
+                        <p>學歷:{{i.Education}}</p>
+                        <p>附加條件:{{i.Additional_conditions | truncatechars_html:150}}</p>
+                    </div>
                 </div>
-                <p class="font_bold">所需技能:{{i.skill}}</p>
-                <p>經驗:{{i.experience}}</p>
-                <p>學歷:{{i.Education}}</p>
-                <p>附加條件:{{i.Additional_conditions | truncatechars_html:150}}</p>
-            </div>
-        </div>
-        <hr style="border-top:3px dashed #1c5a89;" width="98%">
+                <hr style="border-top:3px dashed #1c5a89;" width="98%">
+            {% else %}
+                <div class=" flex">
+                    <div style="padding:15;">
+                        {% load static %}
+                        <img alt="1111" style="width:70px;" height="70px" src="{% static 'images/104.png' %}">
+                    </div>
+                    <div  class="divjob"style="text-align:left; width:59%;">
+                        <span id="job_name" class="relative">
+                            <h4><a class="title" href="{{i.href}}">{{i.title}}</a></h4>
+                            <button type="button" onclick="love('{{ forloop.counter }}')" class="love" target="nm_iframe">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart love1" viewBox="0 0 16 16" id="love1" >
+                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill love2" viewBox="0 0 16 16" id="love2">
+                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                </svg>
+                            </button>
+                        </span>
+                        <h5  class="font_bold job_local" >{{i.local}}</h5>
+                        <p  class="font_bold" style="padding-top:5px;">{{i.company}}</p>
+                        <p class="job_line_he30">
+                            {{i.content | truncatechars_html:220}}
+                        </p>
+                        <p class="font_bold">
+                            薪資:{{i.salary}}
+                        </p>
+                    </div>
+                    <hr class="y">
+                    <div  class="divjob relative" style="width:40%;text-align: left;">
+                        <div class="font_bold flex " style="flex-wrap:wrap; width:80%;;">
+                            所需技能:
+                            {% load new_tage %}
+                            {% for getskill in i.skill|split:"、" %}
+                                {% if getskill|lower in skill|lower %}
+                                    <p style="color:green;" class="skill">{{getskill}}  &nbsp</p>
+                                {% elif getskill == "不拘" %}
+                                    <p>不拘</p>
+                                {% else%}
+                                    <p style="color:red;" class="skill">{{getskill}}  &nbsp</p>
+                                {% endif %}
+                            {% endfor %}
+                            {% if n > 0 %}
+                                {% load static %}
+                                <img src="{% static 'images/1.png' %}" class="number_img1"><img>
+                            {%elif n >= -10 %}
+                                {% load static %}
+                                <img src="{% static 'images/2.png' %}" class="number_img"><img>
+                            {%elif n >= -20 %}
+                                {% load static %}
+                                <img src="{% static 'images/3.png' %}" class="number_img"><img>
+                            {%elif n >= -30 %}
+                                {% load static %}
+                                <img src="{% static 'images/4.png' %}" class="number_img"><img>
+                            {% else %}
+                                {% load static %}
+                                <img src="{% static 'images/5.png' %}" class="number_img"><img>
+                            {% endif %}
+                        </div>
+                        <p>發布日期:{{i.date}}</p>
+                        <p>經驗:{{i.experience}}</p>
+                        <p>學歷:{{i.Education}}</p>
+                        <p>附加條件:{{i.Additional_conditions | truncatechars_html:150}}</p>
+                    </div>
+                </div>
+                <hr style="border-top:3px dashed #1c5a89;" width="98%">
+                {% endif %}
+        {% endfor %}
+</div>
+<input type="hidden" name="user_name" value="{{user_name}}">
+<div style="margin: 20px; ">
+    <span class="pagediv font-bold">
+        {% if page != 1 %}
+        <button type="submit"  style="border:none; background-color:rgba(220,38,38,0);" value="{{page}} last" name="page" onclick="page(2)">上一頁
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+            </svg>
+        </button>
         {% endif %}
-    {% endfor %}
+        <select style="width:auto;" name="select"  onchange="submit()" >
+            {% load new_tage %}
+            {% for i in maxpage|range %}
+                {% if i != page %}
+                    <option class="text-al" value="{{i}} no">第 {{i}} / {{maxpage}}頁</option>
+                {% else %}
+                    <option selected class="text-al" value="{{i}} no">第 {{page}} / {{maxpage}}頁</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        {% if page != maxpage %}
+            <button class=""type="submit" style="border:none; background-color:rgba(220,38,38,0);" value="{{page}} next" name="page"  onclick="page(3)">下一頁
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+            </svg></button>
+        {% endif %}
+    </span>
 </div>
-<p>{{type_skill}}</p>
-<p>{{user_name}}</p>
-<div>
-    <p>第{{page}}頁</p>
-</div>
-{% endblock %}
+</form>
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
+<script>
 
+     function getStyle ( dom, attr ) {
+        return getComputedStyle(dom)[attr]
+        }
+    function love(count){
+
+        count  =count-1
+        loveno = document.getElementsByClassName('love1')
+        loveyes = document.getElementsByClassName('love2');
+        if (getStyle(loveno[count],'display')== 'block' ){
+            loveno[count].style.display = "none" ;
+            loveyes[count].style.display= 'block';
+
+            let user='{{user_name}}';
+            let a = document.getElementsByClassName('title')[count].getAttribute("href",2)
+            let title = document.getElementsByClassName('title')[count].innerHTML
+            let skill = document.getElementsByClassName('skill')[count].innerHTML
+
+            data_like={
+                'user':user,
+                'a':a,
+                'title':title,
+                'skill':skill,
+            }
+            alert(data_like.title)
+
+            $.ajax({
+                url:'{% url "like" %}',
+                type:'GET',
+                data:a,
+                dataType:'json',
+
+                success:function(mesg){
+                    console.log(mesg);
+                },
+                error:function(mesg){
+                    console.log(mesg)
+                }
+
+            })
+        }else{
+            loveno[count].style.display= 'block';
+            loveyes[count].style.display= 'none';
+        }
+        // fetch('http://127.0.0.1:8000/search_job/').then(function(response){
+        //     console.log(response.type);
+        // })
+        // if(loveno[count].style.display =='block'){
+        //     loveno[count].style.display= 'none';
+        //     loveyes[count].style.display= 'block';
+        // }else{
+        //     loveno[count].style.display= 'block';
+        //     loveyes[count].style.display= 'none';
+        // }
+    }
+</script>
+{% endblock %}

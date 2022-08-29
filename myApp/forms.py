@@ -6,3 +6,4 @@ class GETSKILL(forms.Form):
     type_skill =forms.CharField(label='job',max_length=500)
     class Meta:
         fields = ('skill','type_skill')
+

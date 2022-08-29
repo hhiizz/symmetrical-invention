@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-72#%gzv+$b%in-7mdb##6^l=43@l!_@88le1s4jzmii$$958o6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.0.33',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myApp',
     'mysql_member',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +64,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # 新增templates
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [os.path.join(BASE_DIR / 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

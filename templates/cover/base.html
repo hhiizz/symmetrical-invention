@@ -35,6 +35,7 @@ alert('{{message}}')
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
+
       }
 
       .b-example-divider {
@@ -74,14 +75,7 @@ alert('{{message}}')
         -webkit-overflow-scrolling: touch;
       }
       /*搜索框1*/
-        .bar1 input {
-            width: 80%;
-            height: 45px;
-            border: 2px solid #7BA7AB;
-            border-radius: 5px;
-            background: #F9F0DA;
-            color: #9E9C9C;
-        }
+
         .bar1 button {
             top: 0;
             right: 0;
@@ -115,7 +109,39 @@ alert('{{message}}')
           color: #000;
           text-decoration: none;
         }
-
+        h3.mag{
+          margin-left:207px;
+        }
+        .divcolor{
+          background-color: rgb(148, 163, 163);
+          background-repeat: no-repeat;
+        }
+        .backdiv2{
+          padding-top: 28px;
+          margin: -18px;
+          align-items: center;
+          background-color: rgba(157, 142, 118, 1);
+          background-repeat: no-repeat;
+          width: 102%;
+          height:100px;
+          position: fixed;
+          overflow: auto;
+          box-shadow : -10px  10px  10px -10px  #333 ;
+        }
+        @media (max-width: 769px) {
+        div.mb-auto div.backdiv2 h3{
+          margin-left:-80%;
+          text-align: center;
+          display: inline-block;
+        }
+        div.mb-auto div nav{
+          position: absolute;
+          top: 25%;
+          left: 50%;
+          width: 50%;
+          margin-right: -35px;
+        }
+        }
 
     </style>
 
@@ -124,39 +150,25 @@ alert('{{message}}')
     {% load static %}
     <link href="{% static 'cover.css' %}" rel="stylesheet" type="text/css">
   </head>
-  <body class="d-flex h-100 text-center text-white bg-dark" style="width:100%; background-image:none">
+<body class="d-flex h-100 text-center text-white divcolor" style="width:100%; height: auto; background-size: cover;">
 
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" style="max-width: 100%;background-color:rgb(175, 195, 185);">
-  {% if user_name %}
-  <header >
-    <div >
-      <h3 class="float-md-start mb-0" style="margin-left:207px;">Find job</h3>
-      <nav class="nav nav-masthead justify-content-center float-md-end" style="margin-right:140px;">
-        <a class="nav-link fw-bold py-1 px-0 " aria-current="page" href="http://127.0.0.1:8000/{{user_name}}">主頁</a>
-        <a class="nav-link fw-bold py-1 px-0" href="http://127.0.0.1:8000/search_job/{{user_name}}">查尋</a>
-        <a class="btn dropdown-toggle nav-link fw-bold py-1 px-0 active" id="dropdown-toggle"style="font-size: 14px;color:white;height:60px;" >{{user_name |  truncatechars_html:5 }}的帳號</a>
-          <span class="dropdown-menu" id="dropdown-menu" style="min-width:110px;height:110px;margin-top: 40px;">
-            <a class="ahe" href="http://127.0.0.1:8000/search/{{user_name}}" id="userserver">用戶中心</a><br><hr>
-            <a href="http://127.0.0.1:8000/sing_out" class="ahe" style="padding-left:12px;">登出</a>
+<div class="cover-container d-flex w-100 h-100 p-3  flex-column divcolor" style="max-width: 100%;">
+  <div class="mb-auto">
+    <div class="backdiv2" >
+      <h3 class="float-md-start mb-0 mag" style="align-items:center;">Find job</h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end" style="margin-right:207px;">
+        <a class="nav-link fw-bold py-1 px-0 " aria-current="page" href="/{{user_name}}">主頁</a>
+        <a class="nav-link fw-bold py-1 px-0 active" href="/myApp/search_job/{{user_name}}">查尋</a>
+        <a class="btn dropdown-toggle nav-link fw-bold py-1 px-0" id="dropdown-toggle"style="font-size: 14px;color:rgba(255, 255, 255, .5);" >{{user_name |  truncatechars_html:5 }}的帳號</a>
+          <span class="dropdown-menu" id="dropdown-menu" style="min-width:110px;height:110px;margin-top: 40px; margin-left: 90px;">
+            <a class="ahe" href="/search/{{user_name}}" id="userserver">用戶中心</a><br><hr>
+            <a href="/sing_out" class="ahe" style="padding-left:12px;">登出</a>
           <span>
         <!-- <a class="nav-link fw-bold py-1 px-0" href="http://127.0.0.1:8000/sing_out" >{{user_name}}</a> -->
       </nav>
     </div>
-  </header>
-  {% block main2 %}{% endblock %}
-  {% else %}
-  <header class="mb-auto" >
-    <div >
-      <h3 class="float-md-start mb-0" style="margin-left:207px;">Find job</h3>
-      <nav class="nav nav-masthead justify-content-center float-md-end" style="margin-right:207px;">
-        <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="http://127.0.0.1:8000">主頁</a>
-        <a class="nav-link fw-bold py-1 px-0" href="http://127.0.0.1:8000/sing_in">收尋</a>
-        <a class="nav-link fw-bold py-1 px-0" href="http://127.0.0.1:8000/sing_in">登入</a>
-      </nav>
-    </div>
-    {% block main %}{% endblock %}
-  </header>
-  {% endif %}
+    {% block main2 %}{% endblock %}
+  </div>
 </div>
 </body>
 <script>

@@ -67,7 +67,35 @@
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
       }
-
+      .alert{
+        position:absolute;
+        top:-120px;
+        left:-20px;
+        width: 120%;
+        height: 100%;
+        background-color: rgb(255, 255, 255);
+        display: none;
+      }
+      .mistake{
+        border:2px groove rgb(224, 118, 118);
+        color:rgb(190, 86, 86);
+        padding: 10px;
+        background-color: rgb(238, 191, 200);
+        display: none;
+      }
+      #user_name:focus{
+        transition: 0.5s;
+      }
+      #user_password:focus{
+        transition: 0.5s;
+      }
+      button:hover{
+        transition: 1s;
+      }
+      a div:hover{
+        background-color: rgb(22, 22, 22);
+        transition: 0.5s;
+      }
     </style>
 
 
@@ -87,22 +115,38 @@
       </div>
       <div class="modal-body p-5 pt-0">
         {% if usernapo %}
-        <form action="/long-in/" method="POST">
+        <form action="/member/long-in/" method="POST">
           {% csrf_token %}
+          <div class="mistake" id="mistake">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+              <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+            </svg>
+            {{message}}
+          </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control rounded-3" id="user_name" name='user_name'value="{{usernapo.user_name}}" autofocus>
+            <input type="text" class="form-control rounded-3" id="user_name" name='user_name'value="{{usernapo.user_name}}" autofocus autocomplete="off">
             <label for="user_name">帳號</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control rounded-3" id="user_password" name='user_password' placeholder="只能輸入大小寫英文和數字組成的密碼" value="{{usernapo.user_password}}">
+            <input type="password" class="form-control rounded-3" id="user_password" name='user_password' placeholder="只能輸入大小寫英文和數字組成的密碼" value="{{usernapo.user_password}}" autocomplete="off">
             <label for="user_password" >密碼</label>
           </div>
           <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">登入</button>
-          <a href="http://127.0.0.1:8000/sing_up"><div class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" style="background-color: rgb(64, 77, 101);">註冊</div></a>
+          <a href="/member/sing_up">
+            <div class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" style="background-color: rgb(64, 77, 101);">註冊</div>
+          </a>
         </form>
         {% else %}
-        <form action="/long-in/" method="POST">
+        <form action="/member/long-in/" method="POST">
           {% csrf_token %}
+          <div class="mistake" id="mistake">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+              <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+            </svg>
+            {{message}}
+          </div>
           <div class="form-floating mb-3">
             <input type="text" class="form-control rounded-3" id="user_name" value="" name='user_name' placeholder="username" autofocus>
             <label for="user_name">帳號</label>
@@ -111,18 +155,35 @@
             <input type="password" class="form-control rounded-3" id="user_password" name='user_password' placeholder="Password" value="">
             <label for="user_password" >密碼</label>
           </div>
-          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">登入</button>
-          <a href="http://127.0.0.1:8000/sing_up"><div class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" style="background-color: rgb(64, 77, 101);">註冊</div></a>
+          <input type="radio" name="lookpass" id="lookpass" onclick="getpass()">
+          <label for="lookpass" onclick="getpass()">密碼可見</label>
+          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" style="margin-top:8px;">登入</button>
+          <a href="/member/sing_up"><div class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" style="background-color: rgb(64, 77, 101);">註冊</div></a>
         </form>
         {% endif %}
       </div>
     </div>
   </div>
 </div>
-  {% if message %}
-  <script>
-    alert('{{message}}')
-  </script>
-  {% endif %}
+
+{% if message %}
+<script>
+  x = document.getElementById('mistake')
+  x.style.display="block";
+  document.getElementById('user_name').style.marginTop="15px";
+</script>
+{% endif %}
+<script>
+function getpass(){
+  type =document.getElementById('user_password')
+  if(type.type=='text'){
+    type.type='password';
+    document.getElementById('lookpass').checked  = false;
+  }else{
+    type.type='text';
+  }
+}
+
+</script>
 </body>
 </html>
