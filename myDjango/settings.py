@@ -24,18 +24,30 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-72#%gzv+$b%in-7mdb##6^l=43@l!_@88le1s4jzmii$$958o6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = [
     '192.168.0.33',
     '127.0.0.1',
+    'b9d9-106-105-67-34.jp.ngrok.io',
+    '127.0.0.1:4040',
+    '*'
 ]
 
+SESSION_COOKIE_AGE=60*30*24#設定cookie時間
+SESSION_EXPIRE_AT_BROWSER_CLOSE=False#讓cookie關閉網頁部會失效
+# # Application definition
 
-# Application definition
-
+# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+# SECURE_SSL_REDIRECT = True # 将所有非SSL请求永久重定向到SSL
+# SESSION_COOKIE_SECURE = True # 仅通过https传输cookie
+# CSRF_COOKIE_SECURE = True # 仅通过https传输cookie
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True # 严格要求使用https协议传输
+# SECURE_HSTS_PRELOAD = True # HSTS为
+# SECURE_HSTS_SECONDS = 60
+# SECURE_CONTENT_TYPE_NOSNIFF = True # 防止浏览器猜测资产的内容类型
+DEBUG = True
 # 要執行app
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,8 +57,11 @@ INSTALLED_APPS = [
     'myApp',
     'mysql_member',
     'user',
+    'permission_admin',
+    'django_apscheduler',#定时执行任务
+    'dirtyfields',
+    "line_bot",
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -79,21 +94,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myDjango.wsgi.application'
 
-
+LINE_CHANNEL_ACCESS_TOKEN = 'EhkMyAc42vp96rTMDd0L5W1+0LzP2GanqE3IyYXBt1ZwWrNhLBGxWm+ZJkPHwItVCPBqhSz/IAcpMK6nHJSqnPgHXC5WS3L6HUw/PfibS3/Fh2bjn5f0pZOPaPULbusZcJiUb9hSm3DYrrPmmCWMygdB04t89/1O/w1cDnyilFU='
+ 
+LINE_CHANNEL_SECRET = '01bc924034d7d89e35518b7ec67a72dd'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'product',
+        'NAME': 'job_test',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': '127.0.0.1',
         'PORT': '3306',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        },
     }
 }
-
+CONN_HEALTH_CHECKS = True
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -117,7 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'zh-hant'
+LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'Asia/Taipei'
 
@@ -125,11 +145,10 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 # 把新增的static 資料夾新增
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
@@ -138,3 +157,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+SIMPLEUI_LOGO = '/static/images/seekingjob.png'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
+MEDIA_URL = '/media/'

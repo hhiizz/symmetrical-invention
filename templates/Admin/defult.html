@@ -1,0 +1,319 @@
+{% extends 'Admin/index.html' %}
+{% block main %}
+<style>
+    hr.task{
+    height: 40px!important;
+        width: 2px;
+        border-width:10px;
+        margin-top: -8px !important;
+        margin-bottom: -8px !important;
+        margin-left: 10px;
+        margin-right: 10px;
+        color:  #313530;
+    }
+    .flex{
+        display: flex;
+    }
+    .ver_1{
+        margin-top: 3px;
+        margin-left: 2px;
+        vertical-align: 10px !important;
+    }
+    a{
+        text-decoration: none;
+    }
+
+</style>
+<div class="container-fluid px-4" >
+    <h1 class="mt-4">管理者主頁</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">歡迎您管理者{{username}}，您可以在此管理網站的基本訊息，
+            以及查看網站是否正常運作，和回覆使用者的意見及網頁漏洞，感謝您的配合!
+        </li>
+    </ol>
+    <div class="row">
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-chart-area me-1"></i>
+                昨日抓取資料數
+            </div>
+            <div class="card-body"><canvas id="myAreaChart" width="100%" height="30"></canvas></div>
+            <div class="card-footer small text-muted time"></div>
+        </div>
+        <h4 class="p-2">例行檢查清單</h4>
+        <div class="col-xl-3 col-md-6">
+            {% if opinion_count == 0 %}
+            <div class="card bg-success p-2 text-dark bg-opacity-25 mb-4 ">
+                <a  class="text-success" href="{% url 'opinion_response' %}">
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle  ver_1" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                        </svg>
+                        <hr class="task">意見箱無需要回覆的訊息
+                    </div>
+                </a>
+            </div>
+            {% else %}
+            <div class="card text-danger p-2 text-dark bg-opacity-25 mb-4" style="background-color: rgba(176, 27, 27, 0.425);">
+                <a class="text-danger" href="{% url 'opinion_response' %}">
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond  ver_1" viewBox="0 0 16 16">
+                            <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+                            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                        </svg>
+                        <hr class="task">意見箱目前有{{opinion_count}}筆資料尚未回覆
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+
+            {% if recommend_bool == 1 %}
+            <div class="card bg-success p-2 text-dark bg-opacity-25 mb-4" >
+                <div class="flex text-success">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle  ver_1" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                    </svg>
+                    <hr class="task">昨日推送已完成!
+                </div>
+            </div>
+            {% elif recommend_bool == 2  %}
+                <div class="card bg-opacity-50 bg-warning p-2 text-dark mb-4" >
+                    <div  class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond  ver_1" viewBox="0 0 16 16">
+                            <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+                            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                            </svg>
+                        <hr class="task">昨日推送尚未完成!
+                    </div>
+                </div>
+            {% else %}
+                <div class="card bg-opacity-50 bg-danger p-2 text-dark mb-4" >
+                    <div  class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond  ver_1" viewBox="0 0 16 16">
+                            <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+                            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                            </svg>
+                        <hr class="task">昨日推送錯誤!
+                    </div>
+                </div>
+            {% endif %}
+
+
+
+
+            {% if crawler_104_state == 1 %}
+                <div class="card bg-success p-2 text-dark bg-opacity-25 mb-4" >
+                    <div class="flex text-success">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle  ver_1" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                        </svg>
+                        <hr class="task">爬蟲104已完成!
+                    </div>
+                </div>
+            {% elif crawler_104_state == 2  %}
+                <div class="card bg-opacity-50 bg-warning p-2 text-dark mb-4" >
+                    <div  class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond  ver_1" viewBox="0 0 16 16">
+                            <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+                            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                            </svg>
+                        <hr class="task">爬蟲104尚未完成!
+                    </div>
+                </div>
+            {% else %}
+                <div class="card bg-opacity-50 bg-danger p-2 text-dark mb-4" >
+                    <div  class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond  ver_1" viewBox="0 0 16 16">
+                            <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+                            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                            </svg>
+                        <hr class="task">爬蟲104錯誤!
+                    </div>
+                </div>
+            {% endif %}
+
+        {% if crawler_1111_state == 1 %}
+            <div class="card bg-success p-2 text-dark bg-opacity-25 mb-4" >
+                <div class="flex text-success">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle  ver_1" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                    </svg>
+                    <hr class="task">爬蟲1111已完成!
+                </div>
+            </div>
+        {% elif crawler_1111_state == 2  %}
+            <div class="card bg-opacity-50 bg-warning p-2 text-dark mb-4" >
+                <div  class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond  ver_1" viewBox="0 0 16 16">
+                        <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+                        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                        </svg>
+                    <hr class="task">爬蟲1111尚未完成!
+                </div>
+            </div>
+        {% else %}
+            <div class="card bg-opacity-50 bg-danger p-2 text-dark mb-4" >
+                <div  class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond  ver_1" viewBox="0 0 16 16">
+                        <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+                        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                        </svg>
+                    <hr class="task">爬蟲1111錯誤!
+                </div>
+            </div>
+        {% endif %}
+
+
+
+        {% if tesk_log == 1 %}
+            <div class="card bg-success p-2 text-dark bg-opacity-25 mb-4" >
+                <div class="flex text-success">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle  ver_1" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                    </svg>
+                    <hr class="task">昨日任務已完成!
+                </div>
+            </div>
+        {% elif tesk_log  == 2  %}
+            <div class="card bg-opacity-50 bg-warning p-2 text-dark mb-4" >
+                <div  class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond  ver_1" viewBox="0 0 16 16">
+                        <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+                        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                        </svg>
+                    <hr class="task">昨日任務尚未完成!
+                </div>
+            </div>
+        {% else %}
+            <div class="card bg-opacity-50 bg-danger p-2 text-dark mb-4" >
+                <div  class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-diamond  ver_1" viewBox="0 0 16 16">
+                        <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+                        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                        </svg>
+                    <hr class="task">昨日任務錯誤!
+                </div>
+            </div>
+        {% endif %}
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card p-2  bg-opacity-75  mb-4"  style="background-color: #f4a460;">
+                <a class=" text-dark" href="{% url 'notice_admin' %}">
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-megaphone ver_1"  viewBox="0 0 16 16"><path d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0v-.214c-2.162-1.241-4.49-1.843-6.912-2.083l.405 2.712A1 1 0 0 1 5.51 15.1h-.548a1 1 0 0 1-.916-.599l-1.85-3.49a68.14 68.14 0 0 0-.202-.003A2.014 2.014 0 0 1 0 9V7a2.02 2.02 0 0 1 1.992-2.013 74.663 74.663 0 0 0 2.483-.075c3.043-.154 6.148-.849 8.525-2.199V2.5zm1 0v11a.5.5 0 0 0 1 0v-11a.5.5 0 0 0-1 0zm-1 1.35c-2.344 1.205-5.209 1.842-8 2.033v4.233c.18.01.359.022.537.036 2.568.189 5.093.744 7.463 1.993V3.85zm-9 6.215v-4.13a95.09 95.09 0 0 1-1.992.052A1.02 1.02 0 0 0 1 7v2c0 .55.448 1.002 1.006 1.009A60.49 60.49 0 0 1 4 10.065zm-.657.975 1.609 3.037.01.024h.548l-.002-.014-.443-2.966a68.019 68.019 0 0 0-1.722-.082z"/></svg>
+                        <hr class="task">廣播用戶
+                    </div>
+                </a>
+            </div>
+            <div class="card p-2  bg-opacity-75  mb-4"  style="background-color: #f4a460;">
+                <a class=" text-dark" href="{% url 'crawler_log' %}">
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-event ver_1" viewBox="0 0 16 16">
+                            <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                          </svg>
+                        <hr class="task">查看爬蟲日誌
+                    </div>
+                </a>
+            </div>
+            <div class="card p-2  bg-opacity-75  mb-4"  style="background-color: #f4a460;">
+                <a class=" text-dark" href="{% url 'opinion_response' %}">
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mailbox ver_1" viewBox="0 0 16 16">
+                            <path d="M4 4a3 3 0 0 0-3 3v6h6V7a3 3 0 0 0-3-3zm0-1h8a4 4 0 0 1 4 4v6a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V7a4 4 0 0 1 4-4zm2.646 1A3.99 3.99 0 0 1 8 7v6h7V7a3 3 0 0 0-3-3H6.646z"/>
+                            <path d="M11.793 8.5H9v-1h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.354-.146l-.853-.854zM5 7c0 .552-.448 0-1 0s-1 .552-1 0a1 1 0 0 1 2 0z"/>
+                          </svg>
+                          <hr class="task">查看未回覆的意見
+                    </div>
+                </a>
+            </div>
+            <div class="card p-2  bg-opacity-75  mb-4"  style="background-color: #f4a460;">
+                <a class=" text-dark" href="{% url 'crawler_log' %}">
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-escape ver_1" viewBox="0 0 16 16">
+                            <path d="M8.538 1.02a.5.5 0 1 0-.076.998 6 6 0 1 1-6.445 6.444.5.5 0 0 0-.997.076A7 7 0 1 0 8.538 1.02Z"/>
+                            <path d="M7.096 7.828a.5.5 0 0 0 .707-.707L2.707 2.025h2.768a.5.5 0 1 0 0-1H1.5a.5.5 0 0 0-.5.5V5.5a.5.5 0 0 0 1 0V2.732l5.096 5.096Z"/>
+                          </svg>
+                          <hr class="task">查看推送日誌
+                    </div>
+                </a>
+            </div>
+            <div class="card p-2  bg-opacity-75  mb-4"  style="background-color: #f4a460;">
+                <a class=" text-dark" href="{% url 'tesk_log' %}">
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-escape ver_1" viewBox="0 0 16 16">
+                            <path d="M8.538 1.02a.5.5 0 1 0-.076.998 6 6 0 1 1-6.445 6.444.5.5 0 0 0-.997.076A7 7 0 1 0 8.538 1.02Z"/>
+                            <path d="M7.096 7.828a.5.5 0 0 0 .707-.707L2.707 2.025h2.768a.5.5 0 1 0 0-1H1.5a.5.5 0 0 0-.5.5V5.5a.5.5 0 0 0 1 0V2.732l5.096 5.096Z"/>
+                          </svg>
+                          <hr class="task">查看任務日誌
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                        今日新增會員
+                </div>
+                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                        今日意見箱情況
+                </div>
+                <div class="card-body"><canvas id="mydoughnutChart" width="100%" height="40"></canvas></div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                        昨日工作推送
+                </div>
+                <div class="card-body"><canvas id="myarea_recommend" width="100%" height="40"></canvas></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="../../static/js/chart-area-demo.js" type="text/JavaScript"></script>
+<script src="../../static/js/chart-bar-demo.js" type="text/JavaScript"></script>
+<script src="../../static/js/chart-doughnut-demo.js" type="text/JavaScript"></script>
+
+<script>
+    key = '{{key_str|safe}}'.split('、')
+    val = '{{val_str}}'.split('、')
+    key_member = '{{key_str_member|safe}}'.split('、')
+    val_member = '{{val_str_member|safe}}'.split('、')
+    key_opinion = '{{key_opinion|safe}}'.split('、')
+    val_opinion = '{{val_opinion|safe}}'.split('、')
+    AreaChart2(key,val,'昨日抓取資料量')
+
+    bar_admin(key_member,val_member,'新增會員')
+    doughnutchartjs(key_opinion,val_opinion)
+    key = '{{key_recom|safe}}'.split('、')
+    val = '{{val_recom|safe}}'.split('、')
+    AreaChart_auto_recommend(key,val,'推送狀態','myarea_recommend')
+    document.getElementById('btnNavbarSearch').addEventListener('click',function(){
+
+        let search  = JSON.parse('{{list_search | safe}}')[document.getElementById('search_index').value]
+        search = document.URL.replace('/admin_index/',search)
+        document.getElementById('search_form').action = search
+        document.getElementById('search_form').submit()
+    })
+    var Today=new Date();
+    let count_time = document.getElementsByClassName('time')
+    for (let i=0;i<count_time.length;i++){
+        count_time[i].innerHTML = "更新時間  "+Today.getHours()+':'+Today.getMinutes();
+    }
+</script>
+{% endblock %}

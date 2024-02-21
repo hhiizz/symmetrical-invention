@@ -1,0 +1,611 @@
+{% extends 'Admin/index.html' %}
+{% block main %}
+<style>
+        .hidd_div div{
+        margin-bottom: 20PX;
+    }
+    .hidd_div div span{
+        margin-bottom: 20PX;
+        margin-left: 50px;
+    }
+    .hidd_div{
+        margin-left: 3%;
+    }
+    .table_change{
+        float: left;
+        margin-right:30px;
+    }
+    .table_change th,.table_change td{
+        padding-bottom: 30px;
+        margin-bottom: 10px;
+    }
+    .table_change input,.table_change select{
+        margin-left: 20px;
+    }
+    #upandno{
+        clear: left;
+        display: flex;
+        justify-content: center;
+    }
+    #upandno button{
+        margin-right: 10px;
+    }
+    .ver_1{
+        vertical-align: -1px;
+    }
+    #recommend_manage{
+        color: rgb(207, 255, 226);
+    }
+</style>
+<div class="container-fluid px-4">
+    <h1 class="mt-4">推送設定</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">您可以管理用戶的推送設定</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            推送管理設定
+        </div>
+        <form  action="{% url 'admin_recommend' %}" method="get" >
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <button type="button" class="btn btn-success m-1" style="visibility: hidden;" id="add">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle ver_1" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                          </svg>
+                          添加
+                    </button>
+                    <button type="button" class="btn btn-danger m-1" style="visibility: hidden;" id="remove">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle ver_1" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                          </svg> 刪除</button>
+                          <span style="margin-top: 10px; position: absolute;right: 70px;width: 240px;">
+                            <select id="search_key_type" name="search_key_type"  onchange="change_button(this)">
+                                <option value="id">id</option>
+                                <option value="user_name" >user_name</option>
+                                <option value="type">type</option>
+                            </select>
+                        </span>
+                        <span style="margin-top: 10px; position: absolute;right: 30px;">
+                            <input id="search_key" name="key_word_submit_2" type="text" value="{{keyword}}">
+                            <button type="submit" id="key_word_submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg></button>
+                        </span>
+                    </form> 
+                        <tr>
+                        <th>操作功能</th>
+                        <th>id</th>
+                        <th>帳號</th>
+                        <th>是否開啟推送</th>
+                        <th>推送工作纇</th>
+                        <th>篩選技能</th>
+                        <th>篩選地區</th>
+                        <th>推送篩選分數</th>
+                        <th>推送數量</th>
+                        <th>Email通知</th>
+                        <th>line-bot通知</th>
+                        <th>經驗篩選</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in current_page %}
+                    <tr class="crawler_total" onclick="change_member(event,'{{forloop.counter}}')">
+                        <td>
+                            <input type="checkbox" class="delect_box" name="delect_box" value="{{i.id}}">
+                        </td>
+                        <td>{{i.id}}</td>
+                        <td>{{i.recom_user_name_id}}</td>
+                        <td>{{i.recom_open}}</td>
+                        <td>{{i.recom_job_type_id}}</td>
+                        <td>{{i.recom_skill}}</td>
+                        <td>{{i.recom_local | default_if_none:""}}</td>
+                        <td>{{i.recom_fraction}}</td>
+                        <td>{{i.recom_count}}</td>
+                        <td>{{i.recom_email_open}}</td>
+                        <td>{{i.recom_line_bot}}</td>
+                        <td>{{i.recom_Experience  | default_if_none:""}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div  class="hidd_div p-5">
+            <table class="table_change" >
+                <tbody>
+                    <tr class="id">
+                        <th>id</th>
+                        <td><input class="inner" readonly type="text" value=""></td>
+                    </tr>
+                    <tr>
+                        <th>帳號</th>
+                        <td>
+                            <input class="inner" readonly type="text" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>是否開啟推送</th>
+                        <td class="inner">
+                            <input id="yes_open" type="radio" name="remommend_open" value="True">
+                            <label for="yes_open">是</label>
+
+                            <input id="no_open" type="radio" name="remommend_open" value="False">
+                            <label for="no_open">否</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>推送工作纇</th>
+                        <td ><select class="inner" style="width: 183px;height: 30px;" >
+                            <option selected="selected" disabled="disabled"  style='display: none' value=''></option>
+                            {% for i,v in dict_jobname.items %}
+                                <optgroup label="{{i}}" style="padding: 20px;" >
+                                    {% for z in v %}
+                                            <option value="{{z}}" class="opin">{{z}}</option>
+                                    {% endfor %}
+                                </optgroup>
+                            {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>篩選技能</th>
+                        <td><input class="inner" readonly type="" value="" placeholder="技能請用、隔開..."></td>
+                    </tr>
+                    <tr>
+                        <th>篩選地區</th>
+                        <td>
+                            <select class="inner" id="recommend_local" >
+                                <option value="" selected>無</option>
+                            <optgroup label="北部">          
+                                <option class="inner_county" value="台北市">台北市</option>
+                                <option class="inner_county" value="新北市">新北市</option>
+                                <option class="inner_county" value="基隆市">基隆市</option>
+                                <option class="inner_county" value="桃園市">桃園市</option>
+                                <option class="inner_county" value="新竹市">新竹市</option>
+                                <option class="inner_county" value="新竹縣">新竹縣</option>
+                                <option class="inner_county" value="苗栗縣">苗栗縣</option>
+                            </optgroup>
+                            <optgroup label="中部">
+                                <option class="inner_county" value="台中市">台中市</option>
+                                <option class="inner_county" value="南投縣">南投縣</option>
+                                <option class="inner_county" value="彰化縣">彰化縣</option>
+                                <option class="inner_county" value="雲林縣">雲林縣</option>
+                            </optgroup>
+                            <optgroup label="南部">
+                                <option class="inner_county" value="嘉義市">嘉義市</option>
+                                <option class="inner_county" value="嘉義縣">嘉義縣</option>
+                                <option class="inner_county" value="台南市">台南市</option>
+                                <option class="inner_county" value="高雄市">高雄市</option>
+                                <option class="inner_county" value="屏東縣">屏東縣</option>
+                            </optgroup>
+                            <optgroup label="東部">
+                                <option class="inner_county" value="宜蘭縣">宜蘭縣</option>
+                                <option class="inner_county" value="花蓮縣">花蓮縣</option>
+                                <option class="inner_county" value="台東縣">台東縣</option>
+                            </optgroup>
+                            <optgroup label="離島">
+                                <option class="inner_county" value="澎湖縣">澎湖縣</option>
+                                <option class="inner_county" value="金門縣">金門縣</option>
+                                <option class="inner_county" value="連江縣">連江縣</option>
+                            </optgroup>
+                    </select></td>
+                    </tr>
+                    <tr>
+                        <th>推送篩選分數</th>
+                        <td>
+                            <select class="inner" style="width: 183px;height: 30px;" >
+                            <option selected="selected" disabled="disabled"  style='display: none' value=''></option>
+                                <option value="0">完全符合</option>
+                                <option value="3">符合7成</option>
+                                <option value="5">符合5成</option>
+                                <option value="7">符合3成</option>
+                                <option value="max">不限制</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <th>推送數量</th>
+                        <td><input class="inner" type="text" pattern="^\d+|max$"  min="0" placeholder="數量超過1000則表示沒有限制..."></td>
+                    </tr>
+                    <tr>
+                        <th>Email通知</th>
+                        <td class="inner">
+                            <input id="yes_email" type="radio" name="email_open" value="True">
+                            <label for="yes_email">是</label>
+
+                            <input id="no_email" type="radio" name="email_open" value="False">
+                            <label for="no_email">否</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Line-Bot通知</th>
+                        <td class="inner">
+                            <input id="yes_line_bot" type="radio" name="line_bot_open" value="True">
+                            <label for="yes_line_bot">是</label>
+
+                            <input id="no_line_bot" type="radio" name="line_bot_open" value="False">
+                            <label for="no_line_bot">否</label>
+                        </td>
+                    </tr>       
+                </tbody>
+            </table>
+            <div  id="upandno">
+                <!-- <button type="button"  class="btn btn-success" id="update">儲存</button> -->
+                <button type="button"  class="btn btn-danger" id="none_data">返回</button>
+            </div>
+        </div>
+    </div>
+    <form id="getjob_submit" method="GET" action="{% url 'admin_recommend' %}" >
+        <input name="key_word_submit_2" type="text" value="{{keyword}}"  hidden>
+        <input name="search_key_type" type="text" value="{{type_keyword}}"  hidden>
+        <nav id="page_search"  aria-label="Page navigation example">
+            <ul class="pagination justify-content-center page_nav">
+            {% if current_page.has_previous %}
+            <li class="page-item">
+                <span class="page-link" onclick="page_fun('last')"><<</span>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link" ><<</span>
+            </li>
+            {% endif %}
+            {% if page_start_end.start %}
+                <li class="page-item" onclick="page_fun('1')"><a class="page-link" >1</a></li>
+                <li class="page-item" ><a class="page-link" >...</a></li>
+            {% endif %}
+            {% for item in page_range %}
+                {% if page == item %}
+                    <li class="page-item active">
+                        <span class="page-link">
+                        {{item}}
+                        </span>
+                    </li>
+                {% else %}
+                    <li class="page-item" onclick="page_fun('{{item}}')"><a class="page-link" >{{item}}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if page_start_end.end %}
+                <li class="page-item"><a class="page-link" >...</a></li>
+                <li class="page-item" onclick="page_fun('{{page_start_end.max_page}}')" ><a class="page-link" >{{page_start_end.max_page}}</a></li>
+            {% endif %}
+            {% if current_page.has_next %}
+            <li class="page-item">
+                <a class="page-link" onclick="page_fun('next')" >>></a>
+            </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">>></a>
+                </li>
+            {% endif %}
+            </ul>
+        </nav>
+        <input name="page" id="page" hidden value="{{page}}">
+    </form>
+</div>
+<script>
+    document.getElementById('recommend_inner').classList.toggle('show')
+    document.getElementById('recommend_title_nav').classList.toggle('collapsed')
+    if("{{type_keyword}}" != ""){
+        document.getElementById('search_key_type').value ="{{type_keyword}}"
+    }else{
+        document.getElementById('search_key_type').value ="id"
+    }
+    change_button(document.getElementById('search_key_type'))
+    function change_button(event){
+        if(event.value=="id"){
+            document.getElementById('search_key').type = "number"
+        }else{
+            document.getElementById('search_key').type = "text"
+        }
+        document.getElementById('search_key').value = ""
+    }
+    document.getElementById('search_key').value = "{{keyword}}"
+//     document.getElementById('remove').addEventListener('click',function(){
+//     let id= ""
+//     let count = 0
+//     let z = document.getElementsByClassName('delect_box')
+//     for(let i=0;i<z.length;i++){
+//         if(z[i].checked){
+//             count+=1
+//             id+=z[i].value+'、)'
+//         }
+//     }
+//     if(count==0){
+//         swal({
+//         title: "您沒有要刪除的資料!",
+//         text: "You have no data to delete!",
+//         icon: "error",
+//         dangerMode: true,
+//         })
+//     }else{
+//         swal({
+//         title: "是否刪除"+count+"筆資料!",
+//         text: "Please confirm whether to delete the data !",
+//         icon: "warning",
+//         buttons:['我再考慮一下','刪除'],
+//         dangerMode: true,
+//         })
+//         .then((willDelete) => {
+//         if (willDelete) {
+//             data_dict = {
+//                 'id':id,
+//                 'type':'delete'
+//             }
+//             $.ajax({
+//                 url:'{% url "change_recommend" %}',
+//                 type:'POST',
+//                 data:data_dict,
+//                 dataType:'json',
+//                 success:function(mesg){
+//                     swal({
+//                         title: "恭喜您更改成功!",
+//                         text: "You change the data!",
+//                         icon: "success",
+//                         button: "好的",
+//                         }).then((value) => {
+//                             window.location.reload();
+//                         });
+//                 },
+//                 error:function(mesg){
+//                     swal({
+//                         title: "資料錯誤!",
+//                         text: mesg.statusText,
+//                         icon: "error",
+//                         button: "好的",
+//                         }).then((value) => {
+//                     });
+//                 }
+//             })
+//         }
+//         });
+//     }
+// })
+    window.onload = function(){
+        $('.hidd_div').hide()
+    }
+    function page_fun(state){
+    page = document.getElementById('getjob_submit')
+    page2 = document.getElementById('page').value
+    if(state == 'last'){
+        page.page.value =parseInt(page2,10)-1
+        page.submit()
+    }else if(state == 'next'){
+        page.page.value =parseInt(page2,10)+1
+        page.submit()
+    }else{
+        page.page.value = parseInt(state,10)
+        page.submit()
+    }
+
+}
+function change_member(event,count){
+    if(event.target.nodeName !='INPUT'){
+    $('.card-body').hide()
+    $('#page_search').hide()
+    z =  document.getElementsByClassName('crawler_total')[count-1]
+    let inner =  document.getElementsByClassName('inner')
+    z=z.children
+    for(let i=1;i<z.length;i++){
+
+        if(i==9){
+            if(z[i].innerHTML=='True'){
+                $('#yes_email').prop("checked", true);
+            }else{
+                $('#no_email').prop("checked", true);
+            }
+        }
+        else if(i==10){
+            if(z[i].innerHTML=='True'){
+                $('#yes_line_bot').prop("checked", true);
+            }else{
+                $('#no_line_bot').prop("checked", true);
+            }
+        }
+        else if(i==3){
+            if(z[i].innerHTML=='True'){
+                $('#yes_open').prop("checked", true);
+            }else{
+                $('#no_open').prop("checked", true);
+            }
+        }
+        else{
+            inner[i-1].value =  z[i].innerHTML;
+        }
+
+    }
+    $('.hidd_div').show()
+    }
+
+// document.getElementById('update').addEventListener('click',recommend_update)
+}
+
+
+// function recommend_update(){
+//     let update = document.getElementsByClassName('inner')
+//     let data_dict = {}
+//     data_dict['id'] = update[0].value
+//     data_dict['username'] = update[1].value
+//     if(document.getElementById("yes_open").checked){
+//         data_dict['open_recommend'] = true
+//     }else{
+//         data_dict['open_recommend'] = null
+//     }
+//     data_dict['job_type'] = update[3].value
+//     data_dict['skill'] = update[4].value
+//     if(update[5].value != ""){
+//         data_dict['local'] = update[5].value
+//     }else{
+//         data_dict['local'] = null
+//     }
+//     data_dict['fraction'] = update[6].value
+//     data_dict['count'] = update[7].value
+//     if(document.getElementById("yes_email").checked){
+//         data_dict['notice_Email'] = true
+//     }else{
+//         data_dict['notice_Email']= null
+//     }
+//     data_dict['type'] = 'update'
+
+//     $.ajax({
+//                 url:'{% url "change_recommend" %}',
+//                 type:'POST',
+//                 data:data_dict,
+//                 dataType:'json',
+//                 success:function(mesg){
+//                     if(mesg.status == "error"){
+//                         message = JSON.parse(mesg.message)
+//                         var m = "";
+//                         var n = message;
+//                         for(var error in message){
+//                             m+=message[error][0]['message']+'\n\n';
+//                         }
+//                         swal({
+//                         title: "資料錯誤",
+//                         text: m,
+//                         icon: "error",
+//                         button: "好的",
+//                         })
+//                     }
+//                     else if(mesg.status == "error_Exception"){
+//                         swal({
+//                         title: "資料錯誤",
+//                         text: mesg.message,
+//                         icon: "error",
+//                         button: "好的",
+//                         })
+//                     }else{
+//                         swal({
+//                         title: "恭喜您更改成功!",
+//                         text: "You change the data!",
+//                         icon: "success",
+//                         button: "好的",
+//                         }).then((value) => {
+//                             window.location.reload();
+//                         });
+//                     }
+//                 },
+//                 error:function(mesg){
+//                     swal({
+//                         title: "資料錯誤!",
+//                         text: mesg.statusText,
+//                         icon: "error",
+//                         button: "好的",
+//                         }).then((value) => {
+//                     });
+//                 }
+//             })
+// }
+
+// document.getElementById('add').addEventListener('click',function(){
+//     $('.card-body').hide()
+//     $('#page_search').hide()
+//     $('.hidd_div').show()
+//     $('.id').hide()
+//     $('#no_email').prop("checked", true);
+//     $('#no_open').prop("checked", true);
+//     document.getElementsByClassName('inner')[0].value = '{{max_id}}'
+
+//     document.getElementById('update').addEventListener('click',add)
+// })
+// function add(){
+//     let update = document.getElementsByClassName('inner')
+//     let data_dict = {}
+//     data_dict['id'] = 0
+//     data_dict['username'] = update[1].value
+//     if(document.getElementById("yes_open").checked){
+//         data_dict['open_recommend'] = true
+//     }else{
+//         data_dict['open_recommend'] = null
+//     }
+//     data_dict['job_type'] = update[3].value
+//     data_dict['skill'] = update[4].value
+//     if(update[5].value != ""){
+//         data_dict['local'] = update[5].value
+//     }
+//     else{
+//         data_dict['local'] = null
+//     }
+//     data_dict['fraction'] = update[6].value
+//     data_dict['count'] = update[7].value
+//     if(document.getElementById("yes_email").checked){
+//         data_dict['notice_Email'] = true
+//     }else{
+//         data_dict['notice_Email']= null
+//     }
+//     data_dict['type'] = 'add'
+//     $.ajax({
+//                 url:'{% url "change_recommend" %}',
+//                 type:'POST',
+//                 data:data_dict,
+//                 dataType:'json',
+//                 success:function(mesg){
+//                     if(mesg.status == "error"){
+//                         message = JSON.parse(mesg.message)
+//                         var m = "";
+//                         var n = message;
+//                         for(var error in message){
+//                             m+=message[error][0]['message']+'\n\n';
+//                         }
+//                         swal({
+//                         title: "資料錯誤",
+//                         text: m,
+//                         icon: "error",
+//                         button: "好的",
+//                         })
+//                     }
+//                     else if(mesg.status == "error_Exception"){
+//                         swal({
+//                         title: "資料錯誤",
+//                         text: mesg.message,
+//                         icon: "error",
+//                         button: "好的",
+//                         })
+//                     }else{
+//                         swal({
+//                             title: "恭喜您新增成功!",
+//                             text: "You change the data!",
+//                             icon: "success",
+//                             button: "好的",
+//                             }).then((value) => {
+//                                 window.location.reload();
+//                             });
+//                     }
+//                 },
+//                 error:function(mesg){
+//                     swal({
+//                         title: "資料錯誤!",
+//                         text: mesg.statusText,
+//                         icon: "error",
+//                         button: "好的",
+//                         }).then((value) => {
+//                     });
+//                 }
+//             })
+// }
+
+
+document.getElementById('none_data').addEventListener('click',function(){
+    $('.hidd_div').hide()
+    $('.card-body').show()
+    $('#page_search').show()
+    $('.id').show()
+    let inner =  document.getElementsByClassName('inner')
+    for(let i=0;i<inner.length;i++){{
+            inner[i].value =  '';
+        }
+    }
+    // document.getElementById('update').removeEventListener('click',add)
+    // document.getElementById('update').removeEventListener('click',recommend_update)
+})
+document.getElementById('btnNavbarSearch').addEventListener('click',function(){
+
+let search  = JSON.parse('{{list_search | safe}}')[document.getElementById('search_index').value]
+search = document.URL.replace('/admin_recommend/',search)
+document.getElementById('search_form').action = search
+document.getElementById('search_form').submit()
+})
+</script>
+{% endblock %}

@@ -1,229 +1,868 @@
 <!doctype html>
-<html lang="en" class="h-100">
+<html lang="en" style=" overflow-x:hidden !important ;"  >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.98.0">
     <title>find work</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="../../static/css/heroes.css" charset="utf-8">
+      {% load static %}
+      <link href="{% static 'css/cover.css' %}" rel="stylesheet" type="text/css">
+      {% load static %}
+      <link rel="stylesheet" href="{% static 'css/hint.css' %}" type="text/css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+      {% load static %}
+      <script src="{% static 'js/wow.js' %}"></script>
+      {% load static %}
+      <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+      <link rel="shortcut icon"   href="../../static/images/logo/logo-removebg-preview.png" type="image/x-icon" />
   </head>
+  <style>
+    @media screen  and (min-width:600px){
+        div h3.mag{
+          text-align: center !important;
+          margin-left: 0px!important;
+        }
+        nav.nav{
+            margin-right: 0px  !important;
+        }
+    }
+    @media screen  and (min-width:768px){
+            nav.nav{
+              margin-right: 10%  !important;
+        }
+        div h3.mag{
+          text-align: center !important;
+          margin-left: 10% !important;
+        }
 
+    }
 
+    @media screen  and (max-width:600px){
+      nav.nav{
+            margin-left:-10%  !important;
+        }
+        div h3.mag{
+          text-align: left !important;
+          margin-left:-60% !important;
+        }
+    }
+    @media screen  and (max-width:536px){
+        nav#b1{
+          margin-left:-6%  !important;
+          margin-top: -5px !important;
+            margin-right: 0px !important;
+        }
+        nav#b2{
+          margin-left:-13%  !important;
+            margin-right: 0px !important;
+        }
+    }
+    @media screen  and (max-width:391px){
+      nav#b2{
+            margin-top: -5px !important;
+            margin-right: 10px !important;
+        }
+    }
+    html{
+      width: 100% !important;
+      width:  100% !important;
+      margin-right: 0px;
+      padding: 0px;
 
-{% load static %}
-<link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
-{% if message %}
-<script>
-alert('{{message}}')
-</script>
-{% endif %}
+    }
+    body{
+      -webkit-overflow-scrolling: touch;
+      width: 100% !important;
+      width:  100% !important;
+      overflow-x: hidden;
+      background-color: rgb(143, 116, 81) !important;
+    }
+    #zzz{
+      position: absolute;
+      bottom: 0px;
+      color: rgba(255, 0, 0, 0.678);
+      left: 36px;
+      font-size: 23px;
+    }
+    .ahe{
+      z-index: 2;
+    }
+    nav.nav a:hover{
+      color: rgb(255, 255, 255) !important;
+    }
+    .white-space{
+        white-space:nowrap;
 
-    <style>
-
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
+    }
+    .flex_warp_warp{
+        flex-wrap: wrap;
+      }
+      #agree{
+        color: black;
       }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
+      .carousel-cell {
+    text-align: left;
+    min-width: 277px !important;
+  width: 70%;
+  margin-right: 20%;
+  overflow-y: auto;
+  background: rgb(201, 211, 212);
+  border-radius: 5px;
+  color: rgb(200, 224, 245);
+  transform: translatex(-50%)
+}
 
-      .b-example-divider {
-        height: 3rem;
-        background-color: rgba(0, 0, 0, .1);
-        border: solid rgba(0, 0, 0, .15);
-        border-width: 1px 0;
-        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-      }
-
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
-
-      .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-      }
-
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-
-      .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
-      /*搜索框1*/
-        .bar1 input {
-            width: 80%;
-            height: 45px;
-            border: 2px solid #7BA7AB;
-            border-radius: 5px;
-            background: #F9F0DA;
-            color: #9E9C9C;
-        }
-        .bar1 button {
-            top: 0;
-            right: 0;
-            background: #7BA7AB;
-            width: 100%;
-            border-radius: 5px 5px 5px 5px;
-        }
-        #button_fun{
-          height: 45px;
-          width: 7%;
-        }
-        .flex-container {
-        width: 80%;
-        display: flex ;
-        flex-wrap: nowrap;
-        justify-content: center;
-        margin-left: 13%;
-        }
-        .dropdown-menu{
-          position:absolute;
-          top:40px;
-          display:none;
-          background:#ffffff;
-          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-          width: 50px;
-        }
-        .ahe{
-          margin: 20px;
-          padding-top: 30px;
-          justify-content: center;
-          text-align: center;
-          color: #000;
-          text-decoration: none;
-        }
-        h3.mag{
-          margin-left:207px;
-            }
-      @media (max-width: 769px) {
-      header.mb-auto div h3{
-        margin-left:-80%;
-        text-align: center;
+  .sugger{
+    display: inline-block;
+    width: 40%;
+    color: rgb(131, 138, 138);
+    padding: 10px;
+    font-size: 15px;
+    min-width: 250px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-left: 7%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding-top: 20px;
+    background-color: rgb(255, 255, 255);
+  }
+  .ellipsis-text{
+    white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+  }
+  .skill_suggest{
+    background-color: rgba(179, 189, 179, 0.5);
+        padding: 5px;
         display: inline-block;
-      }
-      header.mb-auto div nav#b1{
-        position: absolute;
-        top: 1.8%;
-        left: 56%;
-        width: 50%;
-        margin: 0px;
-      }
-      header.mb-auto div nav#b2{
-        position: absolute;
-        top: 1.8%;
-        left: 62%;
-        width: 50%;
-        margin: 0px;
-      }
-      /* a.ahe:hover{
-        color: #9E9C9C;
-        background-color: rgb(167, 129, 129);
-      }*/
+        border-radius: 10px;
+        cursor: default;
+        margin-right: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+  }
+  .suggest_h3{
+    padding: 20px 0px 20px 30px;background-color: rgb(73, 122, 131);
+  }
+  #hr_suggest{
+        border: 0;
+    padding: 2px;
+    background: linear-gradient(135deg, red, orange,green, blue, purple);
+    border: 0;
+    padding-top: 1px;
+    background: linear-gradient(to right, transparent, #0c2e2f, transparent);
+    font-family:'Roboto',sans-serif;
     }
-    #dropdown-toggle{
-      position: relative;;
+    .main-carousel{
+      margin-top: 4%;
+      margin-bottom: 3%;
     }
-    #dropdown-toggle:hover .dropdown-menu{
-        display: block;
-        transition: 0.5s;
+
+    @media screen and (max-width: 1050px) {
+      .carousel-cell {
+        width: 90%;
+        margin-left: 120px !important;
       }
+      .recommend{
+        width: 70% !important;
+        left: 15% !important;
+      }
+    }    
+    @media screen and (max-width: 895px) {
+      .carousel-cell {
+        width: 85%;
+      }
+      .recommend{
+        width: 80% !important;
+        left: 10% !important;
+      }
+    }    
+    @media screen and (max-width: 805px) {
+      .sugger{
+        margin-left: 10%;
+        margin-right: 10%;
+        width: 80%;
+      }
+    }    
+    @media screen and (max-width: 768px) {
+      .carousel-cell {
+        width: 80%;
+      }
+      .recommend{
+        padding: 20px;
+      }
+      div.flex {
+        margin-left: 30px !important;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .carousel-cell {
+        width: 90%;
+      }
+      .main-carousel{
+        margin-top: 7%;
+      }
+      .img-fluid1,.img-fluid2{
+        display: none;
+      }
+      #email_img{
+        display: none;
+      }
+      .recommend{
+        width: 90% !important;
+        left: 5% !important;
+      }
+      div.flex {
+        margin-left: 15px !important;
+      }
+      .inner{
+        padding: 20px !important;
+      }
+    }
+    @media screen and (max-width: 450px) {
+      .carousel-cell {
+        margin-left: 20px;
+      }
+      .recommend{
+        width: 98% !important;
+        left: 0px !important;
+        padding: 3px !important;
+        padding-top: 0px !important;
+        overflow-x: hidden !important;
+      }
+      .recommend h3{
+        border-radius: 10px 10px 0px 0px !important;
+        margin-left: -5px !important;
+        margin-right: -5px !important;
+        height: 60px !important;
+        line-height: 50px !important;
+      }
+      div.flex {
+        margin-left: 5px !important;
+      }
+      .inner{
+        padding: 10px !important;
+      }
+    }
+    @media screen and (max-width: 380px) {
+      .sugger{
+        width: 93%;
+        margin-left: 10px;
+        margin-right: 10px;
+        min-width: 258px
+      }
+      div.flex {
+        margin-left: 0px !important;
+      }
+    }
+    #recommend_local{
+        width: auto;
+        height: 40px;
+        border-radius: 10px;
+        margin-top: 15px;
+        margin-left: 5px;
+    }
+    #Experience_number{
+        height: 30px;
+        width: 50px;
+        border-radius: 100px;
+        transition: 1s;
+    }
+  </style>
 
 
-    </style>
+
 
 
     <!-- Custom styles for this template -->
-    {% load static %}
-    <link href="{% static 'cover.css' %}" rel="stylesheet" type="text/css">
-  </head>
-  <body class="d-flex h-100 text-center text-white bg-dark" style="width:100%; background-image:none">
+  <body class="d-flex h-100 text-center text-white bg-dark" style="width:100% !important; background-image:none;"  id="div-1">
 
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" style="max-width: 100%;background-image:none;">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" style="max-width: 100%;background-image:none;" id="block_op">
   {% if user_name %}
-  <header class="mb-auto">
+  {% if first == "1" %}
+    <div class="cover"></div>
+    <div class="recommend wow fadeIn" data-wow-duration="3s" data-wow-delay="0s" style="display:block;">
+      <h3 >歡迎使用USFK</h3>
+      <div class="inner main">
+        <i>給使用者的一封信:</i>
+        <div class="content">
+          <p>首先，感謝您選擇使用本網站來尋找您的工作機會。我們非常重視您的時間，因此我們希望能夠為您提供最方便快捷的尋找工作的方法。
+          我們的網站有一個獨特的特色，您可以輸入您所具備的技能，然後選擇您想要的工作類型，我們將為您推薦最合適的工作機會，幫助您減少篩選工作的時間，更快地找到您的理想工作。</p>
+          <p>
+          另外，我們也提供了自動推送系統，您可以選擇符合您需求的工作的標準，系統在獲取到合適的工作時就會將工作推送給您。請確認您的Email是否正確，並開啟推送功能，這樣您可以第一時間獲得有關您感興趣的工作的最新信息。
+          </p>
+          <p>
+            如果您有任何建議或意見，請不要猶豫告訴我們。我們的email和意見箱都可以讓您隨時聯繫我們。我們非常重視您的意見，這些反饋將幫助我們不斷改進網站並為您提供更好的服務。
+          </p>
+          <p>
+            最後，再次感謝您選擇使用本網站尋找工作。我們希望您能在這裡找到您理想的工作，讓我們一起為實現您的職業夢想努力。
+        </p>
+        <p style="text-align:right !important;">
+          祝您找到心儀的工作，事業有成！
+        </p>
+        </div>
+
+          <div style="float:right">
+            <button id ='nextpage' onclick="nextpage(0)" style="float:right">下一頁>></button>
+          </div>
+      </div>
+    </div>
+
+
+    <div class="recommend fadeInLeft wow" data-wow-duration="2s" data-wow-delay="0s" style="display:none;">
+      <h3>推薦設定</h3>
+      <div class="inner main">
+          <div class="flex">
+            用戶名 : {{user_name}}
+        </div>
+      <div class="flex flex_warp_warp">
+          {% if open == 'true' %}
+              <label>是否啟用推薦 </label>
+              <div id="openbutt" class="openbutt in-active">
+                  <input hidden  id="openrecommend" name="openrecommend" value="true">
+                  <div class="circle" onclick="toggle()"></div>
+              </div>
+          {% else %}
+              <label>是否啟用推薦 </label>
+              <div id="openbutt" class="openbutt">
+                  <input hidden id="openrecommend"  name="openrecommend" value="false">
+                  <div class="circle" onclick="toggle()"></div>
+              </div>
+          {% endif %}
+      </div>
+      <div class="flex flex_warp_warp">
+          <label>選擇推薦的工作類:</label>
+          <select name="recommend_job_type" id="type" >
+            {% for i,v in dict_jobname.items %}
+            <optgroup label="{{i}}" style="padding: 20px;" >
+                {% for z in v %}
+                    {% if z == type_skill %}
+                    <option value="{{z}}" class="opin" selected>{{z}}</option>
+                    {% else %}
+                    {{type_skill}}
+                        <option value="{{z}}" class="opin">{{z}}</option>
+                    {% endif %}
+                {% endfor %}
+            </optgroup>
+            {% endfor %}
+          </select>
+      </div>
+      <div class="flex flex_warp_warp">
+          <label>請輸入篩選的技能:</label>
+          <input type="text" name="recommend_skill" id="recommend_skill" autocomplete="off"   placeholder="請個技能請用、或,隔開每個技能">
+      </div>
+        <div class="flex flex_warp_warp" >
+          <label>請輸入篩選地區:</label>
+              <input type="radio"  class="local_recom" name="zza" value="" >
+               <select id="recommend_local" name="recom_local" disabled  class="form-select" aria-label="Default select example" >
+                  <optgroup label="北部">          
+                      <option class="inner_county" value="台北市">台北市</option>
+                      <option class="inner_county" value="新北市">新北市</option>
+                      <option class="inner_county" value="基隆市">基隆市</option>
+                      <option class="inner_county" value="桃園市">桃園市</option>
+                      <option class="inner_county" value="新竹市">新竹市</option>
+                      <option class="inner_county" value="新竹縣">新竹縣</option>
+                      <option class="inner_county" value="苗栗縣">苗栗縣</option>
+                  </optgroup>
+                  <optgroup label="中部">
+                      <option class="inner_county" value="台中市">台中市</option>
+                      <option class="inner_county" value="南投縣">南投縣</option>
+                      <option class="inner_county" value="彰化縣">彰化縣</option>
+                      <option class="inner_county" value="雲林縣">雲林縣</option>
+                  </optgroup>
+                  <optgroup label="南部">
+                      <option class="inner_county" value="嘉義市">嘉義市</option>
+                      <option class="inner_county" value="嘉義縣">嘉義縣</option>
+                      <option class="inner_county" value="台南市">台南市</option>
+                      <option class="inner_county" value="高雄市">高雄市</option>
+                      <option class="inner_county" value="屏東縣">屏東縣</option>
+                  </optgroup>
+                  <optgroup label="東部">
+                      <option class="inner_county" value="宜蘭縣">宜蘭縣</option>
+                      <option class="inner_county" value="花蓮縣">花蓮縣</option>
+                      <option class="inner_county" value="台東縣">台東縣</option>
+                  </optgroup>
+                  <optgroup label="離島">
+                      <option class="inner_county" value="澎湖縣">澎湖縣</option>
+                      <option class="inner_county" value="金門縣">金門縣</option>
+                      <option class="inner_county" value="連江縣">連江縣</option>
+                  </optgroup>
+          </select>
+          <input type="radio" id="local_none" name="zza" checked class="local_recom" value="" ><label for="local_none">不拘</label>
+      </div>
+      <div class="flex flex_warp_warp">
+          <label class="white-space">請勾選篩選程度:</label>
+          <label for="fraction0" class="white-space"><input type="radio" name="recommend_fraction" class="fraction" id="fraction0" value="0">完全符合</label>
+          <label for="fraction3" class="white-space"><input type="radio" name="recommend_fraction" class="fraction" id="fraction3" value="3">符合3成</label>
+          <label for="fraction5" class="white-space"><input type="radio" name="recommend_fraction" class="fraction" id="fraction5" value="5">符合5成</label>
+          <label for="fraction7" class="white-space"><input type="radio" name="recommend_fraction" class="fraction" id="fraction7" value="7">符合7成</label>
+          <label for="fractionmax" class="white-space"><input type="radio" checked name="recommend_fraction" class="fraction" id="fractionmax" value="max">不限制</label>
+      </div>
+      <div class="flex flex_warp_warp">
+        <label class="white-space">請勾選篩工作經驗:</label>
+        <input type="radio" name="Experience" id="Experience_none" class="Experience_c" value="" checked>
+        <label for="Experience_none">不拘</label>
+        <input type="radio" name="Experience" class="Experience_c" id="Experience_no" value="0">
+        <label for="Experience_no">無經驗</label>
+        <input type="radio" name="Experience" id="Experience_select" class="Experience_c" value="Experience_select">
+        <label style="width:200px;" for="Experience_select">幾年以下<input type="number" id="Experience_number" min="1" name="Experience_year" disabled></label>
+      </div>
+      <div class="flex flex_warp_warp">
+          請選擇推送的筆數:
+          <label for="recommend_count30"><input type="radio" checked name="recommend_count" id="recommend_count30" class="recommend_count" value="30">30筆</label>
+          <label for="recommend_count60"><input type="radio" name="recommend_count" id="recommend_count60" class="recommend_count" value="60">60筆</label>
+          <label for="recommend_countmax"><input type="radio" name="recommend_count" id="recommend_countmax" class="recommend_count" value="max">不限制</label>
+          <label for="recommend_countother"><input type="radio" name="recommend_count" id="recommend_countother"  class="countotherlab recommend_count" value="other" >其他:
+              <input type="number" class="countother recommend_count" id="recommend_count" name="recommend_count_other" max="500" min="0" value="{{count}}">
+          </label>
+      </div>
+      <div class="flex flex_warp_warp">
+        是否開啟email通知
+        <span class="hint--bottom" data-hint="您可以用email收到最即時的推送通知!">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+          </svg> :  </span>
+          <label><input type="radio" name="recommend_email" value="true">是</label>
+          <label><input type="radio" name="recommend_email" checked value="false">否</label>
+      </div>
+      <div class="flex flex_warp_warp">
+        是否開啟Line_Bot通知
+        <span class="hint--bottom" data-hint="您可以用line收到最即時的推送通知!">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+          </svg> :  </span>
+          <label><input type="radio" name="recommend_line_bot" value="true">是</label>
+          <label><input type="radio" name="recommend_line_bot" checked value="false">否</label>
+      </div>
+        <button id ='lastpage1' onclick="lastpage(1)" style="flex:left;"><<上一頁</button>
+        <div style="float:right">
+          <button id ='nextpage1' onclick="nextpage(1)" style="float:right">下一頁>></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommend wow fadeIn"  data-wow-duration="3s" style="display:none;">
+      <h3>責任聲明</h3>
+
+      <div class="inner">
+        <p>
+          本網站意識到用戶的隱私權是非常重要的，本網站將致力保護您的隱私權。除非用戶自願向本網站提供用戶個人資料， 否則本網站不會根據下文所述蒐集、處理並使用您的個人資料。另外，本網站在台灣地區將遵守台灣個人資料保護法（下稱「個人資料保護法」）的有關規定。
+          </p>
+          <p>
+          個人資料之安全維護
+          本網站將對用戶所提供的資料進行嚴格的管理及保護，本網站將使用相應的技術，盡量防止用戶的個人資料丟失、被盜用或遭篡改， 非本網站故意導致用戶的個人資料丟失、被盜用或遭篡改的，本網站不承擔任何法律相關責任。
+          </p>
+          <P>使用網站風險與免責聲明
+
+          用戶同意使用本網站各項服務基於用戶的個人意願，並同意自負任何風險，或自本網站服務中獲得之資料導致發生任何資料流失等結果。
+          用戶個人資料之取得非經用戶同意或法律規定，本網站不會任意使用用戶相關資料。
+          本網站目前取得用戶個人資料之途徑，主要為用戶註冊、客戶服務或更正個人資料時，於網站上所輸入之電子或書面表格。本網站就各項服務，不負任何明示或默示之擔保責任。
+          本網站不保證各項服務之穩定, 安全，無誤及不中斷; 用戶明示承擔使用本服務之所有風險及可能發生之任何損害。</P>
+          <div style="text-align: center;"><input type="checkbox" id="agree"><label for="agree"><strong>我已同意以上聲明</strong></label></div>
+          <button id ='lastpage2' onclick="lastpage(2)" style="flex:left;"><<上一頁</button>
+          <div style="float:right">
+            <button id ='nextpage2' disabled onclick="nextpage(2)" style="float:right">完成送出</button>
+          </div>
+        </div>
+
+    </div>
+  {% endif %}
+  <header class="mb-auto" style="width:100% !important;" >
     <div>
-      <h3 class="float-md-start mb-0 mag">Find job</h3>
-      <nav class="nav nav-masthead justify-content-center float-md-end" id="b1" style="margin-right:207px;">
-        <a class="nav-link fw-bold py-1 px-0 active" id="1"aria-current="page" href="/myApp/{{user_name}}">主頁</a>
-        <a class="nav-link fw-bold py-1 px-0" id ="2"href="/myApp/search_job/{{user_name}}">查尋</a>
-        <div class="btn dropdown-toggle nav-link fw-bold py-1 px-0" id="dropdown-toggle" style="font-size: 14px;color:rgba(255, 255, 255, .5);" >{{user_name |  truncatechars_html:5 }}的帳號
-          <span class="dropdown-menu" id="dropdown-menu" >
-            <a class="ahe" href="/member/search/{{user_name}}" id="userserver">用戶中心</a><br><hr>
-            <a href="/member/sing_out" class="ahe" style="padding-left:12px;">登出</a>
-          <span>
+      <h3 class="float-md-start mb-0 mag " style="margin-left:12%;"><a class="text-decoration-none text-white" href="{% url 'definepage' %}">Find job</a></h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end" id="b1" style="margin-right:8%;">
+        <a class="nav-link fw-bold py-1 px-0 active" id="1"aria-current="page" href="{% url 'definepage' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+          </svg>主頁</a>
+        <a class="nav-link fw-bold py-1 px-0" id ="2" href="{% url 'search_job' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+        查詢</a>
+        <div class="btn dropdown-toggle nav-link fw-bold py-1 px-0" id="dropdown-toggle" style="font-size: 14px;color:rgba(255, 255, 255, .5);" >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg>&thinsp; {{user_name |  truncatechars_html:4 }}  ...的帳號
+          <div class="dropbtn" id="dropbtn">
+              <div class="ahe">
+                <a id="userserver" href="{% url 'control_center' %}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16" style="margin-left:-8px;margin-right: 4px;">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                  </svg><b>用戶中心</b></a>
+              </div>
+              <div class="ahe position-relative"><a href="{% url 'notice' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bell mr-2" viewBox="0 0 16 16">
+                  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+                </svg>
+                {% if count_notice %}
+                <ul id="zzz"><li></li></ul>
+                {% endif %}
+              通知</a>
+            </div>
+            {%if power == 'manage' %}
+              <div class="ahe"><a href="{% url 'admin_index' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18"  height="18" fill="currentColor" class="bi bi-gear mr-2" viewBox="0 0 16 16">
+                  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                </svg>
+              後臺管理</a>
+            </div>
+            {% endif %}
+              <div class="ahe" style="border-radius: 0px 0px 15px 15px;"><a href="{% url 'out' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unindent" viewBox="0 0 16 16" >
+                  <path fill-rule="evenodd" d="M13 8a.5.5 0 0 0-.5-.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H12.5A.5.5 0 0 0 13 8Z"/>
+                  <path fill-rule="evenodd" d="M3.5 4a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 1 0v-7a.5.5 0 0 0-.5-.5Z"/>
+                </svg>登出</a>
+              </div>
+          <div>
+        </div>
+        </div>
         </div>
       </nav>
     </div>
   </header>
   {% block main2 %}{% endblock %}
   {% else %}
-  <header class="mb-auto" >
-    <div >
-      <h3 class="float-md-start mb-0 mag">Find job</h3>
-      <nav class="nav nav-masthead justify-content-center float-md-end" id='b2'style="margin-right:207px;">
-        <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="">主頁</a>
-        <a class="nav-link fw-bold py-1 px-0" href="/member/sing_in">收尋</a>
-        <a class="nav-link fw-bold py-1 px-0" href="/member/sing_in">登入</a>
-        <span class="dropdown-menu" id="dropdown-menu" style="min-width:110px;height:110px;margin-top: 40px; margin-left: 90px;">
-          <a class="ahe" href="/member/search/{{user_name}}" id="userserver">用戶中心</a><br><hr>
-          <a href="/member/sing_out" class="ahe" style="padding-left:12px;">登出</a>
-        <span>
+  <header class="mb-auto" style="width:100% !important;" >
+    <div>
+      <h3 class="float-md-start mb-0 mag" style="margin-left:12%;">Find job</h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end" id="b2" style="margin-right:8%;">
+        <a class="nav-link fw-bold py-1 px-0 active" id="1"aria-current="page" href="{% url 'definepage' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+          </svg>主頁</a>
+        <a class="nav-link fw-bold py-1 px-0"  id ="2"   href="{% url 'search_job' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+        查詢</a>
+        <a class="nav-link fw-bold py-1 px-0" href="/member/sing_in">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg> &thinsp;登入</a>
+
       </nav>
     </div>
     {% block main %}{% endblock %}
   </header>
   {% endif %}
+  <a href="{% url 'first_ok' %}" id="first_ok" ></a>
 </div>
 </body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<script></script>
 <script>
-  var slide = 0;
+  new WOW().init();
+</script>
+{% if first == '1' %}
+<script>
+let stop = document.getElementsByClassName('long_in')
+  for (let i=0;i<stop.length;i++){
+    stop[i].style.animationPlayState ='paused';
+  }
 
-  function change(n){
-    $("#dropdown-menu").slideToggle("");
-    if (n == 1) {
-        slide = 0;
-        $(".fa-chevron-up").attr("style", "display:none")
-        $(".fa-chevron-down").attr("style", "display:block")
+  document.getElementById('agree').addEventListener('click',function(){
+    if(document.getElementById('agree').checked){
+      document.getElementById('nextpage2').disabled = false;
+    }else{
+      document.getElementById('nextpage2').disabled = true;
     }
-    else {
-        slide = 1;
-        $(".fa-chevron-up").attr("style", "display:block")
-        $(".fa-chevron-down").attr("style", "display:none")
-    }
-  }
-  function onmous(){
-    document.getElementById('dropdown-menu').style.display='block';
-    document.getElementById('dropdown-menu').style.transition='0.5s';
+  })
+
+
+  try{
+    document.getElementById('nextpage2').addEventListener('click',ajax_recommend)
+  }catch(Example){
 
   }
-  function out(){
-    document.getElementById('dropdown-menu').style.display='none';
-    document.getElementById('dropdown-menu').style.transition='0.5s';
+
+
+
+  function ajax_recommend(){
+    let openrecommend= document.getElementById('openrecommend').value
+    let recommend_job_type= document.getElementById('type').value
+    let recommend_skill= document.getElementById('recommend_skill').value
+    let recommend_fraction = $("[name='recommend_fraction']:checked").val()
+    let recommend_count = $("[name='recommend_count']:checked").val()
+    let recommend_email = $('[name="recommend_email"]:checked').val()
+    let recommend_line_bot = $('[name="recommend_line_bot"]:checked').val()
+    let Experience = $('[name="Experience"]:checked').val()
+    dict_content={
+      'openrecommend':openrecommend,
+      'recommend_job_type':recommend_job_type,
+      'recommend_skill':recommend_skill,
+      'recommend_fraction':recommend_fraction,
+      'recommend_email':recommend_email,
+      "recommend_line_bot":recommend_line_bot,
+      'Experience':Experience,
+      'recommend_count':recommend_count,
+    }
+    if(!document.getElementById('recommend_local').disabled){
+      dict_content['recom_local'] = document.getElementById('recommend_local').value;
+    }
+    if (recommend_count == "other" && isNaN(parseInt(document.getElementById('recommend_count_other').value)) || Experience == 'Experience_select' && isNaN(parseInt(document.getElementById('Experience_number').value))) {
+        swal({
+                title: "不可為空值",
+                text: '請檢檢查您的資料，欄位不可為空',
+                icon: "info",
+                button: "好的",
+                })
+    }else{
+      if(recommend_count == "other"){
+        dict_content['recommend_count_other'] = document.getElementById('recommend_count_other').value;
+      }
+      if(Experience == 'Experience_select'){
+        dict_content['Exper_year'] = document.getElementById('Experience_number').value;
+      }
+      $.ajax({
+      url:'{% url "recommend_set" %}',
+      method:'POST',
+      dataType:'json',
+      data:dict_content,
+      success:function(message){
+        if(message.status == "error"){
+            swal({
+            title: "資料錯誤",
+            text: '請檢檢查您的資料，如果真的沒錯可以到意見箱反饋，我們會盡快解決您的問題!',
+            icon: "error",
+            button: "好的",
+            }).then((value) => {
+            document.getElementById('first_ok').click();
+          });
+        }else{
+          swal({
+          title: "恭喜您更改成功!",
+          text: "You change the data!",
+          icon: "success",
+          button: "好的",
+          }).then((value) => {
+            document.getElementById('first_ok').click();
+          });
+        }
+      },
+      error: function(message){
+        swal({
+          title: "資料錯誤!",
+          text: message.statusText,
+          icon: "error",
+          button: "好的",
+          }).then((value) => {
+            document.getElementById('first_ok').click();
+          });
+      }
+    })
+    }
   }
+
+
+
+
+  let x = getComputedStyle(document.getElementsByClassName('recommend')[0],'display').display
+  if(x=='block'){
+    document.getElementsByClassName('cover')[0].style.height = document.body.scrollHeight+"px";
+  }
+
+  function nextpage(page){
+    if(page==0){
+      let thispage = document.getElementsByClassName('recommend')[page]
+      let nextpage2 = document.getElementsByClassName('recommend')[page+1]
+      thispage.style.display='none'
+      nextpage2.style.display='block';
+    }else if(page==1){
+      let thispage = document.getElementsByClassName('recommend')[page]
+      let nextpage2 = document.getElementsByClassName('recommend')[page+1]
+      thispage.style.display='none'
+      nextpage2.style.display='block';
+    }else{
+      let thispage = document.getElementsByClassName('recommend')[page]
+      thispage.style.display='none';
+      for (let i=0;i<stop.length;i++){
+        let stop = document.getElementsByClassName('long_in')
+        stop[i].style.animationPlayState ='running';
+      }
+      document.getElementsByClassName('cover')[0].style.display='none';
+    }
+  }
+
+  function lastpage(page){
+    if(page==1){
+      let thispage = document.getElementsByClassName('recommend')[page]
+      let lastpage2 = document.getElementsByClassName('recommend')[page-1]
+      thispage.style.display='none'
+      lastpage2.style.display='block';
+    }else{
+      let thispage = document.getElementsByClassName('recommend')[page]
+      let lastpage2 = document.getElementsByClassName('recommend')[page-1]
+      thispage.style.display='none'
+      lastpage2.style.display='block';
+    }
+  }
+
+
+
+  window.addEventListener('load',check);
+    let openbutt = document.getElementById('openbutt')
+    openbutt.addEventListener('click',check)
+    let countother = document.getElementsByClassName('countotherlab')[0]
+    recommend_count = document.querySelectorAll(".recommend_count");
+    for(let i=0;i<recommend_count.length-1;i++){
+        recommend_count[i].addEventListener('click',checkotherfun)
+    }
+    let Experience_select = document.getElementById('Experience_select')
+    Experience = document.querySelectorAll(".Experience_c");
+    for(let i=0;i<Experience.length;i++){
+        Experience[i].addEventListener('click',checkotherfun2)
+    }
+    function check(){
+        let x= document.getElementsByClassName('in-active')
+        if(x[0]==undefined){
+            let input = document.querySelectorAll("#recommend_skill");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = true
+            }
+            input = document.querySelectorAll("#type");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = true;
+            }
+            input = document.querySelectorAll(".fraction");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = true;
+            }
+            input = document.querySelectorAll(".recommend_count");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = true;
+            }
+            document.getElementById('Experience_number').disabled = true;
+            $(".local_recom").attr('disabled',true);
+            $('[name="recommend_email"]').attr('disabled',true)
+            $('[name="recommend_line_bot"]').attr('disabled',true)
+            $('[name=Experience]').attr('disabled',true);
+            document.getElementById('openrecommend').value  = 'false';
+        }else{
+            let input = document.querySelectorAll("#recommend_skill");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = false
+            }
+            input = document.querySelectorAll("#type");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = false
+            }
+            input = document.querySelectorAll(".fraction");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = false
+            }
+            input = document.querySelectorAll(".recommend_count");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = false
+            }
+            if(countother.checked){
+                let countother = document.getElementsByClassName('countother')[0]
+                countother.disabled = false;
+            }else{
+                let countother = document.getElementsByClassName('countother')[0]
+                countother.disabled = true;
+            }
+            $(".local_recom").attr('disabled',false);
+            $('[name="recommend_email"]').attr('disabled',false)
+            $('[name="recommend_line_bot"]').attr('disabled',false)
+            $('[name=Experience]').attr('disabled',false);
+            if(Experience_select.checked){
+                document.getElementById('Experience_number').disabled = false;
+            }else{
+                document.getElementById('Experience_number').disabled = true;
+            }
+            document.getElementById('openrecommend').value  = 'true';
+        }
+    }
+    function toggle() {
+          document.getElementById('openbutt').classList.toggle('in-active');
+      }
+      function checkotherfun(){
+        if(countother.checked){
+            let countother = document.getElementsByClassName('countother')[0]
+            countother.disabled = false;
+        }else{
+            let countother = document.getElementsByClassName('countother')[0]
+            countother.disabled = true;
+        }
+    }
+    function checkotherfun2(){
+        if(Experience_select.checked){
+            document.getElementById('Experience_number').disabled = false;
+        }else{
+            document.getElementById('Experience_number').disabled = true;
+        }
+    }
+    document.getElementsByClassName("local_recom")[0].addEventListener('click', function() {
+        if(this.checked) {
+            document.getElementById('recommend_local').disabled = false;
+        } else {
+            document.getElementById('recommend_local').disabled = true;
+        }
+    });
+    document.getElementsByClassName("local_recom")[1].addEventListener('click', function() {
+        if(!this.checked) {
+            document.getElementById('recommend_local').disabled = false;
+        } else {
+            document.getElementById('recommend_local').disabled = true;
+        }
+    });
+</script>
+{% endif %}
+<script>
+jQuery(document).ajaxSend(function(event, xhr, settings) {
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    function sameOrigin(url) {
+        // url could be relative or scheme relative or absolute
+        var host = document.location.host; // host + port
+        var protocol = document.location.protocol;
+        var sr_origin = '//' + host;
+        var origin = protocol + sr_origin;
+        // Allow absolute or scheme relative URLs to same origin
+        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+            // or any other URL that isn't scheme relative or absolute i.e relative.
+            !(/^(\/\/|http:|https:).*/.test(url));
+    }
+    function safeMethod(method) {
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    }
+});
+
 
 </script>
 </html>

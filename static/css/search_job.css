@@ -1,0 +1,288 @@
+.divjob{
+    padding:20px;
+    height:auto;
+    line-height: 35px;
+}
+.divin{
+    width: 100% !important;
+    background-color: rgb(177, 192, 192);
+    margin-top:70px;
+    justify-content: center;
+    height: 200px;
+    border-radius: 5px;
+    box-shadow : 0px  10px  10px -10px  #333 ;
+}
+.flex{
+    display:flex;flex-wrap: nowrap;
+    flex-grow:0;
+}
+.diviner{
+    width:60%;
+    background-color:rgb(75, 64, 49,0.2); ;
+    align-self: center;
+    border-radius: 5px;
+}
+#skill{
+    width:32%;
+    background-color:rgb(75, 64, 49,0.2); ;
+    align-self: center;
+    height:50px;
+    border: none;
+    border-radius:5px;
+    transition: 1s;
+}
+#skill:focus{
+    background-color: rgb(188, 230, 207);
+}
+#sub{
+    margin-left: 10px;
+    border-radius: 5px;
+    height:50px;
+    align-self: center;
+    background-color: rgb(213, 241, 231);
+}
+.opin{
+    height:110px;
+}
+.h4_title h4{
+    margin-right: 20px;
+}
+.job_div{
+    overflow: hidden;
+    margin-left:8%;
+    width:87%;
+    height: auto;
+    border: 2px solid rgb(18, 17, 17);
+    margin-top:0px;
+    border-radius: 5px;
+    color:black;
+    font-family:sans-serif;
+    padding-left:20px;
+    padding-top: 10px;
+    background-color: rgb(203, 188, 167);
+}
+@media screen and (max-width:768px) {
+    .job_div{
+        margin-left: 10px;
+        width: 96%;
+    }
+    .divjob{
+        padding: 10px;
+    }
+    .inner_left{
+        margin-left:-93px ;
+        margin-top: 15px;
+    }
+    .h4_title{
+        margin-top: 6px;
+        height: 70px;
+    }
+}
+@media screen and (max-width:600px) {
+    nav.nav{
+        margin-left: 0% !important;
+    }
+}
+h3,h5{
+    font-weight:bold;
+}
+hr.y{
+height:auto;
+width:5px;
+border-width:0;
+color:#000;
+background-color:rgba(20, 8, 8, 0.51);
+}
+.job_local{
+    margin-top: 30px;
+}
+a.title:hover{
+    color: darkorange;
+    font-size: 25px;
+    font-weight: bolder;
+}
+a.title{
+    text-decoration: none;
+    font-weight: bold;
+}
+.font_bold{
+    font-weight: bold;
+}
+.pagediv{
+    width: auto;
+    padding-bottom: 20px;
+}
+span.pagediv p{
+    display: inline;
+}
+.text-al{
+    text-align: center;
+}
+option.text-al{
+    border-radius: 5px;
+}
+/* @media screen and(max-width:768px) {
+    .job_div{
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+} */
+div.divjob img{
+    margin-left: 0%;
+    width: 80px;
+    height: 100px;
+    margin-bottom: -10px;
+    margin-top: -10px;
+}
+.love{
+    border: none;
+    position: absolute;
+    right: 10px;
+    margin-left: 100px;
+    top:8%;
+    background-color: rgba(130, 211, 211, 0);
+
+}
+button.love #love1{
+    display: block;
+    position: absolute;
+}
+button.love #love2{
+    position: absolute;
+    display:none;
+    color: rgb(238, 40, 69);
+}
+button.love #love1yes{
+    display:none;
+    position: absolute;
+}
+button.love #love2yes{
+    position: absolute;
+    display: block;
+    color: rgb(238, 40, 69);
+}
+#love1:hover{
+    color: rgb(191, 104, 121);
+}
+.diviner input,.diviner select{
+    text-indent: 10px;
+}
+.relative{
+    position: relative;
+}
+.job_name h4{
+    display:inline;
+}
+span.skillgreen{
+    background-color: rgba(185, 241, 185, 0.5);
+    padding-left: 10px;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+span.skillno{
+    background-color: rgba(87, 92, 89, 0.5);
+    padding: 3px;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-top: -2px;
+    padding-top: -2px;
+    padding-bottom: -2px;
+}
+span.skillred{
+    background-color: rgba(239, 146, 146, 0.5);
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.select_skill{ display: flex; flex-wrap: wrap;
+    background-color: rgb(212, 222, 232);
+    border-radius: 10px;
+    padding: 30px;
+    padding-top: 40px;
+    box-shadow : 0px  10px  10px -10px  #333 ;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 25px;
+    height: 200px;
+    overflow-y:auto;
+}
+.yes_skill{
+    margin-left: 20px;
+    background-color:  rgba(185, 241, 185, 0.5);
+    color: green;
+    padding: 10px;
+    border-radius: 14px;
+    transition: 1s;
+}
+.no_skill{
+    margin-left: 20px;
+    padding: 10px;
+    background-color: rgba(239, 146, 146, 0.5);
+    border-radius: 15px;
+    color: red;
+    transition: 1s;
+}
+@media only screen and (max-width:768px) {
+    .divin{
+    background-color: rgb(177, 192, 192);
+    margin-top:15px;
+    justify-content: center;
+    height: 200px;
+    border-radius: 5px;
+}
+}
+.image_box{
+    flex-wrap:wrap; width:100%;
+
+}
+#chose_job{
+    margin-top:30px;
+    margin-left: 8%;
+    text-align: left;
+}
+#chose_job a{
+    text-align: left;
+    padding: 15px;
+    width: 100px;
+    color: black;
+    height: 200px;
+    margin-right: 2%;
+    background-color: aliceblue;
+    border-radius: 5px 5px 0px 0px;
+    margin-top: -30px;
+}
+#chose_job hr{
+    width: 95%;
+}
+ul.nav{
+    position: relative;
+    margin-top: 30px;
+    width: 87% !important;
+    margin-left: 8% !important;
+    margin-bottom: 1px;
+}
+ul.nav li{
+    width: 10%;
+    min-width:100px ;
+}
+.noactive{
+    background-color: rgb(192, 190, 188) !important;
+}
+.text-ri{
+    top: 5px;
+    position: absolute !important;
+    left: 96%;
+    transform:translate(-85%,-15%);
+}
+
+    /* @media screen and(max-width:766px) {
+  div h3{
+      text-align: center;
+    }
+    .divin{
+      background-color:black !important ;
+    }
+
+} */

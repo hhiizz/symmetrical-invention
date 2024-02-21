@@ -6,11 +6,10 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.98.0">
-    <title>long in</title>
+    <title>登入</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/modals/">
-
-
+    <link rel="shortcut icon"   href="../../static/images/logo/logo-removebg-preview.png" type="image/x-icon" />
 
 
 {% load static %}
@@ -30,7 +29,11 @@
           font-size: 3.5rem;
         }
       }
-
+          input {
+        -webkit-appearance: none;  /* Safari 和 Chrome，常用於iOS下移除內建樣式 */
+        -moz-appearance: none;     /* FireFox */
+        appearance: none;
+    }
       .b-example-divider {
         height: 3rem;
         background-color: rgba(0, 0, 0, .1);
@@ -56,7 +59,24 @@
         height: 2.75rem;
         overflow-y: hidden;
       }
+      .relative{
+        position:relative;
+      }
+      .lookyes{
+        display: block;
+        top: 20px;
+        position:absolute;
+        right: 15px;
+        z-index: 5;
 
+      }
+      .lookno{
+        top: 20px;
+        position:absolute;
+        right: 15px;
+        z-index: 5;
+        display: none;
+      }
       .nav-scroller .nav {
         display: flex;
         flex-wrap: nowrap;
@@ -105,15 +125,15 @@
   </head>
   <body>
 <!----position-static:static py-5:1--->
-<div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content rounded-4 shadow">
-      <div class="modal-header p-5 pb-4 border-bottom-0">
+<div class="modal modal-signin position-static d-block bg-secondary py-5" style="background-color: rgb(179, 192, 192) !important" tabindex="-1" role="dialog" id="modalSignin">
+  <div class="modal-dialog" role="document" >
+    <div class="modal-content rounded-4 shadow"  >
+      <div class="modal-header p-5 pb-4 border-bottom-0" >
         <!-- <h5 class="modal-title">Modal title</h5> -->
-        <h2 class="fw-bold mb-0">Sign in</h2>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h2 class="fw-bold mb-0">登入</h2>
+        <a href="{% url 'definepage' %}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
       </div>
-      <div class="modal-body p-5 pt-0">
+      <div class="modal-body p-5 pt-0" >
         {% if usernapo %}
         <form action="/member/long-in/" method="POST">
           {% csrf_token %}
@@ -125,19 +145,19 @@
             {{message}}
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control rounded-3" id="user_name" name='user_name'value="{{usernapo.user_name}}" autofocus autocomplete="off">
+            <input type="text" class="form-control rounded-3" id="user_name" name='user_name'value="{{user_name}}" autofocus autocomplete="off" required>
             <label for="user_name">帳號</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control rounded-3" id="user_password" name='user_password' placeholder="只能輸入大小寫英文和數字組成的密碼" value="{{usernapo.user_password}}" autocomplete="off">
+            <input type="password" class="form-control rounded-3" id="user_password" name='user_password' placeholder="只能輸入大小寫英文和數字組成的密碼" value="{{pass_word}}" autocomplete="off" required>
             <label for="user_password" >密碼</label>
           </div>
-          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">登入</button>
-          <a href="/member/sing_up">
-            <div class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" style="background-color: rgb(64, 77, 101);">註冊</div>
-          </a>
+        <button class="mb-2 btn btn-lg rounded-3 btn-primary" type="submit" style=" width: 49%;">登入</button>
+          <a href="/member/sing_up"><div class="mb-2 btn btn-lg rounded-3 btn-primary" style="background-color: rgb(64, 77, 101); width: 49%;">註冊</div></a>
+
+        <a href="/member/sing_up"><div class="w-100 mb-2 btn btn-lg rounded-3 text-white bg-secondary" >忘記密碼</div></a>
         </form>
-        {% else %}
+      {% else %}
         <form action="/member/long-in/" method="POST">
           {% csrf_token %}
           <div class="mistake" id="mistake">
@@ -148,42 +168,73 @@
             {{message}}
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control rounded-3" id="user_name" value="" name='user_name' placeholder="username" autofocus>
+            <input type="text" class="form-control rounded-3" id="user_name" value="{{user_name}}" name='user_name' placeholder="username" autofocus required>
             <label for="user_name">帳號</label>
           </div>
-          <div class="form-floating mb-3">
-            <input type="password" class="form-control rounded-3" id="user_password" name='user_password' placeholder="Password" value="">
+          <div class="form-floating mb-3 relative">
+            <input type="password" class="form-control rounded-3" id="user_password" name='user_password' placeholder="Password" value="{{pass_word}}" required>
             <label for="user_password" >密碼</label>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye lookyes" viewBox="0 0 16 16">
+              <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+              <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash lookno" viewBox="0 0 16 16">
+              <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+              <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+              <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+            </svg>
           </div>
-          <input type="radio" name="lookpass" id="lookpass" onclick="getpass()">
-          <label for="lookpass" onclick="getpass()">密碼可見</label>
-          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" style="margin-top:8px;">登入</button>
-          <a href="/member/sing_up"><div class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" style="background-color: rgb(64, 77, 101);">註冊</div></a>
+            <button class="mb-2 btn btn-lg rounded-3 btn-primary" type="submit" style=" width: 49%;margin-top: 8px;">登入</button>
+            <a href="/member/sing_up"><div class="mb-2 btn btn-lg rounded-3 btn-primary" style="background-color: rgb(64, 77, 101); width: 49%;margin-top: 8px;">註冊</div></a>
+
+          <a href="{% url 'forget_password' %}"><div class="w-100 mb-2 btn btn-lg rounded-3 text-white bg-secondary" >忘記密碼</div></a>
         </form>
-        {% endif %}
+      {% endif %}
       </div>
     </div>
   </div>
 </div>
 
-{% if message %}
+  {% if message == "帳號不存在或輸入錯誤!" %}
+  <script>
+    x = document.getElementById('mistake')
+    x.style.display="block";
+    document.getElementById('user_name').style.marginTop="15px";
+    document.getElementById('user_name').style.outline ="3px solid rgb(255,0,0,0.5)";
+  </script>
+  {% elif message == "密碼錯誤!" %}
+  <script>
+    x = document.getElementById('mistake')
+    x.style.display="block";
+    document.getElementById('user_name').style.marginTop="15px";
+    document.getElementById('user_password').style.outline ="3px solid rgb(255,0,0,0.5)"
+  </script>
+  {% endif %}
 <script>
-  x = document.getElementById('mistake')
-  x.style.display="block";
-  document.getElementById('user_name').style.marginTop="15px";
-</script>
-{% endif %}
-<script>
-function getpass(){
-  type =document.getElementById('user_password')
-  if(type.type=='text'){
-    type.type='password';
-    document.getElementById('lookpass').checked  = false;
-  }else{
-    type.type='text';
-  }
-}
 
+        window.onload = function(){
+          document.getElementsByClassName('lookyes')[0].addEventListener('click',look1)
+          document.getElementsByClassName('lookno')[0].addEventListener('click',look1)
+          document.getElementsByClassName('btn-close')[0].addEventListener('click',function(){
+            console.log('asd')
+            history.back()
+          })
+        }
+          function look1(){
+            let lookyes =document.getElementsByClassName('lookyes')[0]
+          let lookno = document.getElementsByClassName('lookno')[0]
+            if(getComputedStyle(lookyes,'display').display=='block'){
+              lookyes.style.display = 'none';
+              lookno.style.display = 'block';
+              type =document.getElementById('user_password');
+              type.type='text';
+            }else{
+              lookyes.style.display = 'block';
+              lookno.style.display = 'none';
+              type =document.getElementById('user_password');
+              type.type='password';
+            }
+          }
 </script>
 </body>
 </html>

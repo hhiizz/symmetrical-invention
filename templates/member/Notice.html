@@ -1,0 +1,310 @@
+{% extends 'member/member_server.html' %}
+
+{% block content %}
+<style>
+    .notice_dic{
+        padding: 10px;
+        padding-top: 20px;
+        margin: 10px;
+        backdrop-filter: blur(5px);
+        color: black;
+        text-align: left;
+        box-sizing: border-box;
+    }
+    .notice_dic h4{
+        vertical-align: middle !important;
+    }
+    .back__notice{
+        margin-top: 10px;
+        background-color:rgba(255, 255, 255, 0.548);
+        position: relative;
+        padding: 10px;
+        border-radius: 4px;
+        box-shadow: 2px 2px 5px black;
+    }
+    .nolook{
+        margin-top: 10px;
+        background-color:rgb(255, 255, 255);
+        position: relative;
+        padding: 10px;
+        box-shadow: 2px 2px 5px black;
+    }
+    .close{
+        border-radius: 0px 5px 0px 5px;
+        position:absolute;
+        top: 0px;
+        right: 0px;
+        width: 50px;
+        text-align: center;
+        line-height: 50px;
+        height: 50px;
+    }
+    .close:hover{
+        background-color: rgb(204, 139, 139);
+        color: aliceblue;
+    }
+    .div__outline{
+        padding: 10px;
+
+        margin-top: 20px;
+    }
+    .title_date{
+        color: #373c3ca9;
+        font-size: 20px;
+    }
+    .text-blue{
+        color: #019ab9;
+        font-size: 25px;
+        padding: 10px;
+        padding-left: 20px;
+    }
+    .div__outline:nth-child(2){
+        margin-top: -10px;
+    }
+    hr{
+    border: 0;
+    padding: 3px;
+    background: linear-gradient(135deg, red, orange,green, blue, purple);
+    border: 0;
+    padding-top: 1px;
+    background: linear-gradient(to right, transparent, #0c2e2f, transparent);
+    font-family:'Roboto',sans-serif;
+    }
+    .content_notice{
+        font-family:'Roboto',sans-serif;
+        padding: 10px;
+        padding-left: 20px;
+        font-size: 20px;
+        color: #164853;
+    }
+    a.button6{
+    display:inline-block;
+    padding:0.7em 1.4em;
+    margin:10px 0.3em 0.3em 0;
+    border-radius:0.15em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    text-transform:uppercase;
+    font-weight:400;
+    color:#FFFFFF;
+    background-color:#e25858;
+    box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+    position:relative;
+    }
+    a.button6:active{
+    top:0.1em;
+    }
+    @media screen and (max-width:599px){
+        .notice_dic{
+            padding: 0px;
+            margin: 0px;
+        }
+    }
+    #body_inner{
+        background-color: #cadde1;
+        padding: 0px;
+    }
+</style>
+
+<div id="content1" >
+    <div class="title_0">
+        <a class="amember"><div class="Table_of_contents active2" id="control_center">管理 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </div></a>
+        <a class="amember2"  href="{% url 'control_center' %}"><div class="control">管理中心</div></a>
+        <a class="amember2"  href="{% url 'recommend_log' %}"><div class="control">推送紀錄</div></a>
+        <a class="amember2"  href="{% url 'notice' %}"><div class="control active2" >通知中心</div></a>
+    </div>
+    <div class="title_1">
+        <a class="amember total"><div class="Table_of_contents" id="love" >收藏 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </div></a>
+        <a class="amember2"  href="{% url 'user' %}"><div class="Table_of_content" >全部</div></a>
+        <a class="amember2" href="{% url 'like_like' %}"><div class="Table_of_content" >我的最愛</div></a>
+        <a class="amember2" href="{% url 'like_recommend' %}"><div class="Table_of_content">推薦</div></a>
+        <a class="amember2" href="{% url 'user_great' %}"><div class="Table_of_content " >點讚紀錄</div></a>
+    </div>
+    <div class="title_2">
+            <a class="amember" ><div class="Table_of_contents super_function" id="super_function">功能 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg></div></a>
+            <a class="amember2"  href="{% url 'user_recommend' %}"><div class="function" >推薦功能</div></a>
+
+    </div>
+    <div class="title_3">
+            <a class="amember"><div class="Table_of_contents" id="member_user">設定 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg></div></a>
+            <a class="amember2"  href="{% url 'change' %}"><div class="Table_of_content_member " >帳號安全</div></a>
+            <a class="amember2" href="{% url 'opinion' %}"><div class="Table_of_content_member " >意見箱</div></a>
+    </div>
+</div>
+<div class="container-fluid" id="body_inner"  >
+    <div class="notice_dic">
+        <div style="text-align: right;">
+            <a class="button6">全部清空</a>
+        </div>
+        {% for k,v in date_dict.items %}
+        <div class="div__outline">
+            <p class="title_date"><b>{{k}}</b></p>
+            {% for i in v %}
+                {% if i.Notice_look %}
+                <div class="back__notice" id="{{i.Notice_id}}">
+                    <span class="close">X</span>
+                    <p><b class="text-blue">{{i.Notice_title}}</b></p>
+                    <hr>
+                    <p class="content_notice">{{i.Notice_content}}</p>
+                </div>
+                {% else %}
+                <div class="back__notice nolook" id="{{i.Notice_id}}">
+                    <span class="close" >X</span>
+                    <p><b class="text-blue">{{i.Notice_title}}</b></p>
+                    <hr>
+                    <p class="content_notice">{{i.Notice_content}}</p>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+</div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+
+jQuery(document).ajaxSend(function(event, xhr, settings) {
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    function sameOrigin(url) {
+        // url could be relative or scheme relative or absolute
+        var host = document.location.host; // host + port
+        var protocol = document.location.protocol;
+        var sr_origin = '//' + host;
+        var origin = protocol + sr_origin;
+        // Allow absolute or scheme relative URLs to same origin
+        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+            // or any other URL that isn't scheme relative or absolute i.e relative.
+            !(/^(\/\/|http:|https:).*/.test(url));
+    }
+    function safeMethod(method) {
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    }
+});
+
+
+// window.onload = function (){
+//     // window.addEventListener('resize', zzy)
+//     alert(document.body.clientHeight )
+// }
+document.getElementsByTagName('html')[0].style.backgroundColor = document.getElementById('body_inner').style.backgroundColor;
+
+document.getElementsByClassName('button6')[0].addEventListener('click',function(){
+        swal({
+        title: "是否刪除全部推薦資料!",
+        text: "Please confirm whether to delete the data !",
+        icon: "warning",
+        buttons:['我再考慮一下','刪除'],
+        dangerMode: true,
+        }).then((willDelete) => {
+            if(willDelete){
+                data_dict={
+                    total:'total'
+                }
+                $.ajax({
+                    url:'{% url "remove_notice" %}',
+                    type:'POST',
+                    data:data_dict,
+                    dataType:'json',
+                    success:function(mesg){
+                swal({
+                title: "恭喜您刪除成功!",
+                text: "You change the data!",
+                icon: "success",
+                button: "好的",
+                }).then((value) => {
+                    window.location.reload();
+                });
+            },
+            error:function(mesg){
+                swal({
+                    title: "資料錯誤!",
+                    text: '請確定資料是否正確，如果操作皆為正確，請去意見箱反饋錯誤。',
+                    icon: "error",
+                    button: "好的",
+                    }).then((value) => {
+                });
+            }
+                })
+            }
+        })
+    }
+    )
+zz = document.getElementsByClassName('close')
+for(let i=0;i<zz.length;i++){
+    zz[i].addEventListener('click',function(){
+        remove(i);
+    })
+}
+
+$.ajax({
+            url:'{% url "set_notice" %}',
+            type:'POST',
+            dataType:'json',
+            success:function(mesg){
+                console.log(mesg)
+            },
+            error:function(mesg){
+                console.log(mesg)
+            }
+    })
+
+function remove(count){
+        let notice =document.getElementsByClassName('back__notice')[count]
+        $(notice).hide(300);
+        let content = document.getElementsByClassName('content_notice')[count].innerHTML
+        let title = document.getElementsByClassName('text-blue')[count].innerHTML
+        data_dict={
+            'id':notice.id,
+        }
+        $.ajax({
+            url:'{% url "remove_notice" %}',
+            type:'POST',
+            data:data_dict,
+            dataType:'json',
+            success:function(mesg){
+                console.log(mesg)
+            },
+            error:function(mesg){
+                console.log(mesg)
+            }
+        })
+    }
+</script>
+{% endblock %}

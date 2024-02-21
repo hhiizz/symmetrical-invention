@@ -9,20 +9,24 @@
     <title>find work</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    {% load static %}
+    <link href="{% static 'css/cover.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    {% load static %}
+    <script src="{% static 'js/wow.js' %}"></script>
+    <script src="../../static/js/popper.min.js"></script>
+    <script src="../../static/js/bootstrap.min.js"></script>
+    {% load static %}
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="shortcut icon"   href="../../static/images/logo/logo-removebg-preview.png" type="image/x-icon" />
+    <!-- <script href="../../static/css/bootstrap.css"></script> -->
   </head>
 
 
 
-{% load static %}
-<link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
-{% if message %}
-<script>
-alert('{{message}}')
-</script>
-{% endif %}
+
 
     <style>
-
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -35,6 +39,7 @@ alert('{{message}}')
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
+
 
       }
 
@@ -94,39 +99,25 @@ alert('{{message}}')
         justify-content: center;
         margin-left: 13%;
         }
-        .dropdown-menu{
-          display:none;
-          background:#ffffff;
-          opacity: .5;
-          margin-top: 40px;
-          margin-left: 95px;
-        }
-        .ahe{
-          margin: 20px;
-          padding-top: 30px;
-          justify-content: center;
-          text-align: center;
-          color: #000;
-          text-decoration: none;
-        }
         h3.mag{
           margin-left:207px;
         }
         .divcolor{
           background-color: rgb(148, 163, 163);
           background-repeat: no-repeat;
+          overflow-x: hidden;
         }
         .backdiv2{
           padding-top: 20px;
           margin: -17px;
           align-items: center;
-          background-color: rgba(157, 142, 118, 0.536);
+          background-color:  rgba(40, 71, 77, 0.536);;
           background-repeat: no-repeat;
-          width: 102%;
+          width: cover !important;
           height:100px;
           display: fixed;
         }
-      @media (max-width: 769px) {
+   /* @media (max-width: 769px) {
       div.mb-auto div h3{
         margin-left:-80%;
         text-align: center;
@@ -139,60 +130,272 @@ alert('{{message}}')
         width: 50%;
         margin: 0px;
       }
-      /* a.ahe:hover{
+      a.ahe:hover{
         color: #9E9C9C;
         background-color: rgb(167, 129, 129);
-      }*/
+      }
+    } */
+    #skill1,#skill2,#skill3{
+        width:32%;
+        background-color:rgb(75, 64, 49,0.2); ;
+        align-self: center;
+        height:50px;
+        border: none;
+        border-radius:5px;
+        transition: 1s;
+        color: black !important;
+    }
+    #skill1:hover,#skill2:hover,#skill3:hover{
+        background-color: rgb(188, 230, 207);
     }
 
+
+
+
+    @media screen  and (min-width:600px){
+            nav.nav{
+            margin-left:15%  !important;
+        }
+    #skill2{
+        margin-right:0.8%;
+        margin-left:2.2%;
+    }
+    #skill3{
+        margin-left:1%;
+    }
+    }
+    @media screen  and (max-width:600px){
+        div h3{
+          text-align: left !important;
+          margin-left:10% !important;
+        }
+        .diviner{
+          display: block;
+        }
+        
+        #skill1,#skill2,#skill3,#special_search{
+            width: 100%;
+        }
+        #skill2{
+        margin-right:0%;
+        margin-left:0%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        }
+        #skill3{
+            margin-left:0%;
+        }
+        nav.nav{
+            margin-left:45% !important;
+            width: 300px !important;
+            margin-top: -35px;
+        }
+        .backdiv2 h3{
+          width: 100px;
+        }
+    }
+
+
+    .dropbtn{
+          border-radius: 0px 0px 15px 15px;
+          position:absolute;
+          top:35px;
+          display:none;
+          background:rgb(255, 255, 255);
+          box-shadow: 5px 3px 5px 0px rgba(0,0,0,0.2);
+          width:125px;
+          z-index: 10;
+        }
+        .ahe{
+        background-color: rgb(255, 255, 255);
+        padding: 12px 16px;
+        display: block;
+        text-align: left;
+        transition: 0.7s;
+        width: 125px ;
+        }
+        .ahe a{
+          text-decoration: none;
+          text-align: center;
+          display: block;
+          transition: 0.7s;
+          color: black;
+          font-weight: bolder;
+          border:none;
+        }
+        #dropdown-toggle{
+      position: relative;;
+    }
+    #dropdown-toggle:hover .dropbtn ,.ahe:hover{
+        display: block;
+      }
+    .ahe:hover{
+      background-color: #b8acac;
+      width: 127px;
+    }
+    .ahe :hover,.ahe:hover #zzz{
+      color: rgb(216, 202, 202);
+    }
+    #zzz{
+      position: absolute;
+      bottom: 0px;
+      color: rgba(255, 0, 0, 0.678);
+      left: 36px;
+      font-size: 23px;
+    }
+
+    nav.nav a:hover,nav.nav div:hover{
+          color: white !important;
+      }
+      #skill1::placeholder{
+        color: rgb(58, 59, 59);
+    }
+    ul.nav li{
+      cursor: pointer;
+    }
     </style>
+
+{% if user_name %}
+    <style>
+          @media screen  and (max-width:510px){
+        nav.nav{
+          margin-left:calc(60%) !important;
+          width: 200px !important;
+        }
+    }
+    @media screen  and (max-width:480px){
+        nav.nav{
+          margin-left:55% !important;
+          width: 200px !important;
+        }
+    }
+    @media screen  and (max-width:400px){
+        nav.nav{
+          margin-left:50% !important;
+          width: 200px !important;
+        }
+    }
+    </style>
+{% else %}
+    <style>
+      @media screen  and (max-width:768px){
+        nav.nav{
+          margin-left: 0px !important;
+          margin-right: 0px !important;
+          text-align: center !important;
+        }
+    }
+    @media screen  and (max-width:600px){
+      nav.nav{
+            margin-left:45% !important;
+            width: 300px !important;
+            margin-top: -35px;
+        }
+    }
+    @media screen and (max-width:480px){
+      nav.nav{
+      margin-left: 35% !important;
+      }
+    }
+    @media screen and (max-width:400px){
+      nav.nav{
+      margin-left: 50% !important;
+      }
+      nav.nav{
+        width: 150px !important;
+      }
+      nav .nav a{
+        margin-left: 0px !important;
+      }
+    }
+    </style>
+{% endif %}
 
 
     <!-- Custom styles for this template -->
-    {% load static %}
-    <link href="{% static 'cover.css' %}" rel="stylesheet" type="text/css">
   </head>
 <body class="d-flex h-100 text-center text-white divcolor" style="width:100%; height: auto; background-size: cover;">
 
 <div class="cover-container d-flex w-100 h-100 p-3  flex-column divcolor" style="max-width: 100%;">
   <div class="mb-auto">
     <div class="backdiv2" >
-      <h3 class="float-md-start mb-0 mag" style="align-items:center;">Find job</h3>
-      <nav class="nav nav-masthead justify-content-center float-md-end" style="margin-right:207px;">
-        <a class="nav-link fw-bold py-1 px-0 " aria-current="page" href="/myApp/{{user_name}}">主頁</a>
-        <a class="nav-link fw-bold py-1 px-0 active" href="/myApp/search_job/{{user_name}}">查尋</a>
-        <a class="btn dropdown-toggle nav-link fw-bold py-1 px-0" id="dropdown-toggle"style="font-size: 14px;color:rgba(255, 255, 255, .5);" >{{user_name |  truncatechars_html:5 }}的帳號</a>
-          <span class="dropdown-menu" id="dropdown-menu" style="min-width:110px;height:110px;margin-top: 40px; margin-left: 90px;">
-            <a class="ahe" href="/member/search/{{user_name}}" id="userserver">用戶中心</a><br><hr>
-            <a href="/member/sing_out" class="ahe" style="padding-left:12px;">登出</a>
-          <span>
-        <!-- <a class="nav-link fw-bold py-1 px-0" href="http://127.0.0.1:8000/sing_out" >{{user_name}}</a> -->
+      <h3 class="float-md-start mb-0 mag" style="margin-left:10%;"><a class="text-decoration-none text-white" href="{% url 'definepage' %}">Find job</a></h3>
+      {% if user_name %}
+      <nav class="nav nav-masthead justify-content-center float-md-end" style="margin-right:10%;">
+        <a class="nav-link fw-bold py-1 px-0" href="{% url 'definepage' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+          </svg>主頁</a>
+        <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="{% url 'search_job' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+          查詢</a>
+        <div class="btn dropdown-toggle nav-link fw-bold py-1 px-0" id="dropdown-toggle" style="font-size: 14px;" >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg>&thinsp;{{user_name |  truncatechars_html:4 }} ...的帳號
+          <div class="dropbtn" id="dropbtn" >
+            <div class="ahe" >
+              <a id="userserver" href="{% url 'control_center' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16" style="margin-left:-8px;margin-right: 4px;">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                </svg><b>用戶中心</b></a>
+            </div>
+            <div class="ahe position-relative"><a href="{% url 'admin_index' %}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bell mr-2" viewBox="0 0 16 16">
+                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+              </svg>
+              {% if count_notice %}
+              <ul id="zzz"><li></li></ul>
+              {% endif %}
+            通知</a>
+          </div>
+          {%if power == 'manage' %}
+          <div class="ahe"><a href="{% url 'admin_index' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18"  height="18" fill="currentColor" class="bi bi-gear mr-2" viewBox="0 0 16 16">
+              <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+              <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+            </svg>
+          後臺管理</a>
+        </div>
+        {% endif %}
+            <div class="ahe" style="border-radius:0px 0px 15px 15px ;"><a href="{% url 'out' %}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unindent" viewBox="0 0 16 16" >
+                <path fill-rule="evenodd" d="M13 8a.5.5 0 0 0-.5-.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H12.5A.5.5 0 0 0 13 8Z"/>
+                <path fill-rule="evenodd" d="M3.5 4a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 1 0v-7a.5.5 0 0 0-.5-.5Z"/>
+              </svg>登出</a>
+            </div>
+          <div>
+        </div>
       </nav>
+      {% else %}
+      <nav class="nav nav-masthead justify-content-center float-md-end" id="b2" style="margin-right:10%;">
+        <a class="nav-link fw-bold py-1 px-0" id="1"aria-current="page" href="{% url 'definepage' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+          </svg>&thinsp;主頁</a>
+        <a class="nav-link fw-bold py-1 px-0 active"  id ="2"   href="{% url 'search_job' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+        查詢</a>
+        <a class="nav-link fw-bold py-1 px-0" href="/member/sing_in">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg> &thinsp;登入</a>
+      </nav>
+      {% endif %}
+      {% block main2 %}{% endblock %}
     </div>
-    {% block main2 %}{% endblock %}
   </div>
 </div>
 </body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-  var slide = 0;
-
-  function change(n){
-    $("#dropdown-menu").slideToggle("");
-    if (n == 1) {
-        slide = 0;
-        $(".fa-chevron-up").attr("style", "display:none")
-        $(".fa-chevron-down").attr("style", "display:block")
-    }
-    else {
-        slide = 1;
-        $(".fa-chevron-up").attr("style", "display:block")
-        $(".fa-chevron-down").attr("style", "display:none")
-    }
-  }
-  $(function () {
-      $("#dropdown-toggle").click(function () {
-          change(slide)
-      });
-  })
+  new WOW().init();
 </script>
 </html>

@@ -13,16 +13,431 @@
     -moz-user-select: none;
     user-select: none;
   }
-
-  @media (min-width: 768px) {
+  .change_posit{
+    margin-top: 0px !important;margin-bottom: 100px
+  }
+  @media screen and (max-width:992px) {
+    .change_posit{
+        margin-left: auto !important;
+        margin-right: auto !important;
+        margin-bottom: 80px;
+        display: none !important;
+      }
+      .change_posit2{
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      .img-fluid{
+        margin-left: 50px !important;
+        display: none !important;
+      }
+  }
+  @media  (max-width:992px) {
+      .change_posit{
+        margin-left: auto !important;
+        margin-right: auto !important;
+        margin-bottom: 80px;
+        display: none !important;
+      }
+      .change_posit2{
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      .img-fluid{
+        margin-left: 50px !important;
+        display: none !important;
+      }
+  }
+  /* @media (min-width: 768px) {
     .bd-placeholder-img-lg {
       font-size: 3.5rem;
     }
   }
   @media (min-width: 992px) {
   .rounded-lg-3 { border-radius: .3rem; }
+  } */
+
+  .b-example-divider {
+    height: 3rem;
+    background-color: rgba(0, 0, 0, .1);
+    border: solid rgba(0, 0, 0, .15);
+    border-width: 1px 0;
+    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
   }
 
+  .b-example-vr {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 100vh;
+  }
+
+  .bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+  }
+
+  .nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+  }
+
+  .nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .back1{
+    background-image:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),url('{% static "images/back1.jpg" %}');
+    background-size: cover;
+    color: white;
+  }
+  .back2{
+    background-image:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),url('{% static "images/back2.jpg" %}');
+    background-size: cover;
+    color: white;
+  }
+  .back3{
+    background-image:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),url('{% static "images/back3.jpg" %}');
+    background-size: cover;
+  }
+  .back4{
+    background-image:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),url('{% static "images/back4.jpg" %}');
+    background-size: cover;
+  }
+  div.back1,div.back2, div.b-example-divider{
+    margin-left:-30px;
+    margin-right:-30px;
+  }
+  .next_div{
+    font-size: 20px;
+
+  }
+  .next_div a{
+    color: white;
+    text-decoration: none;
+  }
+
+
+ 
+</style>
+
+</head>
+
+<body>
+
+<main class="mb-5" >
+  <div class=" px-4 py-5 my-5 text-center back1" >
+    <div class=" wow bounceInUp long_in" data-wow-duration="3s" data-wow-delay="0s">
+    <h1 class=" display-5 fw-bold ">您以登入成功<br>
+      開始查詢適合您的工作吧!</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">當您輸入您所擁有的技能時，我們會將抓取到的工作進行分析後，並幫您匹配最符合您技能的工作，讓您可以在較短的時間找到合適的工作，
+        當然您也可以依照地區、學歷、經驗等等進行特殊查找，讓您可找到合適的工作。
+      </p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <a href="{% url 'search_job' %}"   class="btn btn-primary btn-lg px-4 gap-3">現在去試試</a>
+      </div>
+      <div  class="wow fadeInUp next_div mt-5"   data-wow-duration="2s" data-wow-delay="1s">
+        <a href="#div-2">
+        查看更多
+        <br>
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>
+      </a>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="b-example-divider" id="div-2"></div>
+
+  <div class="px-4 pt-5 my-5 text-center border-bottom back2">
+    <div class="wow fadeInDown" data-wow-duration="3s" data-wow-delay="1s">
+      <h1 class="display-4 fw-bold">網站功能性</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">本網站除了可以幫您篩選工作外，您還可以參考他人推薦的工作，或是依照公司來查找工作。此外，我們也會分析每個工作類所抓取到的工作數量，
+          讓您可以了解該類整體趨勢，及該類熱門的技能供您參考，除此之外，本網站還有許多功能等您來探索。
+        </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+          <a href="{% url 'search_job' %}"   class="btn btn-primary btn-lg px-4 gap-3">現在去試試</a>
+        </div>
+        <div  class="wow fadeInUp next_div mb-5"   data-wow-duration="2s" data-wow-delay="2s">
+          <a href="#div-3">
+          查看更多
+          <br>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>
+        </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="b-example-divider"  id="div-3"></div>
+
+  <div class="back3 container col-xl-10  px-4 py-5 fadeInLeft wow long_in" data-wow-duration="3s" data-wow-delay="0s">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6 change_posit"  >
+        <img src="../../static/images/line-bot.png" class="img-fluid" alt="Bootstrap Themes" width="300" height="400" loading="lazy">
+      </div>
+      <div class="col-lg-6" style="margin-top:-30px">
+        <h1 class="display-5 fw-bold lh-1 mb-3">綁定您的帳戶</h1>
+        <p class="lead mt-4">您可以在系統的官方Line中綁定您的帳戶，來查看網站更新的更新情況，以及工作推送情況，
+          同時您也可以在Line中查看您的收藏職缺，管理您的收藏。
+        </p>
+        <div class="d-grid gap-2 d-md-flex justify-content-center" >
+          <a href="{% url 'user_recommend' %}" class="btn btn-primary btn-lg px-4">現在去試試</a>
+        </div>
+        <div  class="wow fadeInUp next_div mt-5"   data-wow-duration="2s" data-wow-delay="1s">
+          <a href="#div-4">
+          查看更多
+          <br>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>
+        </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="b-example-divider" id="div-4"></div>
+
+  <div class="wow container col-xl-10  px-4 py-5 back4 fadeInRight long_in" data-wow-duration="3s" data-wow-delay="0s">
+    <div class="row align-items-center g-lg-5" >
+      <div class="col-md-10  col-lg-5 change_posit2" >
+        <img src="../../static/images/job_search.png" class="img-fluid" alt="Bootstrap Themes" width="600" height="300" loading="lazy">
+      </div>
+      <div class="col-lg-7 text-center text-lg-start" style="padding-right: 0px;">
+        <h1 class="display-4 fw-bold lh-1 mb-3 text-center">查找工作</h1>
+        <p class="lead" style="padding-right: 50px;">當然除了推薦外，您也可以主動查詢您想要的工作。如果您看到合適的工作，您可以新增到「我的最愛」中，方便以後查看。
+          <br>
+          <br>
+          此外，本網站主要是以技能為基礎搜尋工作。在搜尋的過程中，如果您看到您熟悉的技能，您可以點擊此技能，我們會主動為您添加工作技能。
+          <br>
+          <br>
+          如果您認為某份工作不錯，可以點擊「讚」給這份工作。我們會依照「讚」的數量來排序工作。
+        </p>
+      </div>
+         <div class="d-grid gap-2 d-md-flex justify-content-center" >
+          <a href="{% url 'search_job' %}" class="btn btn-primary btn-lg px-4">現在去試試</a>
+        </div>
+      <div  class="wow fadeInUp next_div mt-10 mt-5"   data-wow-duration="2s" data-wow-delay="1s">
+        <a href="#div-5">
+        查看更多
+        <br>
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>
+      </a>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div class="b-example-divider" id="div-5"></div>
+
+  <div class="lightSpeedIn wow  container my-5 long_in"  data-wow-duration="2s" data-wow-delay="0s" >
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+      <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+        <h1 class="display-4 fw-bold lh-1">與我們聯繫</h1>
+        <p class="lead">如果您有不同的想法或意見的話，歡迎傳送Email給我們，我們將會1-3個工作天進行回覆，
+          當然如果您已註冊我們的網站的話，您也可以使用網站的意見箱給我們，我們會優先處理意見箱的內容，如果您比較緊急的話可以用此，
+          我們會用網頁內的通訊欄回覆給您。在此，感謝您的意見與配合!
+        </p>
+        <div class="d-grid gap-2 d-md-flex justify-content-center" >
+          <a href="{% url 'opinion' %}" class="btn btn-primary btn-lg px-4 ">現在去試試</a>
+        </div>
+      </div>
+      <div class="col-lg-4 offset-lg-1  overflow-hidden">
+          <img class="rounded-lg-3" id="email_img" src="../../static/images/gmail.png" alt="" style="height: auto;max-width: 100%;width: 300px;">
+      </div>
+      <div  class="wow fadeInUp next_div mt-3 mb-5"   data-wow-duration="2s" data-wow-delay="1s">
+        <a href="#div-6">
+        查看更多
+        <br>
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>
+      </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="b-example-divider" id="div-6"></div>
+  <div class="wow zoomIn" data-wow-duration="3s" >
+    <div class="main-carousel"  data-flickity='{ "cellAlign": "left", "contain": true }'>
+      {% for i,v in tit.items %}
+      <div class="carousel-cell">
+        <h4 class="suggest_h3"><img src="../../static/images/fire.png" width="30" height="30">{{i}}</h4>
+        {% for k in v %}
+        <span class="sugger" style="box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);">
+          <p class="ellipsis-text" style="font-size: 20px;"><strong><a  target="_blank" href="{{k.like_jobid__href}}" style="text-decoration: none;">{{k.like_jobid__title}}</a></strong></p>
+          <hr id="hr_suggest">
+          <p class="ellipsis-text" style="font-size: 18px;margin-left: 5px;">{{k.like_jobid__company}}</p>
+          <p class="ellipsis-text" style="font-size: 18px; margin-left: 5px;">{{k.like_jobid__local}} <span style="color: rgba(87, 87, 86, 0.459);">|</span> {{k.like_jobid__salary}} </p>
+          <span class="ellipsis-text" style="font-size: 18px;margin-left: 5px;">所需技能:</span>
+          {% load new_tage %}
+          {% for getskill in k.like_jobid__skill|split:"、" %}
+          <span class="skill_suggest" style="margin-left: 5px;">{{getskill}}</span>
+          {% endfor %}
+          <br>
+          {% if  k.like_jobid__certificate != "不拘" %}
+          <span class="ellipsis-text" style="font-size: 18px;margin-left: 5px;">所需證照:</span>
+            {% for getskill in k.like_jobid__certificate|split:"、" %}
+            <span class="skill_suggest" style="margin-left: 5px;">{{getskill}}</span>
+            {% endfor %}
+          {% endif %}
+        </span>
+        {% endfor %}
+      </div>
+      {% endfor %}
+      </div>
+  </div>
+
+  <div class="b-example-divider" id="div-7"></div>
+
+  <div class="bg-dark text-secondary px-4 py-5 text-center wow zoomIn long_in" data-wow-duration="3s" >
+    <div class="py-5">
+      <h1 class="display-5 fw-bold text-white">開始體驗</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="fs-5 mb-4">當然我們還有許多特別的功能等您來發現，如果有任何問題請與我們聯繫，我們將會為您及時解答，
+          在此祝您找到合適的工作。
+        </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <a href="#div-1" class="btn btn-outline-light btn-lg px-4">返回頂部</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+{% load static %}
+<link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+</body>
+<script src="../../static/js/flickity.min.js"></script>
+<script>
+var flky = new Flickity(".main-carousel",{
+ // options, defaults listed
+  // advances to the next cell
+  // if true, default is 3 seconds
+  // or set time between advances in milliseconds
+  // i.e. `autoPlay: 1000` will advance every 1 second
+  autoPlay: true,
+  cellAlign: 'center',
+  // alignment of cells, 'center', 'left', or 'right'
+  // or a decimal 0-1, 0 is beginning (left) of container, 1 is end (right)
+
+  contain: false,
+  // will contain cells to container
+  // so no excess scroll at beginning or end
+  draggable: '>1',
+  // enables dragging & flicking
+  // if at least 2 cells
+
+  dragThreshold: 3,
+  // number of pixels a user must scroll horizontally to start dragging
+  // increase to allow more room for vertical scroll for touch devices
+
+  freeScroll: false,
+  // enables content to be freely scrolled and flicked
+  // without aligning cells
+
+  friction: 0.2,
+  // smaller number = easier to flick farther
+
+  groupCells: false,
+  // group cells together in slides
+
+  initialIndex: 0,
+  // zero-based index of the initial selected cell
+  // enable lazy-loading images
+  // set img data-flickity-lazyload="src.jpg"
+  // set to number to load images adjacent cells
+
+  percentPosition: false,
+  // sets positioning in percent values, rather than pixels
+  // Enable if items have percent widths
+  // Disable if items have pixel widths, like images
+
+  prevNextButtons: false,
+  // creates and enables buttons to click to previous & next cells
+
+  pageDots: true,
+  // create and enable page dots
+
+  resize: true,
+  // listens to window resize events to adjust size & positions
+
+  rightToLeft: false,
+  // enables right-to-left layout
+
+  setGallerySize: true,
+  // sets the height of gallery
+  // disable if gallery already has height set with CSS
+
+  watchCSS: false,
+  // watches the content of :after of the element
+  // activates if #element:after { content: 'flickity' }
+
+  wrapAround:true,
+  // at end of cells, wraps-around to first for infinite scrolling
+  adaptiveHeight: true,
+
+});
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{%block main%}
+{% load static %}
+<link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+{% load static %}
+<link href="{% static 'css/heroes.css' %}" rel="stylesheet">
+
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  /* @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+  @media (min-width: 992px) {
+  .rounded-lg-3 { border-radius: .3rem; }
+  } */
+
+  @media (max-width:992px) {
+      .change_posit{
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      .img-fluid{
+        margin-left: 50px !important;
+        display: none !important;
+      }
+  }
   .b-example-divider {
     height: 3rem;
     background-color: rgba(0, 0, 0, .1);
@@ -66,302 +481,158 @@
     position: relative;
   }
   .back2{
-    background-image:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),url('{% static "images/back2.jpg" %}');
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)),url('{% static "images/back2.jpg" %}');
     background-size: cover;
     color: white;
   }
   .back3{
-    background-image:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),url('{% static "images/back3.jpg" %}');
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)),url('{% static "images/back3.jpg" %}');
     background-size: cover;
   }
   .back4{
-    background-image:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),url('{% static "images/back4.jpg" %}');
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)),url('{% static "images/back4.jpg" %}');
+    background-size: cover;
+  }
+  .back5{
+    background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)),url('../../static/images/ZzWaNsNVN5fzkR2TTPWFG9-1200-80.jpg');
     background-size: cover;
   }
   div.back1,div.back2, div.b-example-divider{
     margin-left:-30px;
     margin-right:-30px;
   }
+main div{
+  /* overflow-x: h; */
+  overflow-y: hidden;
+}
+.next_div{
+    font-size: 20px;
 
-</style>
-
-</head>
-
-<body>
-
-<main style="max-width:100%;">
-  <div class="px-4 py-5 my-5 text-center back1" >
-    <h1 class="display-5 fw-bold ">Centered hero</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="b-example-divider"></div>
-
-  <div class="px-4 pt-5 my-5 text-center border-bottom back2">
-    <h1 class="display-4 fw-bold">Centered screenshot</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-        <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Primary button</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
-      </div>
-    </div>
-    <div class="overflow-hidden" style="max-height: 30vh;">
-      <div class="container px-5">
-        <img src="bootstrap-docs.png" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
-      </div>
-    </div>
-  </div>
-
-  <div class="b-example-divider"></div>
-
-  <div class="back3 container col-xl-10  px-4 py-5" >
-    <div class="row flex-lg-row-reverse align-items-center g-5 py-5"style="margin-top:-100px">
-      <div class="col-10 col-sm-8 col-lg-6" >
-        <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-      </div>
-      <div class="col-lg-6" style="margin-top:-30px">
-        <h1 class="display-5 fw-bold lh-1 mb-3">Responsive left-aligned hero with image</h1>
-        <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start" style="margin-left:20%;">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="b-example-divider"></div>
-
-  <div class="container col-xl-10  px-4 py-5 back4">
-    <div class="row align-items-center g-lg-5 py-5" >
-      <div class="col-lg-7 text-center text-lg-start" style="margin-top:-80px">
-        <h1 class="display-4 fw-bold lh-1 mb-3">Vertically centered hero sign-up form</h1>
-        <p class="col-lg-10 fs-4">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
-      </div>
-      <div class="col-md-10 mx-auto col-lg-5" style="max-width:450px; margin-top:-50px;">
-      </div>
-    </div>
-  </div>
-
-  <div class="b-example-divider"></div>
-
-  <div class="container my-5">
-    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
-      <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-        <h1 class="display-4 fw-bold lh-1">Border hero with cropped image and shadows</h1>
-        <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Primary</button>
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
-        </div>
-      </div>
-      <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-          <img class="rounded-lg-3" src="bootstrap-docs.png" alt="" width="720">
-      </div>
-    </div>
-  </div>
-
-  <div class="b-example-divider"></div>
-
-  <div class="bg-dark text-secondary px-4 py-5 text-center">
-    <div class="py-5">
-      <h1 class="display-5 fw-bold text-white">Dark mode hero</h1>
-      <div class="col-lg-6 mx-auto">
-        <p class="fs-5 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom button</button>
-          <button type="button" class="btn btn-outline-light btn-lg px-4">Secondary</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="b-example-divider mb-0"></div>
-</main>
-{% load static %}
-<link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
-
-
-  </body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{% endblock %}
-
-{%block main%}
-{% load static %}
-<link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
-
-<style>
-  .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
   }
-
-  @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-      font-size: 3.5rem;
+  .next_div a{
+    color: white;
+    text-decoration: none;
+  }
+  @media screen and (min-width:768px) {
+    main{
+      margin-top:80px;
     }
   }
-  @media (min-width: 992px) {
-  .rounded-lg-3 { border-radius: .3rem; }
-  }
 
-  .b-example-divider {
-    height: 3rem;
-    background-color: rgba(0, 0, 0, .1);
-    border: solid rgba(0, 0, 0, .15);
-    border-width: 1px 0;
-    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-  }
 
-  .b-example-vr {
-    flex-shrink: 0;
-    width: 1.5rem;
-    height: 100vh;
-  }
+  #main_div{
+      margin-top: 80px;
+    }
+  @media screen and (max-width:768px) {
+    #main_div{
+      margin-top: 0px !important;
 
-  .bi {
-    vertical-align: -.125em;
-    fill: currentColor;
+    }
   }
-
-  .nav-scroller {
-    position: relative;
-    z-index: 2;
-    height: 2.75rem;
-    overflow-y: hidden;
-  }
-
-  .nav-scroller .nav {
-    display: flex;
-    flex-wrap: nowrap;
-    padding-bottom: 1rem;
-    margin-top: -1px;
-    overflow-x: auto;
-    text-align: center;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-  }
-  .back1{
-    background-blend-mode: multiply;
-    background-image:linear-gradient(rgba(112, 161, 168, 0.5), rgba(20, 20, 17, 0.7)),url('{% static "images/back1.jpg" %}');
-    background-size: cover;
-    position: relative;
-  }
-  .back2{
-    background-image:linear-gradient(rgba(183, 203, 230, 0.5), rgba(0,0,0,0.7)),url('{% static "images/back2.jpg" %}');
-    background-size: cover;
-    color: white;
-  }
-  .back3{
-    background-image:linear-gradient(rgba(112, 161, 168, 0.5), rgba(0,0,0,0.7)),url('{% static "images/back3.jpg" %}');
-    background-size: cover;
-  }
-  .back4{
-    background-image:linear-gradient(rgba(183, 203, 230, 0.5),  rgba(0,0,0,0.7)),url('{% static "images/back4.jpg" %}');
-    background-size: cover;
-  }
-  div.back1,div.back2, div.b-example-divider{
-    margin-left:-30px;
-    margin-right:-30px;
-  }
+ 
 </style>
 
 </head>
 
 <body>
 
-<main style="margin-top:80px;">
-  <div class="px-4 py-5 my-5 text-center back1 divmagin" >
-    <h1 class="display-5 fw-bold ">你想找到更合適的工作嗎</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">我們可以幫你找到更合適的工作，我們依照你會的技能幫你找工作，當然你也可以依照自己的喜歡來選擇，我們不會收取任何費用。
-      </p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
-      </div>
-    </div>
-  </div>
 
-  <div class="b-example-divider" style="border-radius:250px"></div>
 
-  <div class="px-4 pt-5 my-5 text-center border-bottom back2">
-    <h1 class="display-4 fw-bold">可選擇的領域</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">因為這個軟件目前還在初期，所以暫時只有開啟一部份的工作領域</p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-        <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Primary button</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
-      </div>
-    </div>
-    <div class="overflow-hidden" style="max-height: 30vh;">
-      <div class="container px-5">
-        <img src="bootstrap-docs.png" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
-      </div>
-    </div>
-  </div>
 
-  <div class="b-example-divider"></div>
-
-  <div class="back3 container col-xl-10  px-4 py-5" >
-    <div class="row flex-lg-row-reverse align-items-center g-5 py-5"style="margin-top:-100px">
-      <div class="col-10 col-sm-8 col-lg-6" >
-        <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-      </div>
-      <div class="col-lg-6" style="margin-top:-30px">
-        <h1 class="display-5 fw-bold lh-1 mb-3">Responsive left-aligned hero with image</h1>
-        <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start" style="margin-left:170px;">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+<div class="mb-5" id="main_div">
+  <div class=" px-4 py-5 my-5 text-center back1" >
+    <div class="wow bounceInUp"   data-wow-duration="3s" data-wow-delay="-0.5s" >
+      <h1 class="display-5 fw-bold ">您最近面臨找不到工作的情形嗎?<br>
+        或是遇到的工作琳瑯滿目知道到哪個適合您?</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">如果是的話，我們也許能幫助你找到工作，我們會先到104與1111人力銀行去爬取相關的工作並將資料統整
+          ，然後會依照您輸入的技能去幫您篩選工作，不僅可以大幅度的降低您找工作的時間，還可以增加準確性。
+        </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <a href="{% url 'search_job' %}" class="btn btn-primary btn-lg px-4 gap-3">現在去試試</a>
+        </div>
+        <div  class="wow fadeInUp next_div mt-5"   data-wow-duration="2s" data-wow-delay="1s">
+          <a href="#div-2">
+          查看更多
+          <br>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>
+        </a>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="b-example-divider"></div>
+  <div class="b-example-divider" style="border-radius:250px" id="div-2"></div>
 
-  <div class="container col-xl-10  px-4 py-5 back4">
-    <div class="row align-items-center g-lg-5 py-5" >
-      <div class="col-lg-7 text-center text-lg-start" style="margin-top:-100px; margin-left:60px;">
-        <h1 class="display-4 fw-bold lh-1 mb-3" style="text-align-last:center">Vertically centered hero sign-up form</h1>
-        <p class="col-lg-10 fs-4">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+  <div class=" px-4 pt-5 my-5 text-center border-bottom back2" >
+    <div class="wow fadeInDown" data-wow-duration="3s" data-wow-delay="1s">
+      <h1 class="display-4 fw-bold">推薦功能</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">此我們還有開放推薦功能給需要的使用者，如果您需要的話，可以去會員中心開啟推送，
+          當然如果您覺得不需要的話，您也可以主動關閉。<br>
+          需要注意的點是，我們的推送會依照使用者的技能排序，但是如果超過500筆的話將會暫停推送，
+          需要您去刪除不需要的工作。
+        </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+          <a href="{% url 'search_job' %}" class="btn btn-primary btn-lg px-4 gap-3">現在去試試</a>
+        </div>
+        <div  class="wow fadeInUp next_div mb-5"   data-wow-duration="2s" data-wow-delay="2s">
+          <a href="#div-3">
+          查看更多
+          <br>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>
+        </a>
+        </div>
       </div>
-      <div class="col-md-10 mx-auto col-lg-5" style="max-width:450px; margin-top:-50px; margin-right:50 ;">
-        <form class="p-4 p-md-5 border rounded-3 bg-light" action="/long-in/" method="POST">
+
+    </div>
+  </div>
+
+  <div class="b-example-divider"  id="div-3"></div>
+
+  <div class="back3 container col-xl-10  px-4 py-5 fadeInLeft wow" data-wow-duration="3s" data-wow-delay="0s" >
+      <div class="row flex-lg-row-reverse align-items-center g-5">
+        <div class="col-10 col-sm-8 col-lg-6 mt-4 change_posit" >
+          <img src="../../static/images/line-bot.png" class="img-fluid"   width="300" height="400" loading="lazy">
+        </div>
+        <div class="col-lg-6" >
+          <h1 class="display-5 fw-bold lh-1 mb-3">Line-Bot 功能</h1>
+          <p class="lead">網站本身有提供Line-Bot 功能，讓您可以更方便的查看推送資訊，您必須在Line-Bot中綁定您的帳號，才可以使用Line-Bot功能。
+          </p>
+          <div class="d-grid gap-2 d-md-flex justify-content-center" >
+            <a href="https://line.me/R/ti/p/%40137rltgm" target="_blank" class="btn btn-primary btn-lg px-4 gap-3">現在去試試</a>
+          </div>
+          <div  class="wow fadeInUp next_div mt-5"   data-wow-duration="2s" data-wow-delay="1s">
+            <a href="#div-4">
+            查看更多
+            <br>
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>
+          </a>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="b-example-divider" id="div-4"></div>
+
+  <div class="wow container col-xl-10  px-4 py-5 back4 fadeInRight" data-wow-duration="3s" data-wow-delay="0s">
+    <div class="row align-items-center g-lg-5 py-5"  >
+      <div class="col-lg-7 text-center text-lg-start" style="margin-top: 0px;">
+        <h1 class="display-4 fw-bold lh-1 mb-3">立即登入開始搜尋工作</h1>
+        <p class="col-lg-10 fs-4">如果你已有帳號，可以直接登入，如果您尚未註冊的話，可以點擊登入內的註冊環節進行註冊。
+          如果您不幸忘記密碼也沒關西，我們還有提供找回密碼，當然您在不需要此網站時，您也可以主動註銷帳號。
+        </p>
+      </div>
+      <div class="col-md-10 mx-auto col-lg-5" style="max-width:450px; margin-top:-50px;">
+        <form class="p-4 p-md-5 border rounded-3 bg-light" action="/member/long-in/" method="POST">
           {% csrf_token %}
           <div class="form-floating mb-3">
             <input type="text" class="form-control" id="user_name" name="user_name" >
-            <label for="user_name" style="color:block;">Email address</label>
+            <label for="user_name" style="color:rgb(104, 101, 101) !important;">帳號</label>
           </div>
           <div class="form-floating mb-3">
             <input type="password" class="form-control" id="user_password" name="user_password">
-            <label for="user_password">Password</label>
+            <label for="user_password" style="color:rgb(104, 101, 101) !important;">密碼</label>
           </div>
           <div class="checkbox mb-3">
             <label>
@@ -369,49 +640,164 @@
             </label>
           </div>
           <button class="w-100 btn btn-lg btn-primary" type="submit">登入</button>
-          <!-- <a href="http:127.0.0.1:8000/sing_up" style="text-decoration:none"><div class="w-100 btn btn-lg btn-primary" style=" background-color: rgb(39, 54, 142);">註冊</button></a> -->
         </form>
       </div>
+      <div  class="wow fadeInUp next_div mt-5"   data-wow-duration="2s" data-wow-delay="1s">
+        <a href="#div-5">
+        查看更多
+        <br>
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>
+      </a>
+      </div>
     </div>
   </div>
 
-  <div class="b-example-divider"></div>
+  <div class="b-example-divider" id="div-5"></div>
 
-  <div class="container my-5">
-    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+  <div class="lightSpeedIn wow  container my-5"  data-wow-duration="2s" data-wow-delay="0s">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg back5" >
       <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-        <h1 class="display-4 fw-bold lh-1">Border hero with cropped image and shadows</h1>
-        <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Primary</button>
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+        <h1 class="display-4 fw-bold lh-1">與我們聯繫</h1>
+        <p class="lead">如果您有不同的想法或意見的話，歡迎傳送Email給我們，我們將會1-3個工作天進行回覆，
+          當然如果您已註冊我們的網站的話，您也可以使用網站的意見箱給我們，我們會優先處理意見箱的內容，如果您比較緊急的話可以用此，
+          我們會用網頁內的通訊欄回覆給您。在此，感謝您的意見與配合!
+        </p>
+        <div class="d-grid gap-2 d-md-flex justify-content-center" >
+          <a href="{% url 'sing_in' %}" class="btn btn-primary btn-lg px-4 gap-3">現在去試試</a>
         </div>
       </div>
-      <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-          <img class="rounded-lg-3" src="bootstrap-docs.png" alt="" width="720">
+      <div class="col-lg-4 offset-lg-1 p-0">
+        <img class="rounded-lg-3" id="email_img" src="../../static/images/gmail.png" alt="" style="height: auto;max-width: 100%;width: 300px;">
+      </div>
+      <div  class="wow fadeInUp next_div mt-3 mb-5"   data-wow-duration="2s" data-wow-delay="1s">
+        <a href="#div-6">
+        查看更多
+        <br>
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>
+      </a>
       </div>
     </div>
   </div>
 
-  <div class="b-example-divider"></div>
+  <div class="b-example-divider" id="div-6"></div>
+  <div class="wow zoomIn" data-wow-duration="3s" >
+    <div class="main-carousel"  data-flickity='{ "cellAlign": "left", "contain": true }'>
+      {% for i,v in tit.items %}
+      <div class="carousel-cell">
+        <h4 class="suggest_h3"><img src="../../static/images/fire.png" width="30" height="30">{{i}}</h4>
+        {% for k in v %}
+        <span class="sugger" style="box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);">
+          <p class="ellipsis-text" style="font-size: 20px;"><strong><a target="_blank" href="{{k.like_jobid__href}}" style="text-decoration: none;">{{k.like_jobid__title}}</a></strong></p>
+          <hr id="hr_suggest">
+          <p class="ellipsis-text" style="font-size: 18px;margin-left: 5px;">{{k.like_jobid__company}}</p>
+          <p class="ellipsis-text" style="font-size: 18px;margin-left: 5px;">{{k.like_jobid__local}} <span style="color: rgba(87, 87, 86, 0.459);">|</span> {{k.like_jobid__salary}} </p>
+          <span class="ellipsis-text" style="font-size: 18px;margin-left: 5px;">所需技能:</span>
+          {% load new_tage %}
+          {% for getskill in k.like_jobid__skill|split:"、" %}
+          <span class="skill_suggest" style="margin-left: 5px;">{{getskill}}</span>
+          {% endfor %}
+          <br>
+          {% if  k.like_jobid__certificate != "不拘" %}
+          <span class="ellipsis-text" style="font-size: 18px;margin-left: 5px;">所需證照:</span>
+            {% for getskill in k.like_jobid__certificate|split:"、" %}
+            <span class="skill_suggest" style="margin-left: 5px;">{{getskill}}</span>
+            {% endfor %}
+          {% endif %}
+        </span>
+        {% endfor %}
+      </div>
+      {% endfor %}
+      </div>
+  </div>
 
-  <div class="bg-dark text-secondary px-4 py-5 text-center">
+  <div class="b-example-divider" id="div-7"></div>
+  <div class="bg-dark text-secondary px-4 py-5 text-center wow zoomIn" data-wow-duration="3s" >
     <div class="py-5">
-      <h1 class="display-5 fw-bold text-white">Dark mode hero</h1>
+      <h1 class="display-5 fw-bold text-white">現在就開始體驗</h1>
       <div class="col-lg-6 mx-auto">
-        <p class="fs-5 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+        <p class="fs-5 mb-4" style="color: white;">如果您在使用的過程中，覺得有些許的不足，或是有不方便的地方，歡迎與我們反映，如果您喜歡我們的網站的話，
+          與希望您可以推薦給有需要的人，找工作在此祝您找到合適的工作。
+        </p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom button</button>
-          <button type="button" class="btn btn-outline-light btn-lg px-4">Secondary</button>
+          <a href="{% url 'sing_in' %}" class="btn btn-primary btn-lg px-4 gap-3">現在去試試</a>
+          <a href="#div-1"><button type="button" class="btn btn-outline-light btn-lg px-4">返回頂部</button></a>
         </div>
       </div>
     </div>
   </div>
+</div>
+<script src="../../static/js/flickity.min.js"></script>
+<script>
+var flky = new Flickity(".main-carousel",{
+  // options, defaults listed
+  autoPlay: true,
+  // advances to the next cell
+  // if true, default is 3 seconds
+  // or set time between advances in milliseconds
+  // i.e. `autoPlay: 1000` will advance every 1 second
 
-  <div class="b-example-divider mb-0"></div>
-</main>
+  cellAlign: 'center',
+  // alignment of cells, 'center', 'left', or 'right'
+  // or a decimal 0-1, 0 is beginning (left) of container, 1 is end (right)
 
+  contain: false,
+  // will contain cells to container
+  // so no excess scroll at beginning or end
+  draggable: '>1',
+  // enables dragging & flicking
+  // if at least 2 cells
 
+  dragThreshold: 3,
+  // number of pixels a user must scroll horizontally to start dragging
+  // increase to allow more room for vertical scroll for touch devices
+
+  freeScroll: false,
+  // enables content to be freely scrolled and flicked
+  // without aligning cells
+
+  friction: 0.2,
+  // smaller number = easier to flick farther
+
+  groupCells: false,
+  // group cells together in slides
+
+  initialIndex: 0,
+  // zero-based index of the initial selected cell
+  // enable lazy-loading images
+  // set img data-flickity-lazyload="src.jpg"
+  // set to number to load images adjacent cells
+
+  percentPosition: false,
+  // sets positioning in percent values, rather than pixels
+  // Enable if items have percent widths
+  // Disable if items have pixel widths, like images
+
+  prevNextButtons: false,
+  // creates and enables buttons to click to previous & next cells
+
+  pageDots: true,
+  // create and enable page dots
+
+  resize: true,
+  // listens to window resize events to adjust size & positions
+
+  rightToLeft: false,
+  // enables right-to-left layout
+
+  setGallerySize: true,
+  // sets the height of gallery
+  // disable if gallery already has height set with CSS
+
+  watchCSS: false,
+  // watches the content of :after of the element
+  // activates if #element:after { content: 'flickity' }
+
+  wrapAround:true,
+  // at end of cells, wraps-around to first for infinite scrolling
+  adaptiveHeight: true,
+
+});
+</script>
   </body>
 </html>
 {% endblock %}

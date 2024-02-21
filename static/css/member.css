@@ -1,0 +1,261 @@
+
+    .content{
+        height: 100% !important;
+        margin-left: -15px;margin-right:-15px;background-color: rgb(243, 232, 232);margin-top:-10px;
+    }
+    div.Table_of_contents{
+        width: 100%;
+        height: 60px;
+        background-color :rgb(220,220,220);
+        text-align:left;
+        text-align: center;
+        line-height:55px;
+        color: rgb(90, 63, 22);
+    }
+    main{
+        display: flex;
+    }
+
+    a.amember, .amember2{
+        text-decoration: none;
+    }
+    a.amember, .amember2{
+        width:100%;border:none;padding:0px;
+    }
+    a.amember:link{
+        text-shadow: 3px,3px,5px,rgb(170, 213, 230);
+    }
+    div.Table_of_contents:hover{
+        border-left: 5px solid rgb(122, 209, 243) ;
+        background-color: rgb(211, 228, 238);
+        text-shadow: 3px,3px,5px,cornsilk;
+        color: cornsilk
+    }
+    div.Table_of_contents:visited{
+        text-shadow: 3px,3px,5px,rgb(103, 128, 138);
+    }
+    .job_local{
+        margin-top: 30px;
+    }
+    .love_job , .love_job2{
+        width: 97%;
+        color: black;
+        border-radius: 10px;
+        border: 2px groove rgb(63, 74, 70);
+        margin-bottom: 10px;
+        margin-top: 10px;
+        margin: 20px;
+        text-align:left;
+        background-color: rgb(255, 255, 255);
+    }
+    .love_job:hover , .love_job2:hover{
+        border: 3px solid rgb(181, 218, 226);
+        box-shadow: 1px 1px 15px black;
+    }
+    .love_job h3{
+        text-align: left;
+    }
+    .flex{
+        display: flex;
+        flex-wrap: nowrap;
+    }
+    .love_job h3{
+        padding-top: 20px;
+        text-align: left;
+        font-weight: bolder;
+        display: block;
+    }
+    .love_job h3 a{
+        text-decoration: none;
+    }
+    a.title:hover{
+        color: darkorange;
+        font-size: 25px;
+        font-weight: bolder;
+    }
+    .love_job h5{
+        display: block;
+    }
+    .font_bold{
+        font-weight: bolder;
+    }
+    hr.y{
+    height:auto;
+    width:5px;
+    border-width:0;
+    color:#000;
+    background-color:rgba(20, 8, 8, 0.51);
+    }
+    .relative{
+        position: relative;
+    }
+    .text_left{
+        text-align: left;
+    }
+    .number_img{
+        position: absolute;
+        top: 0%;
+        left: 82%;
+        width: 60px;
+        height: 75px;
+    }
+    .number_img1{
+        position: absolute;
+        top: 0%;
+        left: 80%;
+        width: 70px;
+        height: 70px;
+    }
+    .active2{
+        border-left: 5px solid rgb(122, 209, 243) ;
+        background-color: rgb(99, 126, 150) !important;
+        text-shadow: 3px,3px,5px,cornsilk;
+        color: cornsilk !important;
+    }
+    div.relative button{
+        position: absolute;
+        top: 3%;
+        left: 93%;
+        border: none;
+        background-color: rgb(103, 128, 138,0);
+    }
+    div.main{
+        height: 600px;
+        margin: 10px;
+        padding: 40px;
+        border: 3px groove silver;
+        border-radius: 15px;
+        background-color: #ccc;
+        box-shadow: 5px 5px darkgray;
+    }
+    div.main div{
+        text-align: left;
+        line-height: 70px;
+        font-weight: bolder;
+        font-size: 20px;
+    }
+    div.main div div{
+        margin-left: 2%;
+    }
+    div.main div input,#type{
+        margin-left: 2.5%;
+    }
+    div.main div #recommend_skill{
+        border-radius: 20px;
+        margin-top: 15px;
+        width: 250px;
+        height: 35px;
+        transition: 1s;
+    }
+    .countother{
+        margin-left: 5px !important;
+        border-radius: 20px;
+        width: 70px;
+        height: 35px;
+        transition: 1s;
+    }
+    div.main button{
+        margin-top: 0px;
+    }
+    div.flex #type{
+        margin-left: 2.3%;
+        margin-top: 18px;
+        width: 150px;
+        height: 35px;
+        border-radius: 10px;
+    }
+    #recommend_skill:focus{
+        transition:3s ;
+        width: 40% !important;
+    }
+    .countother:focus{
+        width: 150px;
+    }
+    .openbutt {
+    box-sizing: border-box;
+    width: 63px;
+    height: 30px;
+    padding: 2px;
+    border-radius: 20px;
+    background-color: #eee;
+    border: 2px solid #ccc;
+    justify-items: left !important;
+    margin-top: 20px;
+    margin-left: 8px;
+    transition: 0.5s;
+  }
+  .circle {
+    position: relative;
+    width: 26px;
+    height: 26px;
+    background-color: #aaa;
+    border-radius: 50%;
+    margin-left: -1.5px;
+    top: -2px;
+    transition: 0.5s;
+    cursor: pointer;
+  }
+  .in-active.openbutt {
+    background-color: Honeydew;
+    border-color: SeaGreen;
+  }
+  .in-active .circle {
+    background-color: DarkGreen;
+    margin-left: calc(100% - 23px);
+  }
+  .selection{
+    background-image: linear-gradient(to bottom  ,rgba(215, 170, 120, 0.5), rgb(243, 232, 232));
+    /* background-image: linear-gradient(to bottom right ,rgb(234, 141, 141,0.5),rgb(236, 236, 205,1)); */
+    width:100%;height: 60px;
+    border-radius: 5px 5px 5px 5px;
+    padding-left:30px;
+    padding-TOP:10px;
+    text-align: left !important;
+    color: rgb(77, 70, 70);
+    font-size: large;
+
+  }
+  #selection{
+    border: none;
+    background-color: rgb(215, 185, 185,0);
+    margin-top: 27px;
+  }
+  span.skillgreen{
+        background-color: rgba(185, 241, 185, 0.5);
+        padding-left: 10px;
+        border-radius: 10px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+    span.skillno{
+        background-color: rgba(87, 92, 89, 0.5);
+        padding: 2px;
+        border-radius: 10px;
+        margin-left: 10px;
+        padding-top: -2px;
+        padding-bottom: -2px;
+    }
+    span.skillred{
+        background-color: rgba(239, 146, 146, 0.5);
+        border-radius: 10px;
+        padding-left: 10px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+    .love_hr{
+        width: 95%;
+        margin-left: 29px;
+        color: black;
+    }
+    .search{
+        padding: 15px;
+        border-radius: 10px 10px 0px 0px;
+        background-color: aliceblue;
+    }
+    .search2{
+        margin-bottom: 30px;
+        margin-left:1%;
+        padding: 15px;
+        border-radius: 10px 10px 0px 0px;
+        background-color: aliceblue;
+    }

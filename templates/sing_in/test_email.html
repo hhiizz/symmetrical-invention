@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.98.0">
+    <title>填寫驗證碼</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/modals/">
+    {% load static %}
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    {% load static %}
+    <link href="{% static 'modals.css' %}" rel="stylesheet">
+    <link rel="shortcut icon"   href="../../static/images/logo/logo-removebg-preview.png" type="image/x-icon" />
+
+  </head>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      .alert{
+        position:absolute;
+        top:-120px;
+        left:-20px;
+        width: 120%;
+        height: 100%;
+        background-color: rgb(255, 255, 255);
+        display: none;
+      }
+      .mistake{
+        border:2px groove rgb(224, 118, 118);
+        color:rgb(190, 86, 86);
+        padding: 10px;
+        background-color: rgb(238, 191, 200);
+        display: none;
+      }
+      #user_name:focus{
+        transition: 0.5s;
+      }
+      button:hover{
+        transition: 1s;
+      }
+      a div:hover{
+        background-color: rgb(22, 22, 22);
+        transition: 0.5s;
+      }
+      .flex{
+        display: flex;
+      }
+      .inemail{
+        width: 300px !important;
+        height: 60px !important;
+      }
+      .incode{
+        width: 200px !important;
+        height: 60px !important;
+      }
+      .code{
+        margin-top: 25px;
+        margin-bottom: 20px;
+      }
+      .email{
+        margin-top: 20px;
+      }
+      .incode:focus,.inemail:focus{
+        background-color: rgb(218, 236, 255);
+      }
+      .buttontest{
+        background-color: rgb(217, 217, 216,0.5);
+        margin-left: 15px;
+        width: 95px;
+        border-radius: 5px;
+      }
+      .buttonsubmit{
+        margin-left: 46%;
+        margin-top: 5%;
+      }
+    </style>
+  <body>
+<!----position-static:static py-5:1--->
+<div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <!-- <h5 class="modal-title">Modal title</h5> -->
+        <h2 class="fw-bold mb-0">Email 驗證</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-5 pt-0">
+          <form action="{% url 'test_email' %}" method="POST" id="form1">
+            {% csrf_token %}
+            {% if message %}
+              <div class="mistake" id="mistake">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                </svg>
+                {{message}}
+              </div>
+            {% endif %}
+            <input hidden value="{{time}}" name="time" class='time'>
+            <div class="content">
+              <div class="flex email">
+                <p style="margin-right:15px;padding-top: 14px;font-size:blod;font-size: 20px;"><strong>Email:</strong></p>
+                <div class="form-floating" >
+                    <input type="text" readonly class="form-control rounded-3 inemail" id="id_email" value="{{usernapo.email}}"  name="email" required/>
+                    <label for="id_email">Email</label>
+                </div>
+              </div>
+              </form>
+              <form action="{% url 'check' %}" method="POST" id="form2">
+                {% csrf_token %}
+              <div class="flex code">
+                <input hidden value="{{time}}" class="time" name='time'>
+                  <p style="margin-right:10px;padding-top: 14px;font-size:blod;font-size: 20px;"><strong>驗證碼:</strong></p>
+                  <div class="form-floating" >
+                      <input type="text" class="form-control rounded-3 incode" id="id_email" value=""  name="vertical" >
+                      <label for="id_email">驗證碼</label>
+                  </div>
+                  <input type="button"  value="重新發送{{time}}"  class="buttontest" onclick="again()">
+              </div>
+              <div class="progress ml-1">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
+              </div>
+                  <input type="button" value="提交" class="buttonsubmit" onclick="send()">
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% if message %}
+<script>
+  x = document.getElementById('mistake')
+  x.style.display="block";
+  document.getElementById('user_name').style.marginTop="15px";
+</script>
+{% endif %}
+
+
+
+<script>
+function again(){
+  document.getElementById('form1').submit();
+}
+function send(){
+  document.getElementById("form2").submit();
+}
+function getpass(){
+  type =document.getElementById('user_password')
+  if(type.type=='text'){
+    type.type='password';
+    document.getElementById('lookpass').checked  = false;
+  }else{
+    type.type='text';
+  }
+}
+</script>
+
+
+
+<script>
+  let time = parseInt('{{time}}')
+  document.getElementsByClassName('buttontest')[0].disabled = true;
+  let timecheck = setInterval(timer,1000)
+
+  function timer(){
+    console.log(time)
+    document.getElementsByClassName('buttontest')[0].value = '重新發送'+time;
+    document.getElementsByClassName('time')[0].value=time;
+    document.getElementsByClassName('time')[1].value=time;
+    if(time==0 || time<0){
+      document.getElementsByClassName('buttontest')[0].disabled = false;
+      document.getElementsByClassName('buttontest')[0].value = '重新發送';
+      document.getElementsByClassName('time')[0].value=0;
+      document.getElementsByClassName('time')[1].value=0;
+      clearInterval(timecheck);
+    }
+    time = time-1
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,503 @@
+{% extends 'member/member_server.html' %}
+{% block content %}
+<style>
+        html,body{
+                overflow-x: hidden;
+                position: fixed;
+        }
+        .member{
+                width: 100% !important;
+                background-color: rgb(211, 207, 207);
+                height:auto;
+        }
+        .content_member{
+                background-color: rgb(225, 220, 220);
+                margin: 5%;
+                height: auto;
+                margin-bottom: -30px;
+                box-shadow: 3px 3px 3px rgb(159, 159, 159);
+        }
+        .content_member h4{
+                padding: 10px;
+                background-color: rgb(148, 145, 145);
+                box-shadow: 3px 3px 0px rgb(159, 159, 159);
+        }
+        #opinion_title{
+            text-align: left;
+            font-size: 20px;
+            color: black;
+            margin-right: 100px;
+        }
+        .content_opinion{
+                color: black;
+                padding: 30px;
+                height: 100%;
+                text-align: left;
+                font-size: 20px;
+        }
+        .email{
+                border: none;
+                height: 30px;
+                border-bottom: 3px solid rgb(115, 144, 152);
+                background-color: rgb(225, 220, 220);
+                width: 400px;
+        }
+        .email:focus{
+                outline: none;
+                background-color: none;
+        }
+        .content_opinion select{
+                border-radius: 5px;
+                margin-left: 15px;
+                width: 100px;
+                text-align: center;
+                font-size: 18px;
+                height: 30px;
+        }
+        #s_question{
+                width: 500px;
+                height: 200px;
+                margin-left: 15px;
+                font-size: 17px;
+                resize:none;
+        }
+        .pad20{
+                padding: 10px;
+        }
+        .reminder_box{
+                border-radius: 5px;
+                transform: translate(-50%, -50%);
+                visibility: hidden;
+                transition: 1s;
+                opacity: 0;
+                top: 50%;
+                left: 50%;
+                background-color: rgb(255, 255, 255);;
+                position: absolute;
+                width: 25%;
+                min-width: 300px;
+                height: auto;
+        }
+        .reminder_box h4{
+                padding: 10px;
+                color: rgba(254, 254, 254, 1);
+                text-align: center;
+                background-color: rgb(203, 199, 199);
+                box-shadow: 0px 10px 0px  rgb(14, 14, 14);
+                border-radius: 5px 5px 0px 0px ;
+                z-index: 1;
+        }
+        .wordsNum{
+                color: rgb(113, 115, 116);
+                font-size: 15px;
+                text-align: right;
+                padding-left: 15px;
+                white-space: pre;
+        }
+        .reminder_inner p{
+                padding: 10px 20px !important;
+                font-family: Microsoft JhengHei !important;
+                text-align: left !important;
+                color: rgb(46, 49, 39);
+        }
+        .reminder_inner input{
+                height: auto;
+                margin-left: 85%;
+                transform: translate(-85%, -15%);
+                line-height:10px;
+                background-color: rgba(221, 216, 216, 0.7);
+                padding: 15px;
+                border: none;
+        }
+        #changebut{
+                height: 30px;
+                text-align: center;
+                line-height: 0px;
+                width: 80px;
+                background-color: rgb(216, 181, 114);
+                border-radius: 10px;
+                margin-left: 44%;
+                margin-bottom: 20px;
+        }
+        #from_op{
+                height: 100%;
+                padding-left: 10px;
+        }
+        .cover{
+                visibility: hidden;
+                transition: 1s;
+                position:fixed !important;
+                top: 0;
+                left: 0;
+                background-color: rgb(64, 62, 62);
+                opacity: 0;
+                height:100% !important;
+                width: 100%;
+                z-index: 0;
+        }
+        .mar100{
+                margin-right: 100px;
+        }
+
+        #reminder_buttom{
+                margin-bottom: 10px;
+        }
+        @media screen and (max-width:862px) {
+                .email{
+                        margin-left: 0px;
+                }
+                #s_question{
+                        width: 400px;
+                }
+        }
+
+        @media screen and (max-width:665px) {
+                #changebut{
+                        margin-top: 30px;
+                }
+                #s_question{
+                        width: 100%;
+                }
+        }
+        @media screen and (max-width:600px) {
+                .content_member{
+                margin: 5px;
+                margin-top: 15px;
+                margin-bottom: 10px;
+                }
+                #changebut{
+                        margin-top: 30px;
+                }
+                #s_question{
+                        width: 100%;
+                }
+                #content1{
+                        width: 20% !important;
+                }
+                .member{
+                        width: 82%;
+                }
+                #s_question{
+                        margin-left: 0px !important;
+                }
+
+        }
+        @media screen and (max-width:414px) {
+                .reminder_box{
+                        width: 70%;
+                }
+                .email{
+                        width: 90%;
+                }
+
+                .content_opinion{
+                        padding: 0px;
+                }
+                .content_opinion select{
+                        margin-left: 0px !important;
+                }
+        }
+        .monkeyb-cust-file{
+transition: 1s;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  background-color:#9cf;
+  color:#fff;
+  text-align:center; 
+  -web-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+  padding:10px 30px;
+  font-size:20px;
+  line-height: 0px;
+  font-family:Arial,Microsoft JhengHei;
+}
+.monkeyb-cust-file input{
+  position: absolute;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  top: 0;
+  right: 0;
+  width:100%;
+  height:100%;
+}
+.monkeyb-cust-file:hover{
+
+        background-color: rgb(92, 107, 124);
+}
+</style>
+<div id="content1" >
+        <div class="title_0">
+            <a class="amember"><div class="Table_of_contents" id="control_center">管理 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </div></a>
+            <a class="amember2"  href="{% url 'control_center' %}"><div class="control">管理中心</div></a>
+            <a class="amember2"  href="{% url 'recommend_log' %}"><div class="control">推送紀錄</div></a>
+            <a class="amember2" href="{% url 'notice' %}"><div class="control" >通知中心</div></a>
+        </div>
+        <div class="title_1">
+            <a class="amember total"><div class="Table_of_contents" id="love" >收藏 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </div></a>
+            <a class="amember2"  href="{% url 'user' %}"><div class="Table_of_content" >全部</div></a>
+            <a class="amember2" href="{% url 'like_like' %}"><div class="Table_of_content" >我的最愛</div></a>
+            <a class="amember2" href="{% url 'like_recommend' %}"><div class="Table_of_content">推薦</div></a>
+            <a class="amember2" href="{% url 'user_great' %}"><div class="Table_of_content " >點讚紀錄</div></a>
+        </div>
+        <div class="title_2">
+                <a class="amember" ><div class="Table_of_contents super_function" id="super_function">功能 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                  </svg></div></a>
+                <a class="amember2"  href="{% url 'user_recommend' %}"><div class="function" >推薦功能</div></a>
+
+        </div>
+        <div class="title_3">
+                <a class="amember"><div class="Table_of_contents active2" id="member_user">設定 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                  </svg></div></a>
+                <a class="amember2"  href="{% url 'change' %}"><div class="Table_of_content_member " >帳號安全</div></a>
+                <a class="amember2" href="{% url 'opinion' %}"><div class="Table_of_content_member active2" >意見箱</div></a>
+        </div>
+    </div>
+<div class="member">
+    <div class="content_member">
+        <h4>意見箱<svg xmlns="http://www.w3.org/2000/svg" style="margin-left:10px;"  width="30" height="30" fill="currentColor" class="bi bi-mailbox" viewBox="0 0 16 16">
+                <path d="M4 4a3 3 0 0 0-3 3v6h6V7a3 3 0 0 0-3-3zm0-1h8a4 4 0 0 1 4 4v6a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V7a4 4 0 0 1 4-4zm2.646 1A3.99 3.99 0 0 1 8 7v6h7V7a3 3 0 0 0-3-3H6.646z"/>
+                <path d="M11.793 8.5H9v-1h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.354-.146l-.853-.854zM5 7c0 .552-.448 0-1 0s-1 .552-1 0a1 1 0 0 1 2 0z"/>
+              </svg></h4>
+        <div class="content_opinion">
+                <form enctype="multipart/form-data" action="{% url 'opinion_check' %}" method="post" id="opinion_submit">
+                        {% csrf_token %}
+                        <!-- <div class="flex pad20 flex_warp_warp email_opin">
+                                <p id="opinion_title" class="mar100" ><span style="color: red;">*</span>Email</p>
+                                <input class="email" type="email" id="Email" placeholder="務必填正確的E-Mail，以便我們回覆您的意見" value="{{email}} ">
+                        </div> -->
+                        <div class="flex pad20 flex_warp_warp" >
+                                <p id="opinion_title "><span style="color: red;">*</span>請選擇意見類型</p>
+                                <select name="opinion_type" id="opinion_type"  >
+                                        <option value="opinion">意見</option>
+                                        <option value="bug">網頁出現bug</option>
+                                </select>
+                        </div>
+                        <div class="flex pad20 flex_warp_warp" >
+                                <p id="opinion_title" style="margin-right: 83px;">詳細圖片</p>
+                                <div class="monkeyb-cust-file">
+                                        <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-cloud-arrow-up"  viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z"/>
+                                                <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z"/>
+                                        </svg>
+                                                Select File</span>
+                                        <input id="opinion_img" name="opinion_img" type="file" accept="image/*" />
+                                  </div>  
+                        </div>
+                        <div class="flex pad20 flex_warp_warp" style="height:45%">
+                                <p id="opinion_title" class="mar100"><span style="color: red;">*</span>內容</p>
+                                <div>
+                                        <textarea name="s_question" required id="s_question" maxlength="1000" onkeydown="check_maxlength(this)" onkeyup="check_maxlength(this)" placeholder="請詳述操作問題或意見(5字以上)" ></textarea>
+                                        <br>
+                                        <div class="wordsNum">以輸入0字 | 還可以輸入1000字</div>
+                                </div>
+
+                        </div>
+                        <input  type="submit" value="提交" id="changebut" >
+                </form>
+        </div>
+</div>
+</div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+{% if message == 0 %}
+<script>
+        swal({
+        title: "字數不足",
+        text:"請查看資料後在提交!",
+        icon: "warning",
+        button: "好的",
+        }).then((value) => {
+
+        });
+</script>
+{% elif message == 1 %}
+<script>
+        swal({
+                title: "成功寄出!",
+                text:  "恭喜您成功寄出，我們會盡快給您一個答覆，感謝您使用USFK",
+                icon: "success",
+                button: "好的",
+                }).then((value) => {    
+        });
+</script>
+{% elif message == 2 %}
+<script>
+        swal({
+        title: "系統繁忙",
+        text: "系統繁忙中請稍後在試",
+        icon: "error",
+        button: "好的",
+        }).then((value) => {
+
+        });
+</script>
+{% endif %}
+
+
+<script>
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+</script>
+<script>
+        
+jQuery(document).ajaxSend(function(event, xhr, settings) {
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    function sameOrigin(url) {
+        // url could be relative or scheme relative or absolute
+        var host = document.location.host; // host + port
+        var protocol = document.location.protocol;
+        var sr_origin = '//' + host;
+        var origin = protocol + sr_origin;
+        // Allow absolute or scheme relative URLs to same origin
+        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+            // or any other URL that isn't scheme relative or absolute i.e relative.
+            !(/^(\/\/|http:|https:).*/.test(url));
+    }
+    function safeMethod(method) {
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    }
+});
+
+</script>
+
+<script>
+
+
+
+
+
+document.getElementsByClassName('mb-auto')[0].style.height='auto';
+
+
+window.addEventListener('resize',chaneheight)
+function chaneheight(){
+        document.getElementsByClassName('content')[0].style.height='cover';
+}
+function check_maxlength(event){
+        // alert(document.getElementsByClassName('wordsNum')[0].innerHTML)
+        let x = event.value.length
+        document.getElementsByClassName('wordsNum')[0].innerHTML = '以輸入'+x+' | 還可以輸入'+(1000-x)+''
+}
+document.getElementById("opinion_submit").addEventListener("submit", function(event) {
+        if(document.getElementById("s_question").value.length<4){
+                swal({
+                title: "字數不足",
+                text:"請輸入的內容不可低於5字!",
+                icon: "warning",
+                button: "好的",
+                })
+                alert(22123)
+                event.preventDefault();
+        }else if(document.getElementById("s_question").value.length>1000){
+                swal({
+                title: "字數太多",
+                text:"請輸入的內容不可超過1000字!",
+                icon: "warning",
+                button: "好的",
+                })
+                event.preventDefault();
+        }
+        const file = document.getElementById('opinion_img').files[0]
+        const fileMaxSize = 1024*1024*10;
+        if (file.size > fileMaxSize) {
+                swal({
+                        title: "檔案過大",
+                        text:"圖片不可以超過10MB!",
+                        icon: "warning",
+                        button: "好的",
+                })
+                event.preventDefault();
+        }
+});
+
+
+// $("#changebut").click(function(){
+//         console.log(document.getElementById("opinion_img").value)
+//         if(document.getElementById("s_question").value.length<4){
+//                 swal({
+//                 title: "字數不足",
+//                 text:"請輸入的內容不可低於5字!",
+//                 icon: "warning",
+//                 button: "好的",
+//                 })
+//         }else{
+//                 data_dict = {
+//                 "Email":document.getElementById("Email").value,
+//                 "opinion_type":document.getElementById("opinion_type").value,
+//                 "opinion_img":document.getElementById("opinion_img").value,
+//                 "s_question":document.getElementById("s_question").value
+//                 }
+//                 $.ajax({
+//                         url:"{% url 'opinion_check' %}",
+//                         type:'POST',
+//                         data:data_dict,
+//                         dataType:'json',
+//                         success:function(mesg){
+//                                 if(mesg.status == "error"){
+//                                         swal({
+//                                         title: "資料錯誤",
+//                                         text:mesg.message,
+//                                         icon: "error",
+//                                         button: "好的",
+//                                         })
+//                                 }else{
+//                                         swal({
+//                                         title: "成功寄出!",
+//                                         text:  mesg.message,
+//                                         icon: "success",
+//                                         button: "好的",
+//                                         }).then((value) => {
+//                                         window.location.reload();
+//                                         });
+//                                 }
+//                         },
+//                         error:function(mesg){
+//                         swal({
+//                                 title: "系統繁忙",
+//                                 text: "系統繁忙中請稍後在試",
+//                                 icon: "error",
+//                                 button: "好的",
+//                                 }).then((value) => {
+//                         });
+//                         }
+//                 })
+        
+//         }
+
+// })
+</script>
+{% endblock %}

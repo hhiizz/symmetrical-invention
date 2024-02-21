@@ -1,0 +1,217 @@
+{% extends 'member/member_server.html' %}
+
+{% block content %}
+<style>
+    table{
+        border-top: 3px solid rgba(116, 111, 111, 0.39);
+        border-left: 1px solid rgba(116, 111, 111, 0.59);
+        border-right: 1px solid rgba(116, 111, 111, 0.59);
+    }
+    tr{
+        border-bottom: 2px solid slategray;
+        text-align: left;
+    }
+    td{
+        border-bottom: 2px solid slategray;
+    }
+    tr:nth-child(even){
+        background-color: rgb(179, 212, 218);
+    }
+    .dataTable-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  }
+  .dataTable-wrapper .dataTable-container {
+  font-size: 0.875rem;
+}
+.dataTable-wrapper.no-header .dataTable-container {
+  border-top: none;
+}
+.dataTable-wrapper.no-footer .dataTable-container {
+  border-bottom: none;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="../../static/css/dataables_lastest.css">
+<div id="content1" >
+    <div class="title_0">
+        <a class="amember"><div class="Table_of_contents active2" id="control_center">管理 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </div></a>
+        <a class="amember2"  href="{% url 'control_center' %}"><div class="control">管理中心</div></a>
+        <a class="amember2"  href="{% url 'recommend_log' %}"><div class="control active2">推送紀錄</div></a>
+        <a class="amember2"  href="{% url 'notice' %}"><div class="control" >通知中心</div></a>
+    </div>
+    <div class="title_1">
+        <a class="amember total"><div class="Table_of_contents" id="love" >收藏 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </div></a>
+        <a class="amember2"  href="{% url 'user' %}"><div class="Table_of_content" >全部</div></a>
+        <a class="amember2" href="{% url 'like_like' %}"><div class="Table_of_content" >我的最愛</div></a>
+        <a class="amember2" href="{% url 'like_recommend' %}"><div class="Table_of_content">推薦</div></a>
+        <a class="amember2" href="{% url 'user_great' %}"><div class="Table_of_content " >點讚紀錄</div></a>
+    </div>
+    <div class="title_2">
+            <a class="amember" ><div class="Table_of_contents super_function" id="super_function">功能 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg></div></a>
+            <a class="amember2"  href="{% url 'user_recommend' %}"><div class="function" >推薦功能</div></a>
+
+    </div>
+    <div class="title_3">
+            <a class="amember"><div class="Table_of_contents" id="member_user">設定 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg></div></a>
+            <a class="amember2"  href="{% url 'change' %}"><div class="Table_of_content_member " >帳號安全</div></a>
+            <a class="amember2" href="{% url 'opinion' %}"><div class="Table_of_content_member " >意見箱</div></a>
+    </div>
+</div>
+<div class="container-fluid px-4" style="height:auto !important;">
+    <h2 class="mt-4 text-dark font-weight-bolder text-muted" style="background-color: rgb(215, 194, 194);padding: 10px;border-radius: 30px;"><strong>推薦管理中心</strong></h2>
+    <ol class="breadcrumb mb-4">
+    </ol>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header text-dark">
+                    <i class="fas fa-chart-area me-1 text-dark"></i>
+                    推送紀錄
+                </div>
+                <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header text-dark">
+                    <i class="fas fa-chart-bar me-1"></i>
+                    昨日推薦技能趨勢
+                </div>
+                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-4" style="color:black !important;">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            我的推送紀錄
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>推送時間:</th>
+                        <th>推送數量:</th>
+                        <th>推送類型:</th>
+                        <th>對比技能:</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for i,v in total_recommend.items %}
+                        {% for z in i %}
+                        <tr>
+                            <td>{{z.relog_datetime}}</td>
+                            <td>{{z.relog_count}}</td>
+                            {% for z in v %}
+                            <td>{{z.recom_job_type_id}}</td>
+                            <td>{{z.recom_skill}}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+</div>
+<script src="../../static/js/scripts.js"></script>
+<script src="../../static/js/chart-bar-demo.js"></script>
+<script src="../../static/js/chart-area-demo.js"></script>
+<script src="../../static/js/simple-datatables-classic.js" type="text/javascript"></script>
+<script src="../../static/js/datatables-user_index.js"></script>
+
+<script>
+    let key = '{{recommend_count_key|safe}}'.split('*')
+    let val = '{{recommend_count_value}}'.split('*')
+    let key2 = '{{analysis_keys|safe}}'.split('*')
+    let val2 = '{{analysis_values|safe}}'.split(',')
+    AreaChart2(key,val,"推送數量")
+    bar(key2,val2,'技能次數','')
+
+</script>
+
+
+<script>
+window.onload = function (){
+    document.getElementsByClassName('Table_of_contents')[1].innerHTML = '分析功能'
+    window.addEventListener('resize', zzy)
+}
+
+jQuery(document).ajaxSend(function(event, xhr, settings) {
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    function sameOrigin(url) {
+        // url could be relative or scheme relative or absolute
+        var host = document.location.host; // host + port
+        var protocol = document.location.protocol;
+        var sr_origin = '//' + host;
+        var origin = protocol + sr_origin;
+        // Allow absolute or scheme relative URLs to same origin
+        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+            // or any other URL that isn't scheme relative or absolute i.e relative.
+            !(/^(\/\/|http:|https:).*/.test(url));
+    }
+    function safeMethod(method) {
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    }
+});
+
+
+function zzy(){
+//   $('.cover_base').css({'visibility':'hidden'})
+//   $('.cover_base').css({'opacity':'0'})
+    $('container-fluid').css({'height':'auto'})
+}
+
+
+
+
+</script>
+{% endblock %}

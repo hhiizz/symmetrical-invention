@@ -1,0 +1,785 @@
+{% extends 'member/member_server.html' %}
+{% block content %}
+<style>
+    .cover{
+        visibility: hidden;
+        transition: 1s;
+        position:fixed;
+        top: 0;
+        left: 0;
+        background-color: rgb(64, 62, 62);
+        opacity: 0;
+        height:100%;
+        width: 100%;
+        z-index: 4;
+}
+.open_content{
+        color: rgb(107, 102, 102);
+        font-weight:550;
+        border-radius: 3px;
+    }
+.close_content{
+        color:#554646;
+        border-radius: 3px;
+        font-weight:550;
+    }
+.reminder_box{
+        border-radius: 5px;
+        transform: translate(-50%, -50%);
+        visibility: hidden;
+        transition: 1s;
+        opacity: 0;
+        top: 50%;
+        left: 50%;
+        background-color: rgb(255, 255, 255);;
+        position: absolute;
+        width: 25%;
+        min-width: 300px;
+        height: auto;
+        z-index: 5;
+}
+.reminder_box h4{
+        padding: 10px;
+        color: rgb(222, 82, 82);
+        text-align: center;
+        font-weight: bolder;
+        background-color: rgb(203, 199, 199);
+        box-shadow: 0px 3px 3px  rgb(159, 159, 159);
+        border-radius: 5px 5px 0px 0px ;
+        z-index: 1;
+}
+.reminder_inner p{
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+        padding: 10px;
+        margin-left: 8%;
+        text-align: left;
+        width: 80%;
+        height:auto;
+        border-radius: 10px;
+}
+#img1111,#img104{
+padding:20px;display: block;width: 10%;height: 90px;
+}
+.likejob__inner{
+text-align:left; width:59%;
+margin-left: 20px;
+margin-bottom: 30px;
+}
+.selection{
+margin-bottom: 15px;
+}
+@media screen and (max-width:1460px){
+.love_job2{
+    width: 95%;
+}
+div.likejob__inner{
+    margin-left: 50px;
+}
+.search,.search2{
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+}
+.selection{
+    height: auto;
+}
+.selection div{
+    word-wrap:break-word;
+    white-space:wrap;
+    flex-wrap: wrap;
+    height: auto;
+}
+}
+@media screen  and (max-width:768px){
+.search,.search2{
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+}
+
+
+.inner_left{
+    margin-left:-93px ;
+    margin-top: 55px;
+}
+.love_job2{
+    width: 95%;
+}
+body{
+    overflow-x: hidden !important;
+}
+
+}
+@media screen  and (max-width:600px){
+div.likejob__inner
+{
+    margin-left: 30px;
+    white-space:wrap;
+}
+h3 a.title{
+    white-space:wrap;
+}
+.search,.search2{
+    border-radius: 10px;
+    padding: 10px;
+    margin: 1px;
+}
+.love_job,.love_job2{
+    width: 90%;
+    overflow:auto;
+    margin: 15px;
+}
+div.text_left{
+    display: none;
+    padding: 5px !important;
+}
+.divcolor{
+    overflow-x: hileftdden !important;
+    width: 100% !important;
+    width: 100%;
+}
+
+#main{
+    width: 100% !important;
+}
+.page_nav{
+            margin-top: 50px !important;
+            margin-right: 300px !important;
+        }
+}
+.but_open{
+display: none;
+}
+@media screen and (min-width:599px) {
+    .text_left{
+        display: block !important;
+    }
+}
+@media screen and (max-width:599px) {
+.text_left{
+    width: auto !important;
+    margin-left: 30px;
+}
+.inner_left{
+    margin: 0px !important;
+}
+.likejob__inner{
+    width: auto;
+    height: auto;
+    margin-right: 10px;
+    clear: both;
+    display:inline-block;
+}
+#job_name{
+    margin-left: 0px;
+}
+.y{
+    display: none;
+}
+.love_job{
+    display: block !important;
+    width: auto;
+}
+.love_job2{
+    display: block !important;
+    width: auto;
+}
+.divjob{
+    width: auto !important;
+}
+
+.h4_title{
+    text-align: center;
+    height: auto;
+}
+.job_skill{
+    padding-left: 5%;
+}
+.number_img1{
+    position: absolute;
+    left:90%;
+    transform: translate(-80%,-20%);
+}
+#img1111,#img104{
+    margin-left: 10px;
+}
+.but_open{
+    display: block;
+    background-color: rgba(250, 235, 215, 0.514);
+    margin-left: 96%;
+    border: 3px solid rgb(165, 160, 146);
+    width: 90px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+    transform: translate(-96%,-4%);
+}
+.but_open:hover{
+    background-color: rgba(250, 235, 215, 1);
+}
+}
+#job_name span{
+position: absolute;
+right: 10px;
+top:30px;
+
+}
+#job_name{
+padding-top: 20px;
+padding-right: 30px;
+width: 100%;
+height: auto;
+}
+a.title{
+font-size: 25px;
+font-weight: bolder;
+color: rgb(97, 168, 230);
+text-decoration: none;
+}
+hr.y{
+height:auto;
+width:5px;
+border-width:0;
+color:#000;
+background-color:rgba(20, 8, 8, 0.51);
+}
+.line-clamp-content2,.line-clamp-content3,.line-clamp-content{
+        line-height: 50px !important;
+    }
+@media screen and (max-width:500px) {
+div.mb-auto div nav{
+position: static;
+margin-left: 10px !important;
+margin-left: 55% !important;
+margin-top: -35px !important;
+}
+}
+#clear_data{
+        cursor: pointer;
+    }
+    .form-control-xxx0 {
+     width : 200px ;
+     display :inline-block;
+     margin-left: 10px;
+     margin-bottom: 30px !important;
+}
+    .form-control-xxx {
+     width : 100px ;
+     display :inline-block;
+     margin-left: 10px;
+     margin-bottom: 30px !important;
+}
+.form-control-xxx2 {
+     width : 100px ;
+     display :inline-block;
+     margin-left: 6px;
+}
+div.search .form-control-xxx {
+     margin-bottom: 0px !important;
+}
+@media screen and (max-width:425px) {
+        div.search .form-control-xxx {
+        margin-bottom: 10px !important;
+    }
+}
+</style>
+<div id="content1" >
+    <div class="title_0">
+        <a class="amember"><div class="Table_of_contents" id="control_center">管理
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </div></a>
+        <a class="amember2"  href="{% url 'control_center' %}"><div class="control">管理中心</div></a>
+        <a class="amember2"  href="{% url 'recommend_log' %}"><div class="control">推送紀錄</div></a>
+        <a class="amember2" href="{% url 'notice' %}"><div class="control" >通知中心</div></a>
+    </div>
+    <div class="title_1">
+        <a class="amember"><div class="Table_of_contents active2" id="love" >收藏
+             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </div></a>
+        <a class="amember2"  href="{% url 'user' %}"><div class="Table_of_content" >全部</div></a>
+        <a class="amember2" href="{% url 'like_like' %}"><div class="Table_of_content" >我的最愛</div></a>
+        <a class="amember2" href="{% url 'like_recommend' %}"><div class="Table_of_content  active2" >推薦</div></a>
+        <a class="amember2" href="{% url 'user_great' %}"><div class="Table_of_content " >點讚紀錄</div></a>
+    </div>
+    <div class="title_2">
+            <a class="amember" ><div class="Table_of_contents super_function" id="super_function">功能 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg></div></a>
+            <a class="amember2"  href="{% url 'user_recommend' %}"><div class="function" >推薦功能</div></a>
+    </div>
+    <div class="title_3">
+            <a class="amember"><div class="Table_of_contents" id="member_user">設定 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg></div></a>
+            <a class="amember2"  href="{% url 'change' %}"><div class="Table_of_content_member " >帳號安全</div></a>
+            <a class="amember2" href="{% url 'opinion' %}"><div class="Table_of_content_member " >意見箱</div></a>
+    </div>
+</div>
+<div style="width:100%; height: 100%;">
+    <form method="get" action="{% url 'like_recommend' %}" id="user_submit">
+        <div class="selection">
+            <div class="flex">
+                <div class="search">
+                    當前內容:推薦
+                </div>
+                <div class="search2">
+                    當前數量:
+                    <span id="count" >{{count}}</span>
+                </div>
+                <div class="search2" id="clear_data">
+                    清空資料
+                </div>
+                <div class="search2" style="padding: 7px;padding-left: 15px;">
+                    查詢工作類:
+                    <select id="like_type" style="width: 150px !important;" name="like_type" class="form-control form-control-xxx0 mb-3" onchange="submit()" >
+
+                        <option value="全部" class="select_type" >全部</option>
+                        {% for i,v in dict_jobname.items %}
+                        <optgroup label="{{i}}" style="padding: 20px;text-align: left !important;" >
+                            {% for z in v %}
+                                {% if z == like_type %}
+                                <option value="{{z}}" class="select_type" style="text-align: left !important;"  selected>{{z}}</option>
+                                {% else %}
+                                    <option value="{{z}}" class="select_type" style="text-align: left !important;">{{z}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </optgroup>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="search"   style="padding: 7px;padding-left: 15px;">
+                    地區篩選:<span id="twzipcode"></span>
+                    <input type="submit"class="btn btn-primary" style="background-color: cornflowerblue;" >
+                </div>
+            </div>
+        </div>
+        <input name="page" id="page" hidden value="{{page}}">
+        </form>
+    <hr class="love_hr">
+    <div class="cover"></div>
+    <div class="reminder_box">
+            <h4>警告!</h4>
+            <div class="reminder_inner">
+                    <p style="overflow-wrap:normal;">是否清除資料!</p>
+                    <button id="remove-yes" type="button" class="btn btn-outline-danger mb-3 min-vw-10">是</button>
+                    <button id="remove-no" type="button" class="btn btn-outline-info mb-3 min-vw-10">否</button>
+            </div>
+    </div>
+
+
+
+    {% for i in dict_total_recommend %}
+    <div class="flex love_job2" style="background-color:rgb(212, 223, 226);word-break:break-all;word-wrap:break-word;">
+    {% if i.like_jobid.website == "104" %}
+        <div id="img104">
+            {% load static %}
+            <img alt="104" style="width:70px;" height="70px" src="{% static 'images/104.png' %}">
+        </div>
+    {% else %}
+    <div id="img1111">
+            {% load static %}
+            <img alt="1111" style="width:70px;" height="70px" src="{% static 'images/1111.png' %}">
+        </div>
+    {% endif %}
+    <div class="likejob__inner">
+        <div id="job_name" class="relative">
+           <a class="title" href="{{i.like_jobid.href}}" target="_blank">{{i.like_jobid.title}}</a>
+           <p class="jobid" hidden>{{i.like_jobid_id}}</p>
+           <span  onclick="remove( '{{forloop.counter}}' )">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                </svg>
+            </span>
+        </div>
+            <div class='inner_left'>
+            <h5  class="font_bold job_local " >{{i.like_jobid.local}}</h5>
+            <p  class="font_bold " style="padding-top:5px;">{{i.like_jobid.company}}</p>
+            <div style="margin-bottom: 50px;" class="job_line_he30">
+                <p class="line-clamp-content"  >
+                    {{i.like_jobid.content}}
+                </p>
+                <p onclick="open_line('{{forloop.counter}}')" style="text-align:right ;margin-top: -20px;" class="line-clamp-open" ></p>
+            </div>
+            <span class="font_bold " style="background-color:rgb(240, 240, 216,0.7); padding: 10px;border-radius: 20px;">
+                {{i.like_jobid.salary}}
+            </span>
+        </div>
+    </div>
+    <hr class="y">
+    <div class="relative text_left" style="padding:20px;width: 40%;">
+        <div class="font_bold flex" style="flex-wrap:wrap;  line-height: 40px;">所需技能:
+            {% load new_tage %}
+            {% for getskill in i.like_jobid.skill|split:"、" %}
+                {% if getskill|lower in i.like_user_skill|lower|split:"、" %}
+                    <span style="color:green;" class="skillgreen"  >{{getskill}}  &nbsp</span>
+                {% elif getskill == "不拘" %}
+                    <span class="skillno"style="margin-bottom: 10px;">不拘</span>
+                {% else %}
+                    <span style="color:red;" class="skillred">{{getskill}}  &nbsp</span>
+                {% endif %}
+            {% endfor %}
+            </div>
+            <!-- {% if i.like_user_skill != " " %}
+            <div class="font_bold flex" style="flex-wrap:wrap;">查詢技能:
+                    <p>{{i.like_user_skill}}</p>
+            </div>
+            {% endif %} -->
+            {% if i.like_jobid.certificate != '不拘'%}
+            <div class="font_bold flex" style="flex-wrap:wrap;  line-height: 40px;">所需證照:
+                {% load new_tage %}
+                {% for getskill in i.like_jobid.certificate|split:"、" %}
+                    {% if getskill|lower in i.like_certificate|lower|split:"、" %}
+                        <span style="color:green;" class="skillgreen"  >{{getskill}}  &nbsp</span>
+                    {% else %}
+                        <span style="color:red;" class="skillred">{{getskill}}  &nbsp</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        <p>發布日期:{{i.like_jobid.date}}</p>
+        <p>經驗:{{i.like_jobid.experience}}</p>
+        <p>學歷:{{i.like_jobid.Education}}</p>
+        <div  class="job_line_he302">
+            <p class="line-clamp-content2"  >
+                附加條件:{{i.like_jobid.Additional_conditions |safe}}
+            </p>
+            <p onclick="open_line2('{{forloop.counter}}')" style="text-align:right ;margin-top: -20px;" class="line-clamp-open2" ></p>
+        </div>
+            {% if i.like_jobid.other != "不拘"%}
+            <div  class="job_line_he303" style="background-color: #858a8f75;padding: 10px;border-radius: 10px;word-break:break-all;word-wrap:break-word;">
+                <p class="line-clamp-content3"  >
+                    其它:{{i.like_jobid.other}}
+                </p>
+                <p onclick="open_line3('{{forloop.counter}}')" style="text-align:right ;margin-top: -20px;" class="line-clamp-open3" ></p>
+            </div>
+            {% else %}
+            <div  class="job_line_he303" style="background-color: #cadeee75;padding: 10px;border-radius: 10px;display: none;">
+                <p class="line-clamp-content3"  >
+                </p>
+                <p onclick="open_line3('{{forloop.counter}}')" style="text-align:right ;margin-top: -20px;" class="line-clamp-open3" ></p>
+            </div>
+            {% endif %}
+    </div>
+    <button class="but_open" style="margin-bottom: 35px;" type="button" onclick="but_total2('{{forloop.counter}}')">顯示全部</button>
+</div>
+{% endfor %}
+{% if dict_total_recommend|length != 0 %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center page_nav">
+        {% if current_page.has_previous %}
+        <li class="page-item">
+            <span class="page-link" onclick="page_fun('last')"><<</span>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link" ><<</span>
+        </li>
+        {% endif %}
+        {% if page_start_end.start %}
+            <li class="page-item" onclick="page_fun('1')"><a class="page-link" >1</a></li>
+            <li class="page-item" ><a class="page-link" >...</a></li>
+        {% endif %}
+        {% for item in page_range %}
+            {% if page == item %}
+                <li class="page-item active">
+                    <span class="page-link">
+                    {{item}}
+                    </span>
+                </li>
+            {% else %}
+                <li class="page-item" onclick="page_fun('{{item}}')"><a class="page-link" >{{item}}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if page_start_end.end %}
+            <li class="page-item"><a class="page-link" >...</a></li>
+            <li class="page-item" onclick="page_fun('{{page_start_end.max_page}}')" ><a class="page-link" >{{page_start_end.max_page}}</a></li>
+        {% endif %}
+        {% if current_page.has_next %}
+        <li class="page-item">
+            <a class="page-link" onclick="page_fun('next')" >>></a>
+        </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link">>></a>
+            </li>
+        {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+</div>
+<script src="../../static/js/clamp.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="../../static/js/jquery.twzipcode.min.js"></script>
+
+<script>
+    $("#twzipcode").twzipcode({
+        css: ["city form-control form-control-xxx", "town form-control form-control-xxx2"],
+        countySel: "{{county}}",
+        districtSel: "{{district}}",
+        onCountySelect:zz,    
+    }
+    );
+    document.getElementsByName("zipcode")[0].style.display ="none";
+    function zz(){
+        document.getElementsByName("district")[0].options.add(new Option("鄉鎮市區",""))
+        document.getElementsByName("district")[0].value = ""
+    }
+</script>
+
+<script>
+//jquery 實現django { CSRF }
+jQuery(document).ajaxSend(function(event, xhr, settings) {
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    function sameOrigin(url) {
+        // url could be relative or scheme relative or absolute
+        var host = document.location.host; // host + port
+        var protocol = document.location.protocol;
+        var sr_origin = '//' + host;
+        var origin = protocol + sr_origin;
+        // Allow absolute or scheme relative URLs to same origin
+        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+            // or any other URL that isn't scheme relative or absolute i.e relative.
+            !(/^(\/\/|http:|https:).*/.test(url));
+    }
+    function safeMethod(method) {
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    }
+});
+
+    function but_total2(count){
+        if(document.getElementsByClassName('but_open')[count-1].innerHTML=='顯示全部'){
+            document.getElementsByClassName('text_left')[count-1].style.display='block'
+            document.getElementsByClassName('but_open')[count-1].innerHTML = '收起';
+        }else{
+            document.getElementsByClassName('text_left')[count-1].style.display='none'
+            document.getElementsByClassName('but_open')[count-1].innerHTML = '顯示全部';
+        }
+    }
+
+
+header = document.getElementsByClassName('line-clamp-content2')
+open_header = document.getElementsByClassName('line-clamp-open2')
+job_line_he30 = document.getElementsByClassName('job_line_he302')
+for(let i=0;i<header.length;i++){
+    if(header[i].clientHeight/50>2){
+        open_header[i].innerHTML = '<span class="open_content">展開</span>';
+        $clamp(header[i], {clamp:3, useNativeClamp: true,animate: true});
+        job_line_he30[i].style.marginBottom = '0px'
+    }
+}
+header = document.getElementsByClassName('line-clamp-content3')
+open_header = document.getElementsByClassName('line-clamp-open3')
+job_line_he30 = document.getElementsByClassName('job_line_he303')
+for(let i=0;i<header.length;i++){
+    if(header[i].clientHeight/50>2){
+        open_header[i].innerHTML = '<span class="open_content">展開</span>';
+        $clamp(header[i], {clamp:2, useNativeClamp: true,animate: true});
+        job_line_he30[i].style.marginBottom = '0px'
+    }
+}
+function remove(count){
+        count= count-1;
+        let openremove = true;
+        let jobid = document.getElementsByClassName('jobid')[count].innerHTML;
+        data_dict={
+            'jobid':jobid,
+            'type':'recommend',
+        }
+        $(".love_job2").slice(count,count+1).fadeOut("slow")
+        $.ajax({
+            url:'{% url "nolike" %}',
+            type:'POST',
+            data:data_dict,
+            dataType:'json',
+            success:function(mesg){
+                console.log(mesg)
+            },
+            error:function(mesg){
+                console.log(mesg)
+            }
+        })
+    }
+
+
+
+// function remove_recommend(count){
+//     count= count-1;
+//     let openremove = true;
+//     let jobid = document.getElementsByClassName('jobid')[count].innerHTML;
+//     data_dict={
+//         'jobid':jobid,
+//         'type':'recommend',
+//     }
+//     document.getElementsByClassName('love_job2')[count].style.opacity = "1"
+//     var xxz = 1;
+//     const active =  setInterval(function (){
+//         if(xxz<=0){
+//             window.location.reload();
+//             clearInterval(active)
+//         }
+//         if(xxz<=0.1 & openremove){
+//             openremove = false
+//             document.getElementsByClassName('love_job2')[count].remove();
+//         }
+//         xxz-=0.05;
+//         document.getElementsByClassName('love_job2')[count].style.opacity =xxz+"";
+//     },50);
+//     $.ajax({
+//         url:'{% url "nolike" %}',
+//         type:'POST',
+//         data:data_dict,
+//         dataType:'json',
+//         success:function(mesg){
+//             console.log(mesg)
+//         },
+//         error:function(mesg){
+//             console.log(mesg)
+//         }
+//     })
+// }
+
+
+
+
+
+
+    window.onload = Howcount()
+
+  function Howcount(){
+    document.getElementById('clear_data').addEventListener('click',function(){
+        swal({
+        title: "是否刪除全部推薦資料!",
+        text: "Please confirm whether to delete the data !",
+        icon: "warning",
+        buttons:['我再考慮一下','刪除'],
+        dangerMode: true,
+        }).then((willDelete) => {
+            if(willDelete){
+                okyes()
+            }
+        })
+    })
+
+    // let height = (countlove.length+count.length)
+    // if(height>=2){
+    //     document.getElementsByClassName('mb-auto')[0].style.height='auto';
+    // }else{
+    //     document.getElementsByClassName('mb-auto')[0].style.height='91.2%';
+    // }
+    let header = document.getElementsByClassName('line-clamp-content')
+        let open_header = document.getElementsByClassName('line-clamp-open')
+        let job_line_he30 = document.getElementsByClassName('job_line_he30')
+        for(let i=0;i<header.length;i++){
+            if(header[i].clientHeight/50>2){
+                open_header[i].innerHTML = '<span class="open_content">展開</span>';
+                $clamp(header[i], {clamp:2, useNativeClamp: true,animate: true});
+                job_line_he30[i].style.marginBottom = '0px'
+            }
+        }
+  }
+  function open_line(count){
+        let open_cmp = document.getElementsByClassName('line-clamp-open')[count-1]
+        let header = document.getElementsByClassName('line-clamp-content')[count-1]
+        if(open_cmp.innerHTML == '<span class="open_content">展開</span>'){
+            $clamp(header, {clamp:1000, useNativeClamp: true,animate: true});
+            open_cmp.innerHTML = '<span class="close_content">收起</span>'
+        }else{
+            $clamp(header, {clamp:2, useNativeClamp: true,animate: true});
+            open_cmp.innerHTML = '<span class="open_content">展開</span>'
+        }
+    }
+
+    function page_fun(state){
+    page = document.getElementById('user_submit')
+    page2 = document.getElementById('page').value
+    if(state == 'last'){
+        page.page.value =parseInt(page2,10)-1
+        page.submit()
+    }else if(state == 'next'){
+        page.page.value =parseInt(page2,10)+1
+        page.submit()
+    }else{
+        page.page.value = parseInt(state,10)
+        page.submit()
+    }
+}
+
+    function okyes(){
+
+        data_dict = {
+            'type':'recommend'
+        }
+        $.ajax({
+            url:'{% url "nolike" %}',
+            type:'POST',
+            data:data_dict,
+            dataType:'json',
+            success:function(mesg){
+                swal({
+                title: "恭喜您刪除成功!",
+                text: "You change the data!",
+                icon: "success",
+                button: "好的",
+                }).then((value) => {
+                    window.location.reload();
+                });
+            },
+            error:function(mesg){
+                swal({
+                    title: "資料錯誤!",
+                    text: '請確定資料是否正確，如果操作皆為正確，請去意見箱反饋錯誤。',
+                    icon: "error",
+                    button: "好的",
+                    }).then((value) => {
+                });
+            }
+        })
+    }
+    function open_line3(count){
+        let open_cmp = document.getElementsByClassName('line-clamp-open3')[count-1]
+        let header = document.getElementsByClassName('line-clamp-content3')[count-1]
+        if(open_cmp.innerHTML == '<span class="open_content">展開</span>'){
+            $clamp(header, {clamp:1000, useNativeClamp: true,animate: true});
+            open_cmp.innerHTML = '<span class="close_content">收起</span>'
+        }else{
+            $clamp(header, {clamp:2, useNativeClamp: true,animate: true});
+            open_cmp.innerHTML = '<span class="open_content">展開</span>'
+        }
+    }
+    function open_line2(count){
+        let open_cmp = document.getElementsByClassName('line-clamp-open2')[count-1]
+        let header = document.getElementsByClassName('line-clamp-content2')[count-1]
+        if(open_cmp.innerHTML == '<span class="open_content">展開</span>'){
+            $clamp(header, {clamp:1000, useNativeClamp: true,animate: true});
+            open_cmp.innerHTML = '<span class="close_content">收起</span>'
+        }else{
+            $clamp(header, {clamp:2, useNativeClamp: true,animate: true});
+            open_cmp.innerHTML = '<span class="open_content">展開</span>'
+        }
+    }
+</script>
+{% endblock %}

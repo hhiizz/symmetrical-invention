@@ -1,0 +1,776 @@
+<script src="../../static/js/popper.min.js"></script>
+<script src="../../static/js/bootstrap.min.js"></script>
+<style>
+    .divjob{
+        padding:20px;
+        height:auto;
+        line-height: 35px;
+    }
+    .divin{
+        width: 100% !important;
+        background-color: rgb(177, 192, 192);
+        margin-top:70px;
+        justify-content: center;
+        height: 200px;
+        border-radius: 5px;
+        box-shadow : 0px  10px  10px -10px  #333 ;
+    }
+    .flex{
+        display:flex;flex-wrap: nowrap;
+        flex-grow:0;
+    }
+    .diviner{
+        width:60%;
+        background-color:rgb(75, 64, 49,0.2); ;
+        align-self: center;
+        border-radius: 5px;
+    }
+
+    #sub{
+        transform: scale(1);
+        margin-left: 10px;
+        border-radius: 5px;
+        height:50px;
+        align-self: center;
+        background-color: rgb(213, 241, 231);
+        transition: .2s;
+        box-shadow: 1px 2px 1px;
+    }
+    #sub:active{
+        transform: scale(0.85);
+    }
+    .opin{
+        height:110px;
+    }
+    /* .h4_title h4{
+        margin-right: 20px;
+        display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    } */
+
+    @media only screen and (max-width:768px) {
+        .divin{
+        background-color: rgb(177, 192, 192);
+        margin-top:15px;
+        justify-content: center;
+        height: 200px;
+        border-radius: 5px;
+    }
+    div h3{
+          margin-left: 0px !important;
+        }
+
+    }
+    .cover{
+                visibility: hidden;
+                transition: 1s;
+                position:absolute;
+                top: 0;
+                left: 0;
+                background-color: rgb(42, 38, 38);
+                opacity: 0;
+                height:100%;
+                width: 100%;
+                z-index: 3;
+        }
+    ul.nav{
+        position: relative;
+        margin-top: 30px;
+        width: 92% !important;
+        margin-left: 4% !important;
+        margin-bottom: 1px;
+        /* transform: translate(-8%,-92%); */
+    }
+    ul.nav li{
+        width: 10%;
+        min-width:100px ;
+    }
+    .number_img1{
+        position: absolute;
+        left:90%;
+        transform: translate(-80%,-20%);
+    }
+    .noactive{
+        background-color: rgb(192, 190, 188) !important;
+        color: #333 !important;
+    }
+    .text-ri{
+        top: 3px;
+        position: absolute !important;
+        left: 100%;
+        z-index: 3 !important;
+        transform:translate(-98%,-2%);
+        background-color: rgba(255, 255, 255, 0);
+    }
+    @media screen and (max-width:768px) {
+        .job_div{
+            margin-left: 10px;
+            width: 96%;
+        }
+        .divjob{
+            padding: 10px;
+        }
+        .inner_left{
+            margin-left:-93px ;
+            margin-top: 15px;
+        }
+        .h4_title{
+            margin-top: 6px;
+            height: 70px;
+        }
+    }
+    @media screen and (max-width:600px) {
+        nav.nav{
+            margin-left: 0% !important;
+        }
+        .text-ri{
+            top:-25px;
+            margin-top: 10px !important;
+        }
+        ul.nav li{
+            margin-top: 30px;
+        }
+
+    }
+    @media screen and (max-width:451px){
+        ul.nav li{
+            min-width: 80px;
+        }
+    }
+
+    #img1111,#img104{
+        padding: 15px;
+    }
+    .but_open{
+            display: none;
+    }
+
+
+
+    #trend_submit2{
+        background-color: rgb(155, 153, 153) !important;
+        color:  black;
+    }
+    .noactive2{
+        background-color: rgb(155, 153, 153) !important;
+        color: #333 !important;
+    }
+    #job_submit{
+        color: #000 !important;
+    }
+    .trend{
+        width: 92%;
+        padding: 1%;
+        text-align: left;
+        margin-left: 4%;
+        color: black;
+        background-color: rgb(255, 255, 255);
+        margin-bottom: 1000px !important;
+    }
+    .card-header img{
+        margin-bottom: 5px;
+    }
+    #hot_skill{
+        display: flex;
+        margin-bottom: 23px ;
+        font-size: 17px;
+        padding: 10px;
+        flex-wrap: wrap;
+    }
+    #hot_skill span{
+        margin-top: 5px;
+    }
+    #select_box{
+        opacity: 0;
+        background-color: aliceblue;
+        transition: 1s;
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        z-index: 4;
+        border-radius: 5px;
+        color: #000;
+        padding: 5px;
+        width: auto !important;
+        visibility: hidden;
+        /* max-width: 503px; */
+    }
+    #select_box h5{
+        color: aliceblue;
+        font-weight: bolder;
+        font-size: 25px;
+    }
+    .select_box_title{
+        position: relative;
+        background-color: rgb(82, 225, 238);
+        border-radius: 5px;
+        text-align: left;
+        padding: 10px;
+    }
+    .select_box_title_color{
+        background-color: rgb(27, 163, 175);
+    }
+    #select_date{
+        padding: 10px;
+        padding-bottom:0px ;
+    }
+    #select_date span{
+        vertical-align:5px;
+        font-size: 20px;
+    }
+    #select_date input{
+        margin-right: 5px;
+        margin-left: 5px;
+        border: none;
+        font-size: 15px;
+        vertical-align:super;
+        margin-bottom: 20px;
+    }
+    #date{
+        width: 120px;
+        height: 30px;
+    }
+    #date_max{
+        width: 120px;
+        height: 30px;
+    }
+    .date_time{
+        margin-top: -6px;
+    }
+    .date_time span{
+        margin-top:7px;
+    }
+    .skill_count{
+        width: 50px;
+    }
+    .date_count{
+        padding-top: 13px;
+    }
+    .box_date{
+        padding-top: 10px;
+    }
+    .select_no{
+        position: absolute;
+        top: 15.5px;
+        left: 98%;
+        transform: translate(-98%,-2%);
+        color: black;
+    }
+    .skill_href{
+        text-decoration-line: none;
+        color: #2a5c9a;
+        background-color:#e2ecf7;
+        margin-right: 7px;
+        margin-left: 7;
+        padding: 7px;
+        border-radius: 10px;
+        transition: .2s;
+        text-align: center;
+        cursor: pointer;
+        width: 120px;
+        margin-bottom: 10px;
+        transform: scale(1);
+        box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.75);
+    }
+    .skill_href:active{
+        transform: scale(0.87);
+    }
+    .green{
+        background-color: rgba(17, 166, 17, 0.296);
+        color: green;
+        white-space:nowrap;
+    }
+    .noactive3{
+        background-color: rgba(145, 77, 77, 0.49) !important;
+        color: rgb(0, 0, 0) !important;
+    }
+    .red{
+        background-color:  rgba(255, 0, 0, 0.241);
+        color: red;
+        white-space:nowrap;
+    }
+
+    #job_submit:hover,#company_submit:hover,#popular_job:hover{
+        color:  rgb(253, 245, 245) !important;
+        box-shadow: 1px 1px 3px rgb(214, 211, 211);
+    }
+    #skill2{
+        text-align: left;
+        padding-left: 15px;
+        color:rgb(95, 91, 91) ;
+    } 
+    #skill2:hover{
+        background-color: rgb(75, 64, 49,0.2) !important;
+    } 
+</style>
+{% extends 'search_job/base.html'%}
+{%block main2%}
+<form id="job_send_trend" method="GET" action="{% url 'trend' %}" >
+<input hidden name="trend_function">
+{% csrf_token %}
+<div class="divin flex">
+    <div class="diviner  wow fadeInUp flex "data-wow-duration="3s" data-wow-delay="-0.5s" >
+        <input type="search" id="skill1" value="{{get_skill}}" name="get_skill" class="get_skill" placeholder="請輸入需要篩選的技能(用、或,隔開)..." >
+        <input hidden name="extends_local" value="{{extends_local}}">
+        <input hidden name="extends_type" value="{{extends_type}}">
+        <input name="get_local" id="get_local_submit" value="{{get_local}}"  hidden>
+        <button type="button" id="skill2" disabled>篩選地點</button>
+
+        <select id="skill3" name="job">
+            {% for i,v in dict_jobname.items %}
+            <optgroup label="{{i}}" style="padding: 20px;" >
+                {% for z in v %}
+                    {% if z == type_skill %}
+                    <option value="{{z}}" class="opin" selected>{{z}}</option>
+                    {% else %}
+                        <option value="{{z}}" class="opin">{{z}}</option>
+                    {% endif %}
+                {% endfor %}
+            </optgroup>
+            {% endfor %}
+        </select>
+
+    </div>
+    <button class="wow fadeInUp" type="button" id="sub" value="1 no" name="page" data-wow-duration="3s" data-wow-delay="-0.5s" >
+        &nbsp;
+        <img src="../../static/images/search.png" height="20px" width="20px" style="margin-bottom: 2px;">
+        &nbsp;
+    </button>
+</div>
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link noactive"  id="job_submit">找工作</a>
+    </li>
+    <li class="nav-ite">
+        <a class="nav-link noactive2" id="company_submit" >找公司</a>
+    </li>
+    <li class="nav-ite select-trend">
+        <a class="nav-link active" id="trend_submit">統計趨勢</a>
+    </li>
+    <li class="nav-ite">
+        <a class="nav-link noactive3" id="popular_job" >推薦工作</a>
+    </li>
+    <div class="dropdown text-ri">
+        <button class="btn btn-secondary dropdown-toggle" id="special_search"   type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            趨勢篩選
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="width:20px !important;">
+            <li><a id="skill_search_trend" class="dropdown-item" style="width:160px !important;">工作數量趨勢</a></li>
+            <li><a id="count_year" class="dropdown-item"  style="width:160px !important;">技能成長趨勢</a></li>
+            <li><a id="certificate_year" class="dropdown-item"  style="width:160px !important;">證照需求趨勢</a></li>
+        </ul>
+    </div>
+
+</ul>
+  <div class="cover"></div>
+
+
+
+
+
+
+
+
+
+  
+  <div id="select_box">
+    <h5 class="select_box_title">工作數量趨勢
+        <svg xmlns="http://www.w3.org/2000/svg" class="select_no" width="16" height="16" fill="currentColor" id="out_select" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+          </svg>
+    </h5>
+  <fieldset class="row mb-3">
+    <div class="flex box_date" style="flex-wrap:wrap">
+        <legend class="col-form-label col-sm-2 pt-0" >日期:</legend>
+        <div class="flex date_time" >
+            <input class="form-check-input date" type="month"  name="date_start" id="date" min="2022-10" value="{{date_start}}">
+            <span>~</span>
+            <input class="form-check-input date_max" type="month" value="{{date_end}}"  name="date_end" id="date_max" min="2022-10">
+        </div>
+    </div>
+    <div class="flex date_count">
+
+    </div>
+
+  </fieldset>
+  <div>
+    <button type="button" class="btn btn-primary" id="story">查詢</button>
+    <button type="reset" id="reset" class="btn btn-primary" style="background-color:rgba(255, 0, 0, 0.442) ;">清除</button>
+</div>
+  </div>
+
+
+  <div id="select_box" class="select_box_cla">
+    <h5 class="select_box_title select_box_title_color">技能成長趨勢
+        <svg xmlns="http://www.w3.org/2000/svg" class="select_no" width="16" height="16" fill="currentColor" id="out_select" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+          </svg>
+    </h5>
+  <fieldset class="row mb-3">
+    <div class="flex box_date" style="flex-wrap:wrap">
+        <legend class="col-form-label col-sm-2 pt-0" >日期:</legend>
+        <div class="flex date_time" >
+            <input class="form-check-input date" type="month"  name="date_start" value="{{date_start}}" id="date" min="2022-10" value="2022-10">
+            <span>~</span>
+            <input class="form-check-input date_max" type="month" value="{{date_end}}" name="date_end" id="date_max" min="2022-10" >
+        </div>
+    </div>
+    <div class="flex date_count">
+        <legend class="col-form-label col-sm-2 pt-0">技能數:</legend>
+        <div class="flex" >
+            <input class="skill_count" name="count_skill" type="number" value="{{count_skill}}" max="10" min="1" >
+        </div>
+    </div>
+  </fieldset>
+  <div>
+    <button type="button" class="btn btn-primary" id="story2">查詢</button>
+    <button type="reset" id="reset" class="btn btn-primary" style="background-color:rgba(255, 0, 0, 0.442) ;">清除</button>
+</div>
+  </div>
+
+  <div id="select_box" class="select_box_certi">
+    <h5 class="select_box_title select_box_title_color">證照需求趨勢
+        <svg xmlns="http://www.w3.org/2000/svg" class="select_no" width="16" height="16" fill="currentColor" id="out_select" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+          </svg>
+    </h5>
+  <fieldset class="row mb-3">
+    <div class="flex box_date" style="flex-wrap:wrap">
+        <legend class="col-form-label col-sm-2 pt-0" >日期:</legend>
+        <div class="flex date_time" >
+            <input class="form-check-input date" type="month"  name="date_start" id="date" min="2023-08" defaultValue="2022-10" value="{{date_start}}">
+            <span>~</span>
+            <input class="form-check-input date_max" type="month"  name="date_end" id="date_max" min="2023-08" value="{{date_end}}" >
+        </div>
+    </div>
+    <div class="flex date_count">
+        <legend class="col-form-label col-sm-2 pt-0">證照數:</legend>
+        <div class="flex" >
+            <input class="skill_count" name="cer_skill" type="number" value="{{count_skill}}" value="10" max="10" >
+        </div>
+    </div>
+  </fieldset>
+  <div>
+    <button type="button" class="btn btn-primary" id="story3">查詢</button>
+    <button type="reset" id="reset" class="btn btn-primary" style="background-color:rgba(255, 0, 0, 0.442) ;">清除</button>
+</div>
+  </div>
+
+
+  
+
+
+
+<div class="trend wow fadeIn" data-wow-delay="0s" data-wow-duration="2s">
+    <div id="select_date">
+        <span>篩選日期:</span>
+        <input class="form-check-input date" type="month"  name="date_start" id="date" min="2022-10" defaultValue="2022-10" value="{{date_start}}">
+        <span>~</span>
+        <input class="form-check-input date_max" type="month"  name="date_end" id="date_max" min="2022-10" value="{{date_end}}" >
+    </div>
+    <div id="hot_skill">
+        <span><img src="../../static/images/tools.png" width="20px" height="20px"><strong>熱門技能:</strong></span>
+        {% for key,val in color.items %}
+                <div class="skill_href {{val}}" id="{{key}}">{{key}}</div>
+        {% endfor %}
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <img src="../../static/images/area-graph.png" width="20px" height="20px">
+            工作技能統計圖
+        </div>
+        <div class="card-body"><canvas id="myAreaChart" width="100%" height="30"></canvas></div>
+        <div class="card-footer small text-muted">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+            </svg>&ensp; <span class="time"> yesterday at 11:59 PM</span></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <img src="../../static/images/bar-chart.png" width="20px" height="20px">
+                    技能成長趨勢圖
+                </div>
+                <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
+                <div class="card-footer small text-muted">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                    </svg>&ensp; <span class="time"> yesterday at 11:59 PM</span></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <img src="../../static/images/pie-chart.png" width="20px" height="20px">
+                    技能總比例
+                </div>
+                <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
+                <div class="card-footer small text-muted">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                    </svg>&ensp; <span class="time"> yesterday at 11:59 PM</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<form  id="job_send_sub" hidden  method="GET"  action="/myApp/search_job_skill/">
+    <input hidden name="get_local" value="">
+    <input hidden name="get_skill" value="">
+    <input hidden name="job" value="">
+    <input hidden name="page" value="1 no">
+    <input hidden name="skill_hot" value="">
+    <input hidden name="extends_local" value="">
+    <input hidden name="extends_type" value="">
+</form>
+<form  id="company_send" hidden  method="GET" action="{% url 'company' %}" >
+    <input hidden name="get_local" value="">
+    <input hidden name="get_skill" value="">
+    <input hidden name="job" value="">
+    <input hidden name="page" value="1 no">
+    <input hidden name="extends_local" value="">
+    <input hidden name="extends_type" value="">
+</form>
+<form  id="popular_job_send" hidden  method="GET" action="{% url 'popular_job' %}" >
+    <input hidden name="get_local" value="">
+    <input hidden name="get_skill" value="">
+    <input hidden name="job" value="">
+    <input hidden name="extends_local" value="">
+    <input hidden name="extends_type" value="">
+    <input hidden name="page" value="1 no">
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" type="text/JavaScript" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" type="text/JavaScript" crossorigin="anonymous"></script>
+<script src="../../static/js/chart-area-demo.js" type="text/JavaScript"></script>
+<script src="../../static/js/chart-bar-demo.js" type="text/JavaScript"></script>
+<script src="../../static/js/chart-pie-demo.js" type="text/JavaScript"></script>
+<script>
+    key = '{{skill_key|safe}}'.split('*')
+    val = '{{skill_value }}'.split('*')
+    val2 = '{{last_skill_value|safe}}'.split('*')
+    grouing_up = '{{growin_up}}'.split('*')
+    AreaChart(key,val,val2)
+    piechartjs(key,val)
+    bar(key,grouing_up,"成長率")
+</script>
+
+
+<script>
+//jquery 實現django { CSRF }
+jQuery(document).ajaxSend(function(event, xhr, settings) {
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    function sameOrigin(url) {
+        // url could be relative or scheme relative or absolute
+        var host = document.location.host; // host + port
+        var protocol = document.location.protocol;
+        var sr_origin = '//' + host;
+        var origin = protocol + sr_origin;
+        // Allow absolute or scheme relative URLs to same origin
+        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+            // or any other URL that isn't scheme relative or absolute i.e relative.
+            !(/^(\/\/|http:|https:).*/.test(url));
+    }
+    function safeMethod(method) {
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    }
+});
+    $('.skill_href').click(
+        function(event){
+            let send= document.getElementById('job_send_sub');
+            let send_job= document.getElementById('job_send_trend');
+            send.get_local.value = send_job.get_local.value;
+            send.get_skill.value = send_job.get_skill.value;
+            send.extends_local.value = send_job.extends_local.value;
+            send.extends_type.value = send_job.extends_type.value;
+            send.job.value = send_job.job.value;
+            send.skill_hot.value = event.target.id;
+            send.submit()
+        }
+    )
+
+    let array_list = "{{extends_local |safe }}"
+    if(array_list != ""){
+        console.log(array_list )
+        array_list = array_list.split(",")
+        let change_count = array_list.length
+        if(change_count != 0){
+            document.getElementById("skill2").innerHTML ="篩選地點"+" ("+array_list.length+")";
+            document.getElementById("skill2").style.backgroundColor = "rgb(188, 230, 207)"
+        }else{
+            document.getElementById("skill2").innerHTML = "篩選地點";
+            document.getElementById("skill2").style.backgroundColor = "rgb(75, 64, 49,0.2)"
+        }
+    }
+    var Today=new Date();
+    let count_time = document.getElementsByClassName('time')
+    for (let i=0;i<count_time.length;i++){
+        count_time[i].innerHTML = "更新時間  "+Today.getHours()+':'+Today.getMinutes();
+    }
+    window.onload = function(){
+        $('#sub').click(function(){
+            let submit_trend = document.getElementById('job_send_trend')
+            submit_trend.trend_function.value= 'skill_picture';
+            submit_trend.submit();
+        })
+        var Today=new Date();
+        let date_max = document.getElementsByClassName('date_max')
+            if(Today.getMonth()+1<10){
+                max_mount = "0"+(Today.getMonth()+1)
+            }else{
+                max_mount = (Today.getMonth()+1)
+            }
+        for(let i=0;i<date_max.length;i++){
+            date_max[i].max = Today.getFullYear()+'-'+max_mount;
+            date[i].max= Today.getFullYear()+'-'+max_mount;
+            date_max[i].min = "{{date_end}}"
+            date[i].max = "{{date_start}}"
+            for(let z=0;z<date.length;z++){
+                    date[z].value = date[i].value;
+                    date_max[z].min = date[z].value;
+                }
+                for(let z=0;z<date_max.length;z++){
+                    date_max[z].value = date_max[i].value;
+                    date[z].max = date_max[z].value
+                }
+            date[i].addEventListener('input',function(){
+                for(let z=0;z<date.length;z++){
+                    date[z].value = date[i].value;
+                    date_max[z].min = date[z].value;
+                }
+            })
+            date_max[i].addEventListener('input',function(){
+                for(let z=0;z<date_max.length;z++){
+                    date_max[z].value = date_max[i].value;
+                    date[z].max = date_max[z].value
+                }
+            })
+        }
+        $('#skill_search_trend').click(select);
+        $('#count_year').click(select2);
+        $('#certificate_year').click(select3);
+        document.getElementById('company_submit').addEventListener('click',function(){
+            let send= document.getElementById('company_send');
+            let send_job= document.getElementById('job_send_trend');
+            send.get_local.value = send_job.get_local.value;
+            send.get_skill.value = send_job.get_skill.value;
+            send.job.value = send_job.job.value;
+            send.extends_type.value= send_job.extends_type.value;
+            send.extends_local.value= send_job.extends_local.value;
+            send.submit()
+        })
+        document.getElementById('job_submit').addEventListener('click',function(){
+            let send= document.getElementById('job_send_sub');
+            let send_job= document.getElementById('job_send_trend');
+            send.get_local.value = send_job.get_local.value;
+            send.get_skill.value = send_job.get_skill.value;
+            send.job.value = send_job.job.value;
+            send.extends_type.value= send_job.extends_type.value;
+            send.extends_local.value= send_job.extends_local.value;
+            send.submit()
+        })
+        document.getElementById('popular_job').addEventListener('click',function(){
+            let send= document.getElementById('popular_job_send');
+            let send_job= document.getElementById('job_send_trend');
+            send.get_local.value = send_job.get_local.value;
+            send.get_skill.value = send_job.get_skill.value;
+            send.job.value = send_job.job.value;
+            send.extends_type.value= send_job.extends_type.value;
+            send.extends_local.value= send_job.extends_local.value;
+            send.submit()
+        })
+    }
+
+    function select3(){
+        let cover = document.getElementsByClassName('cover')[0]
+        let select_box = document.getElementsByClassName('select_box_certi')[0]
+
+        cover.style.visibility='visible';
+        cover.style.opacity='0.35';
+        select_box.style.visibility='visible';
+        select_box.style.opacity = '1';
+        let out_select = document.getElementsByClassName('select_no')[2]
+        out_select.addEventListener('click',function(){
+            cover.style.visibility='hidden';
+            cover.style.opacity='0';
+            select_box.style.visibility='hidden';
+            select_box.style.opacity = '0';
+        })
+    }
+    function select2(){
+        let cover = document.getElementsByClassName('cover')[0]
+        let select_box = document.getElementsByClassName('select_box_cla')[0]
+        cover.style.visibility='visible';
+        cover.style.opacity='0.35';
+        select_box.style.visibility='visible';
+        select_box.style.opacity = '1';
+        let out_select = document.getElementsByClassName('select_no')[1]
+        out_select.addEventListener('click',function(){
+            cover.style.visibility='hidden';
+            cover.style.opacity='0';
+            select_box.style.visibility='hidden';
+            select_box.style.opacity = '0';
+        })
+    }
+        $('#story').click(function(){
+            let submit_trend = document.getElementById('job_send_trend')
+            submit_trend.trend_function.value= 'job_count_trend';
+            submit_trend.submit();
+        })
+        $('#story2').click(function(){
+            let submit_trend = document.getElementById('job_send_trend')
+            submit_trend.trend_function.value= 'skill_picture';
+            submit_trend.submit();
+        })
+        $('#story3').click(function(){
+            let submit_trend = document.getElementById('job_send_trend')
+            submit_trend.trend_function.value= 'certificate_picture';
+            submit_trend.submit();
+        })
+    function select(){
+        let cover = document.getElementsByClassName('cover')[0]
+        let select_box = document.getElementById('select_box')
+        cover.style.visibility='visible';
+        cover.style.opacity='0.35';
+        select_box.style.visibility='visible';
+        select_box.style.opacity = '1';
+        let out_select = document.getElementsByClassName('select_no')[0]
+        out_select.addEventListener('click',function(){
+            cover.style.visibility='hidden';
+            cover.style.opacity='0';
+            select_box.style.visibility='hidden';
+            select_box.style.opacity = '0';
+        })
+    }
+
+</script>
+
+
+{% endblock %}

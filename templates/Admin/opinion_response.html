@@ -1,0 +1,425 @@
+{% extends 'Admin/index.html' %}
+{% block main %}
+<style>
+        .hidd_div div{
+        margin-bottom: 20PX;
+    }
+    .hidd_div div span{
+        margin-bottom: 20PX;
+        margin-left: 50px;
+    }
+    .hidd_div{
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    .table_change{
+        float: left;
+        margin-right:30px;
+    }
+    .table_change th,.table_change td{
+        padding-bottom: 30px;
+        margin-bottom: 10px;
+    }
+    .table_change input,.table_change select,.table_change textarea,.table_change img{
+        margin-left: 20px;
+    }
+    #upandno{
+        clear: left;
+        display: flex;
+        justify-content: center;
+    }
+    #upandno button{
+        margin-right: 10px;
+    }
+    .ver_1{
+        vertical-align: -1px;
+        margin-right: 5px;
+    }
+    .btn a{
+        color: azure;
+        text-decoration: none;
+    }
+    .table_change textarea{
+        width: 185px;
+        height: 100px;
+        resize:none;
+    }
+    textarea.response_inner{
+        height: 200px;
+    }
+    #other_manage{
+        color: rgb(207, 255, 226);
+    }
+</style>
+<div class="container-fluid px-4">
+    <h1 class="mt-4">意見回覆</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">您可以在此回覆使用者的意見!</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            需回應意見的資料表
+        </div>
+        <div class="card-body">
+            <form id="keyword___zz" method="GET" action="{% url 'opinion_response' %}" >
+                <span style="margin-top: 10px; position: absolute;right: 70px;width: 240px;">
+                    <select id="search_key_type" name="search_key_type"  onchange="change_button(this)">
+                        <option value="id">id</option>
+                        <option value="date" >date</option>
+                        <option value="user_name">user_name</option>
+                        <option value="opinion_type">opinion_type</option>
+                    </select>
+                </span>
+                <span style="margin-top: 10px; position: absolute;right: 30px;">
+                    <input id="search_key" name="key_word_submit_2" type="text" value="{{keyword}}">
+                    <button type="submit" id="key_word_submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg></button>
+                </span>
+            </form>
+            <table id="datatablesSimple">
+                <thead>
+                    <button type="button" class="btn btn-secondary mb-3 m-1" id="last">
+                        <a href="{% url 'opinion_admin' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left ver_1" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
+                            <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                            </svg>返回
+                        </a>
+                    </button>
+                    <button type="button" class="btn btn-danger mb-3  m-1" id="remove">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle ver_1" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                          </svg>刪除意見</button>
+                    <tr>
+                        <th>操作功能</th>
+                        <th>id</th>
+                        <th>日期</th>
+                        <th>帳號</th>
+                        <th>類型</th>
+                        <th>圖片</th>
+                        <th>內容</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in current_page %}
+                    <tr class="crawler_total" onclick="change_member(event,'{{forloop.counter}}')">
+                        <td>
+                            <input type="checkbox" class="delect_box" name="delect_box" value="{{i.opinion_id}}">
+                        </td>
+                        <td>{{i.opinion_id}}</td>
+                        <td>{{i.opinion_date}}</td>
+                        <td>{{i.opinion_user_name_id}}</td>
+                        <td>{{i.opinion_type}}</td>
+                        {% if i.opinion_img %}
+                            <td><img src="../../static/media/{{i.opinion_img}}" width="30" height="30" alt="My Model Image"></td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                        <td>{{i.opinion_content}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div  class="hidd_div p-5">
+            <table class="table_change" >
+                <tbody>
+                    <tr class="id">
+                        <th>id</th>
+                        <td><input class="inner" readonly type="text" ></td>
+                    </tr>
+                    <tr>
+                        <th>帳號</th>
+                        <td><input class="inner" readonly type="text" ></td>
+                    </tr>
+                    <tr>
+                        <th>類型</th>
+                        <td><input class="inner" readonly type="text"></td>
+                    </tr>
+                    <tr>
+                        <th>圖片</th>
+                        <td style="padding-bottom: 0px;"><div style="width: 300px;height: 200px;margin-bottom: 0px;"><img class="inner"  style="max-width: 100%; max-height: 100%;width: auto;height: auto;" src="" alt="My Model Image"></div></td>
+                    </tr>
+                    <tr>
+                        <th>內容</th>
+                        <td><textarea readonly class="inner" ></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table_change">
+                <tbody>
+                    <tr>
+                        <th>標題</th>
+                        <td><input class="response_inner" readonly type="text" value="回覆意見"></td>
+                    </tr>
+                    <tr>
+                        <th>回覆內容</th>
+                        <td><textarea class="response_inner"  required placeholder='請輸入要回覆的訊息...'></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div  id="upandno">
+                <button type="button"  class="btn btn-success" id="update">回覆意見</button>
+                <button type="button"  class="btn btn-danger" id="none_data">取消</button>
+            </div>
+        </div>
+    </div>
+    <form id="getjob_submit" method="GET" action="{% url 'opinion_response' %}" >
+        <input name="key_word_submit_2" type="text" value="{{keyword}}"  hidden>
+        <input name="search_key_type" type="text" value="{{type_keyword}}"  hidden>
+        <nav id="page_search"  aria-label="Page navigation example">
+            <ul class="pagination justify-content-center page_nav">
+            {% if current_page.has_previous %}
+            <li class="page-item">
+                <span class="page-link" onclick="page_fun('last')"><<</span>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link" ><<</span>
+            </li>
+            {% endif %}
+            {% if page_start_end.start %}
+                <li class="page-item" onclick="page_fun('1')"><a class="page-link" >1</a></li>
+                <li class="page-item" ><a class="page-link" >...</a></li>
+            {% endif %}
+            {% for item in page_range %}
+                {% if page == item %}
+                    <li class="page-item active">
+                        <span class="page-link">
+                        {{item}}
+                        </span>
+                    </li>
+                {% else %}
+                    <li class="page-item" onclick="page_fun('{{item}}')"><a class="page-link" >{{item}}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if page_start_end.end %}
+                <li class="page-item"><a class="page-link" >...</a></li>
+                <li class="page-item" onclick="page_fun('{{page_start_end.max_page}}')" ><a class="page-link" >{{page_start_end.max_page}}</a></li>
+            {% endif %}
+            {% if current_page.has_next %}
+            <li class="page-item">
+                <a class="page-link" onclick="page_fun('next')" >>></a>
+            </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">>></a>
+                </li>
+            {% endif %}
+            </ul>
+        </nav>
+        <input name="page" id="page" hidden value="{{page}}">
+    </form>
+</div>
+<script>
+                document.getElementById('other_inner').classList.add('show')
+    document.getElementById('other_title_nav').classList.remove('collapsed')
+    if("{{type_keyword}}" != ""){
+        document.getElementById('search_key_type').value ="{{type_keyword}}"
+    }else{
+        document.getElementById('search_key_type').value ="id"
+    }
+    change_button(document.getElementById('search_key_type'))
+    function change_button(event){
+        if(event.value=="date"){
+            document.getElementById('search_key').type = "date"
+        }else if(event.value=="id"){
+            document.getElementById('search_key').type = "number"
+        }else{
+            document.getElementById('search_key').type = "text"
+        }
+        document.getElementById('search_key').value = ""
+    }
+    document.getElementById('search_key').value = "{{keyword}}"
+    document.getElementById('remove').addEventListener('click',function(){
+    let id= ""
+    let count = 0
+    let z = document.getElementsByClassName('delect_box')
+    for(let i=0;i<z.length;i++){
+        if(z[i].checked){
+            count+=1
+            id+=z[i].value+'、)'
+        }
+    }
+    if(count==0){
+        swal({
+        title: "您沒有要刪除的資料!",
+        text: "You have no data to delete!",
+        icon: "error",
+        dangerMode: true,
+        })
+    }else{
+        swal({
+        title: "是否刪除"+count+"筆資料!",
+        text: "Please confirm whether to delete the data !",
+        icon: "warning",
+        buttons:['我再考慮一下','刪除'],
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            data_dict = {
+                'id':id,
+                'type':'delete'
+            }
+            $.ajax({
+                url:'{% url "change_opinion_admin" %}',
+                type:'POST',
+                data:data_dict,
+                dataType:'json',
+                success:function(mesg){
+                    swal({
+                        title: "恭喜您更改成功!",
+                        text: "You change the data!",
+                        icon: "success",
+                        button: "好的",
+                        }).then((value) => {
+                            window.location.reload();
+                        });
+                },
+                error:function(mesg){
+                    swal({
+                        title: "資料錯誤!",
+                        text: mesg.statusText,
+                        icon: "error",
+                        button: "好的",
+                        }).then((value) => {
+                    });
+                }
+            })
+        }
+        });
+    }
+})
+    window.onload = function(){
+        $('.hidd_div').hide()
+    }
+
+function change_member(event,count){
+    if(event.target.nodeName !='INPUT'){
+    $('.card-body').hide()
+    $('#page_search').hide()
+    z =  document.getElementsByClassName('crawler_total')[count-1]
+    var inner =  document.getElementsByClassName('inner')
+    z=z.children
+        inner[0].value = z[1].innerHTML;
+    for(let i=0;i<inner.length-1;i++){
+        if(i==2){
+            if(z[i+3].childNodes.length !=0){
+                inner[i+1].src = z[i+3].childNodes[0].src
+            }else{
+                inner[i+1].parentNode.parentNode.parentNode.style.display = 'none';
+            }
+        }else{
+            inner[i+1].value =  z[i+3].innerHTML;
+        }
+        }
+
+    $('.hidd_div').show()
+    }
+
+document.getElementById('update').addEventListener('click',response)
+}
+function response(){
+    var inner =  document.getElementsByClassName('inner')
+    let update = document.getElementsByClassName('response_inner')
+    data_dict = {}
+    data_dict['id'] = inner[0].value
+    data_dict['username'] = inner[1].value
+    data_dict['title'] = update[0].value
+    data_dict['content'] = update[1].value
+    data_dict['type'] ='response'
+    console.log(data_dict)
+    $.ajax({
+                url:'{% url "change_opinion_admin" %}',
+                type:'POST',
+                data:data_dict,
+                dataType:'json',
+                success:function(mesg){
+                    if(mesg.status == "error"){
+                        message = JSON.parse(mesg.message)
+                        var m = "";
+                        var n = message;
+                        for(var error in message){
+                            m+=message[error][0]['message']+'\n\n';
+                        }
+                        swal({
+                        title: "資料錯誤",
+                        text: m,
+                        icon: "error",
+                        button: "好的",
+                        })
+                    }
+                    else if(mesg.status == "error_Exception"){
+                        swal({
+                        title: "資料錯誤",
+                        text: mesg.message,
+                        icon: "error",
+                        button: "好的",
+                        })
+                    }else{
+                    swal({
+                        title: "您已回覆成功!",
+                        text: "You change the data!",
+                        icon: "success",
+                        button: "好的",
+                        }).then((value) => {
+                            window.location.reload();
+                        });
+                    }
+                },
+                error:function(mesg){
+                    swal({
+                        title: "資料錯誤!",
+                        text: mesg.statusText,
+                        icon: "error",
+                        button: "好的",
+                        }).then((value) => {
+                    });
+                }
+            })
+}
+
+function page_fun(state){
+    page = document.getElementById('getjob_submit')
+    page2 = document.getElementById('page').value
+    if(state == 'last'){
+        page.page.value =parseInt(page2,10)-1
+        page.submit()
+    }else if(state == 'next'){
+        page.page.value =parseInt(page2,10)+1
+        page.submit()
+    }else{
+        page.page.value = parseInt(state,10)
+        page.submit()
+    }
+
+}
+document.getElementById('none_data').addEventListener('click',function(){
+    $('.hidd_div').hide()
+    $('.card-body').show()
+    $('#page_search').show()
+    $("tr").show()
+    let inner =  document.getElementsByClassName('inner')
+    for(let i=0;i<inner.length;i++){
+        if(i==inner.length-1){
+            inner[i].value = 'False';
+        }else{
+            inner[i].value =  '';
+        }
+    }
+    document.getElementById('update').removeEventListener('click',response)
+})
+document.getElementById('btnNavbarSearch').addEventListener('click',function(){
+
+let search  = JSON.parse('{{list_search | safe}}')[document.getElementById('search_index').value]
+search = document.URL.replace('/opinion_response/',search)
+console.log(search)
+document.getElementById('search_form').action = search
+document.getElementById('search_form').submit()
+})
+</script>
+{% endblock %}

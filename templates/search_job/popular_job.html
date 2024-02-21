@@ -1,0 +1,1288 @@
+
+<style>
+
+    .divin{
+        width: 100% !important;
+        background-color: rgb(177, 192, 192);
+        margin-top:70px;
+        justify-content: center;
+        height: 200px;
+        border-radius: 5px;
+        box-shadow : 0px  10px  10px -10px  #333 ;
+    }
+    .flex{
+        display:flex;flex-wrap: nowrap;
+        flex-grow:0;
+    }
+    .diviner{
+        width:60%;
+        background-color:rgb(75, 64, 49,0.2); ;
+        align-self: center;
+        border-radius: 5px;
+    }
+
+    #sub{
+        transform: scale(1);
+        margin-left: 10px;
+        border-radius: 5px;
+        height:50px;
+        align-self: center;
+        background-color: rgb(213, 241, 231);
+        transition: .2s;
+        box-shadow: 1px 2px 1px;
+    }
+    #sub:active{
+        transform: scale(0.85);
+    }
+    #last_page{
+      display: none;
+    }
+    .opin{
+        height:110px;
+    }
+
+    @media only screen and (max-width:768px) {
+        .divin{
+        background-color: rgb(177, 192, 192);
+        margin-top:15px;
+        justify-content: center;
+        height: 200px;
+        border-radius: 5px;
+    }
+    div h3{
+          margin-left: 0px !important;
+        }
+
+    }
+
+    ul.nav{
+        position: relative;
+        margin-top: 30px;
+        width: 87% !important;
+        margin-left: 8% !important;
+        margin-bottom: 1px;
+    }
+    ul.nav li{
+        width: 10% !important;
+        min-width:100px ;
+    }
+    .number_img1{
+        position: absolute;
+        left:90%;
+        transform: translate(-80%,-20%);
+    }
+    .noactive{
+        background-color: rgb(192, 190, 188) !important;
+        color: #333 !important;
+    }
+    .text-ri{
+        top: 3px;
+        position: absolute !important;
+        left: 100%;
+        z-index: 3 !important;
+        transform:translate(-98%,-2%);
+        background-color: rgba(255, 255, 255, 0);
+    }
+    @media screen and (max-width:600px) {
+        nav.nav{
+            margin-left: 0% !important;
+        }
+        .text-ri{
+            top:-50px;
+            margin-top: 10px !important;
+        }
+        .select_skill{
+            margin-bottom: 50px;
+        }
+    }
+
+
+
+
+
+    .noactive2{
+        background-color: rgb(155, 153, 153) !important;
+        color: #333 !important;
+    }
+    #job_submit{
+        color: #000 !important;
+    }
+    .box_date{
+        padding-top: 10px;
+    }
+
+    .noactive3{
+        background-color: rgba(145, 77, 77, 0.49) !important;
+        color: rgb(0, 0, 0) !important;
+    }
+    #company_submit:hover,#job_submit:hover,#trend_submit:hover{
+        color:  rgb(253, 245, 245) !important;
+        box-shadow: 1px 1px 3px rgb(214, 211, 211);
+    }
+
+    span.skillred{
+    background-color: rgba(239, 146, 146, 0.5);
+    border-radius: 10px;
+    cursor: pointer;
+    padding-left: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    transition: 0.5s;
+}
+span.skillred:hover{
+        background-color: rgba(198, 245, 204, 0.5);
+        color: green !important;
+    }
+span.skillgreen{
+    background-color: rgba(185, 241, 185, 0.5);
+    padding-left: 10px;
+    border-radius: 10px;
+    cursor: default;
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+#inner_title a{
+    color: cornflowerblue;
+    text-decoration: none   ;
+    font-size: 25px;
+    font-weight: bolder;
+    transition: 1s;
+}
+#inner_title a:hover{
+    color: rgb(240, 196, 131);
+    text-decoration: none   ;
+}
+.inner_box{
+    padding: 20px;
+    margin-bottom: 10px;
+    box-shadow: 3px 3px 3px rgb(219, 210, 210) !important;
+    border-radius: 2px;
+    background-color: rgba(255, 253, 141, 0.511);
+    font-family: Microsoft JhengHei;
+}
+    .div_total{
+            margin-left:8%;
+            width:87%;
+            text-align: left;
+        }
+    .div_total_none{
+        margin-left:8%;
+            width:87%;
+            text-align: left;
+            border-radius: 0px 0px 10px 10px;
+            padding-bottom: 50px;
+            padding-top: 50px;
+            text-align: center;
+            background-color: beige;
+    }
+    ul.nav li.text-ri{
+        top: 0px;
+        position: absolute !important;
+        left: 98%;
+        min-width: 120px;
+        transform:translate(-98%,-2%);
+        position: relative;
+    }
+    ul.nav li.text-ri input{
+        padding-right: 0px;
+        padding-left: 50px;
+        transition: 1s;
+        border: none;
+        outline: none;
+        width:  0px !important;
+        color: black;
+    }
+    ul.nav li.text-ri svg{
+        position: absolute;
+        top: 13px;
+        left: 15px;
+    }
+    ul.nav li.text-ri input:focus{
+        border-bottom: 3px solid rgba(255, 255, 255, 0.784) ;
+        width: 100% !important;
+    }
+    ul.nav li.text-ri:hover{
+        border: none !important;
+        outline: none !important;
+    }
+    @keyframes example {
+    0%   {transform:rotate(0deg);color: rgb(4, 66, 4);}
+    25%   {transform:rotate(30deg);}
+    50%  {transform:rotate(0deg);color: white;}
+    75%  {transform:rotate(-30deg);}
+    100% {transform:rotate(0deg);color: rgb(109, 28, 45);}
+    }
+    @keyframes myfirst {
+        0%   {opacity: 1;transform: translate(0px, 0px);}
+        100% {opacity: 0.25;transform: translate(-5px, 5px);}
+    }
+    #select_box2 h5{
+        color: aliceblue;
+        font-weight: bolder;
+        font-size: 25px;
+    }
+    .select_box_title{
+        position: relative;
+        background-color: rgb(82, 225, 238);
+        border-radius: 5px;
+        text-align: left;
+        padding: 10px;
+    }
+    .select_no{
+        position: absolute;
+        top: 15.5px;
+        left: 98%;
+        transform: translate(-98%,-2%);
+        color: black;
+    }
+    .box_date2{
+        padding: 5px;
+    }
+    .user-good:hover{
+    animation-name: example;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    }
+    .cover{
+                visibility: hidden;
+                transition: 1s;
+                position:absolute;
+                top: 0;
+                left: 0;
+                background-color: rgb(42, 38, 38);
+                opacity: 0;
+                height:100%;
+                width: 100%;
+                z-index: 5;
+        }
+        #select_box2{
+        opacity: 0;
+        background-color: aliceblue;
+        transition: 1s;
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        z-index: 6;
+        border-radius: 5px;
+        color: #000;
+        padding: 5px;
+        overflow-x: hidden;
+        visibility: hidden;
+        max-width: 503px;
+    }
+    .user-nogood:hover{
+    animation-name: myfirst;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    }
+    .user-nogood{
+        color: rgb(120, 176, 202);
+        vertical-align: -5px !important ;
+    }
+    .user-good{
+        vertical-align: -5px;
+        color: rgba(51, 51, 51, 0.638);
+    }
+    .job_skill{
+        position: relative;
+    }
+    .skillno{
+        background-color: rgba(112, 128, 144, 0.348);
+        padding: 10px;
+        border-radius: 10px;
+        display: inline-block;
+        margin-top: -10px;
+        color: rgb(62, 62, 62);
+    }
+
+    @media only screen and (max-width:768px) {
+        .div_total,.div_total_none{
+            margin-left: 10px;
+            width: 96%;
+        }
+        ul.nav{
+        margin-left: 2% !important;
+        width: 96% !important;
+        }
+    }
+    #select_box3{
+          opacity: 0;
+        background-color: rgb(255, 255, 255);
+        transition: 1s;
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        z-index: 6;
+        border-radius: 5px;
+        color: #000;
+        padding: 5px;
+        overflow-x: hidden;
+        visibility: hidden;
+        text-align: left;
+        width: 500px;
+        height: auto !important;
+    }
+    @media only screen and(max-width:560px) {
+        .text-ri{
+            position: relative;
+        }
+    }
+    @media screen and (max-width:500px) {
+        #select_box3{
+            width: 100%;
+        } 
+    }
+    @media screen and (max-width:451px){
+        ul.nav li{
+            min-width: 80px;
+        }
+    }
+    @media screen and (max-width:382px){
+        .job_skill {
+            margin-bottom: 50px;
+        }
+    }
+    .inner_county{
+      display: inline-block;
+      width: 30%;
+      margin-top: 10px;
+      padding-top: 5px;
+      padding-left: 40px;
+      padding-bottom: 5px;
+      border-radius: 10px;
+      color: #000;
+    }
+    @media screen and (max-width:432px){
+        .inner_county{
+            padding-left: 20px;
+            width: 90px;
+        }
+    }
+        #out_select_local{
+        position: absolute;
+        top: 20.5px;
+        left: 96%;
+        transform: translate(-98%,-2%);
+        color: black;
+    }
+    .inner_county:hover{
+      background-color: #a8d2d69d;
+    }
+    .inner_county_local:hover{
+      background-color: #bed6d8;
+      border-radius: 10px;
+    }
+    .inner_county_local{
+      display: inline-block;
+      width: 47%;
+      padding-top: 10px;
+      padding-left: 40px;
+      padding-bottom: 10px;
+      border-radius: 6px;
+      color: #000;
+    }
+    #inner_tp,#inner_hs,#inner_net,#remove_local{
+      display: none;
+    }
+    #skill2{
+        text-align: left;
+        padding-left: 15px;
+        color:rgb(95, 91, 91) ;
+    }    .tw_county{
+      color: cornflowerblue;
+      padding:20px 20px;
+      padding-bottom: 20px;
+      padding-top: 00px;
+    }    
+    #lo_screen{
+      background-color: #dfd7d7c0;padding:10px 20px 10px 30px;margin: -10px -12px;
+      overflow-y: hidden;
+      position: relative !important;
+    }
+    #local_champ{
+      position: absolute;
+      top: 70px;
+      left: 88%;
+      padding-left: 30px;
+      display: none;
+    }
+    #local_open{
+      position: absolute;
+      display: none;
+      left: 88%;
+            padding-left: 30px;
+      bottom: 20px;
+    }
+</style>
+{% extends 'search_job/base.html'%}
+{%block main2%}
+<form id="popular_job_form" method="GET" action="{% url 'popular_job' %}" >
+<input hidden name="trend_function">
+{% csrf_token %}
+<div class="divin flex">
+    <div class="diviner  wow fadeInUp flex "data-wow-duration="3s" data-wow-delay="-0.5s" >
+        <input type="search" id="skill1" value="{{get_skill}}" name="get_skill" class="get_skill" placeholder="請輸入需要篩選的技能(用、或,隔開)..." >
+        <input name="get_local" id="get_local_submit" value="{{get_local}}"  hidden>
+        <button type="button" id="skill2" value="{{get_local}}" >篩選地點</button>
+        <input hidden name="extends_local" value="{{extends_local}}">
+        <input hidden name="extends_type" value="{{extends_type}}">
+        <select id="skill3" name="job">
+            {% for i,v in dict_jobname.items %}
+            <optgroup label="{{i}}" style="padding: 20px;" >
+                {% for z in v %}
+                    {% if z == type_skill %}
+                    <option value="{{z}}" class="opin" selected>{{z}}</option>
+                    {% else %}
+                        <option value="{{z}}" class="opin">{{z}}</option>
+                    {% endif %}
+                {% endfor %}
+            </optgroup>
+            {% endfor %}
+        </select>
+
+    </div>
+    <button class="wow fadeInUp" type="submit" id="sub" value="1 no" name="page" data-wow-duration="3s" data-wow-delay="-0.5s" >        &nbsp;
+        <img src="../../static/images/search.png" height="20px" width="20px" style="margin-bottom: 2px;">
+      &nbsp;</button>
+</div>
+
+<div class="cover"></div>
+  <div id="select_box2">
+    <h5 class="select_box_title">排序順序
+        <svg xmlns="http://www.w3.org/2000/svg" class="select_no" width="16" height="16" fill="currentColor" id="out_select2" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+        </svg>
+    </h5>
+    <fieldset class="row mb-3" style="padding-left: 5px;padding-right: 5px;padding-top: 20px;">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">點讚數</span>
+            </div>
+            <select class="form-select" name="count"  id="count"  a  aria-label="Default select example">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">技能符合度</span>
+            </div>
+            <select class="form-select" name="fraction" id="fraction"  a  aria-label="Default select example">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">優先我點讚的工作</span>
+            </div>
+            <select class="form-select" name="recommend" id="recommend"  aria-label="Default select example">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+          </div>
+
+    </fieldset>
+    <button type="button" class="btn btn-primary" id="story2">提交</button>
+    <button type="button" id="reset2" class="btn btn-primary" style="background-color:rgba(255, 0, 0, 0.442) ;">清除</button>
+  </div>
+
+
+
+
+<div class="select_skill  wow fadeIn" data-wow-delay="0s" data-wow-duration="2s">
+    {% for sele_skill,yes_no in dict_skill.items %}
+        {% if yes_no == 'yes'%}
+            <p class="yes_skill" onclick="skill_click(this)" >{{sele_skill}}</p>
+        {% else %}
+            <p class="no_skill" onclick="skill_click(this)">{{sele_skill}}</p>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<input hidden disabled id="company_name_input" name="company_name" value="">
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link noactive2" aria-current="page" id="job_submit">找工作</a>
+      </li>
+      <li class="nav-ite">
+          <a class="nav-link noactive3" id="company_submit" >找公司</a>
+      </li>
+      <li class="nav-ite select-trend">
+          <a class="nav-link noactive" id="trend_submit">統計趨勢</a>
+      </li>
+      <li class="nav-ite">
+        <a class="nav-link active" id="popular_job" >推薦工作</a>
+    </li>
+    <div class="dropdown text-ri">
+        <button class="btn btn-secondary dropdown-toggle" id="special_search"  type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            特殊篩選
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="width:20px !important;">
+            <li><a id="select_date" class="dropdown-item"  style="width:160px !important;">排序篩選</a></li>
+        </ul>
+    </div>
+</ul>
+
+
+<div id="select_box3">
+    <p style="font-size: 20px;text-align: center;padding-top: 10px;padding-bottom: 10px;">地區選單
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" id="out_select_local" class="bi bi-x-lg" viewBox="0 0 16 16">
+        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+    </svg>
+  </p>
+  <div id="lo_screen"><strong>以選地區</strong><span id="local_champ" onclick="open_local_title()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+  </svg></span>
+    <span id="local_area"></span><span id="local_open" onclick="close_local_title()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+        <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+      </svg>
+    </span>
+  </div>
+    <div style="height: 300px; overflow-y:scroll; margin-top: 20px;" id="total_counny">
+      <p class="tw_county">北部<br>
+        <span class="inner_county" id="Taipei">台北市</span>
+        <span class="inner_county"  id="NewTaipeiCity">新北市</span>
+        <span class="inner_county" id="Keelung">基隆市</span>
+        <span class="inner_county" id="Taoyuan">桃園市</span>
+        <span class="inner_county" id="Hsinchui">新竹市</span>
+        <span class="inner_county" id="Hsinchuc">新竹縣</span>
+        <span class="inner_county" id="Miaoli">苗栗縣</span>
+      </p>
+      <p class="tw_county">中部<br>
+        <span class="inner_county" id="Taichung">台中市</span>
+        <span class="inner_county" id="Nantou">南投縣</span>
+        <span class="inner_county" id="Changhua">彰化縣</span>
+        <span class="inner_county" id="Yunlin">雲林縣</span>
+      </p>
+      <p class="tw_county">南部<br>
+        <span class="inner_county" id="Chiayic">嘉義市</span>
+        <span class="inner_county" id="Chiayii">嘉義縣</span>
+        <span class="inner_county" id="Tainan">台南市</span>
+        <span class="inner_county" id="Kaohsiung">高雄市</span>
+        <span class="inner_county" id="Pingtung">屏東縣</span>
+      </p>
+      <p class="tw_county">東部<br>
+        <span class="inner_county" id="Yilan">宜蘭縣</span>
+        <span class="inner_county" id="Hualien">花蓮縣</span>
+        <span class="inner_county" id="Taitung">台東縣</span>
+      </p>
+      <p class="tw_county">離島<br>
+        <span class="inner_county" id="Penghu">澎湖縣</span>
+        <span class="inner_county" id="golden">金門縣</span>
+        <span class="inner_county" id="Lianjiang">連江縣</span>
+      </p>
+    </div>
+    {% for i in local %}
+    <div id="inner_{{i.id}}" style="height: 300px; overflow-y:scroll; margin-top: 20px;margin-bottom: 20px;display: none;">
+      <span class="inner_county_local">
+        <input type="checkbox"  onclick="add_local_total(this)"  id="total_{{i.id}}" value="{{i.name}}" class="total_{{i.id}}">
+        <label for="total_{{i.id}}">{{i.name}}</label><br>
+      </span><br>
+        {% for z in i.data %}
+        <span class="inner_county_local">
+          <input type="checkbox" id="{{i.id}}{{ forloop.counter }}" value="{{z}}" class="input_{{i.id}}">
+          <label for="{{i.id}}{{ forloop.counter }}">{{z}}</label>
+        </span>
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+
+      <div style="text-align: center;">
+        <button type="button" class="btn btn-outline-primary" id="last_page">上一層</button>
+        <button type="button" class="btn btn-outline-danger" id="remove_local">清除</button>
+        <button type="button" class="btn btn-outline-info" id="ok_local">確認</button>
+        <button type="button" class="btn btn-outline-info" id="ok_local_inner">確認</button>
+      </div>
+  </div>
+
+    {% if total_job|length != 0 %}
+
+        <div class="div_total">
+        {% for i,z in total_job %}
+            <div class="inner_box">
+                <div style="display: flex;position: relative;">
+                    <p id="inner_title" style="margin-right: 50px;"><a target="_blank" href="{{i.href}}">{{i.title |safe }}</a></p>
+                    <div style="position:absolute;right: 10px;color: aliceblue;top: 6px;">
+                        {% if z.recommend == "yes" %}
+                        <svg  id="{{i.jobid}}" onclick="user_good('{{i.jobid}}','{{z.count}}')" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-hand-thumbs-up-fill user-nogood " viewBox="0 0 16 16">
+                            <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+                        </svg>
+                        {% else %}
+                        <svg  id="{{i.jobid}}"  onclick="user_good('{{i.jobid}}','{{z.count}}')" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-hand-thumbs-up-fill user-good" viewBox="0 0 16 16">
+                            <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+                        </svg>
+                        {% endif %}
+                        <span style="right: 12px;color: rgb(39, 82, 138);">{{z.count}}</span>
+                    </div>
+                </div>
+                    <p style="color:rgba(88, 86, 86, 0.726);font-size: 18px;"><strong>{{i.company}}</strong></p>
+                    <p style="color:rgba(51, 51, 51, 0.726);margin-bottom: 20px;"><strong>{{i.local}}</strong></p>
+                    <div class="job_skill"  >
+                        <div style="position: absolute;right:20px;display: inline-block;;">
+                        {% load new_tage %}
+                        {% for getskill in i.skill|split:"、" %}
+                            {% if getskill|lower in get_skill|lower|split:"、" %}
+                                <span style="color:green;"  class="skillgreen">{{getskill}}  &nbsp</span>
+                            {% elif getskill != "無" and getskill != "不拘" %}
+                                <span style="color:red;"  onclick="addinput(this)" id="{{getskill}}" class="skillred">{{getskill}}  &nbsp</span>
+                            {% else %}
+                                <span class="skillno" >不好意思，該工作並沒有提供所需技能</span>
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                    </div>
+                    <div style="visibility: hidden;">z</div>
+            </div>
+        {% endfor %}
+    </div>
+    <div style="margin: 20px;">
+        <span class="pagediv font-bold">
+            {% if page != 1 %}
+            <button type="submit"  style="border:none; background-color:rgba(220,38,38,0);" value="{{page}} last" name="page" onclick="page(2)">上一頁
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+                </svg>
+            </button>
+            {% endif %}
+            <select style="width:auto;margin-bottom: 30px;" name="select"  onchange="submit()" >
+                {% load new_tage %}
+                {% for i in maxpage|range %}
+                    {% if i != page %}
+                        <option class="text-al" value="{{i}} no">第 {{i}} / {{maxpage}}頁</option>
+                    {% else %}
+                        <option selected class="text-al" value="{{i}} no">第 {{page}} / {{maxpage}}頁</option>
+                    {% endif %}
+                {% endfor %}
+                {% if page == maxpage %}
+                    <option class="text-al" selected value="{{maxpage}} no">第 {{maxpage}} / {{maxpage}}頁</option>
+                {% else %}
+                <option class="text-al" value="{{maxpage}} no">第 {{maxpage}} / {{maxpage}}頁</option>
+                {% endif %}
+                </select>
+            {% if page != maxpage %}
+                <button class=""type="submit" style="border:none; background-color:rgba(220,38,38,0);" value="{{page}} next" name="page"  onclick="page(3)">下一頁
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+                </svg></button>
+            {% endif %}
+        </span>
+    </div>
+    {% else %}
+    <div class="div_total_none wow fadeIn" data-wow-delay="0s" data-wow-duration="2s">
+        <input hidden name="select"  value="1 no">
+        <p><img src="../../static/images/sorry.png" width="100px" height="100px"><p style="font-size: 20px;color: #1c5a89;font-weight: bold;margin-top: 10px;">此條件目前尚無資料，建議您試試其它相關條件</p></p>
+        </div>
+    {% endif %}
+
+
+</form>
+<form id="job_send" method="GET" action="/myApp/search_job_skill/" >
+    <input hidden name="get_local" value="">
+    <input hidden name="get_skill" value="">
+    <input hidden name="job" value="">
+    <input hidden name="page" value="1 no">
+    <input hidden name="extends_local" value="">
+    <input hidden name="extends_type" value="">
+</form>
+<form id="trend_send" method="GET" action="{% url 'trend' %}" >
+    <input hidden name="get_local" value="">
+    <input hidden name="trend_function">
+    <input hidden name="get_skill" value="">
+    <input hidden name="job" value="">
+    <input hidden name="extends_local" value="">
+    <input hidden name="extends_type" value="">
+</form>
+<form id="company_send" method="GET" action="{% url 'company' %}" >
+    <input hidden name="get_local" value="">
+    <input hidden name="trend_function">
+    <input hidden name="get_skill" value="">
+    <input hidden name="job" value="">
+    <input hidden name="page" value="1 no">
+    <input hidden name="extends_local" value="">
+    <input hidden name="extends_type" value="">
+</form>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
+
+
+
+<script>
+    document.getElementById("count").value = "{{count}}"
+    document.getElementById("fraction").value = "{{fraction}}"
+    document.getElementById("recommend").value = "{{recommend}}"
+</script>
+
+<script>
+//jquery 實現django { CSRF }
+jQuery(document).ajaxSend(function(event, xhr, settings) {
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    function sameOrigin(url) {
+        // url could be relative or scheme relative or absolute
+        var host = document.location.host; // host + port
+        var protocol = document.location.protocol;
+        var sr_origin = '//' + host;
+        var origin = protocol + sr_origin;
+        // Allow absolute or scheme relative URLs to same origin
+        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+            // or any other URL that isn't scheme relative or absolute i.e relative.
+            !(/^(\/\/|http:|https:).*/.test(url));
+    }
+    function safeMethod(method) {
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    }
+});
+
+    window.onload = function(){
+        document.getElementById('job_submit').addEventListener('click',function(){
+            let send_comp= document.getElementById('job_send');
+            let send_job= document.getElementById('popular_job_form');
+            send_comp.get_local.value = send_job.get_local.value;
+            send_comp.get_skill.value = send_job.get_skill.value;
+            send_comp.job.value = send_job.job.value;
+            send_comp.extends_type.value = send_job.extends_type.value;
+            send_comp.extends_local.value = send_job.extends_local.value;
+            send_comp.submit();
+        })
+        document.getElementById('trend_submit').addEventListener('click',function(){
+            let send= document.getElementById('trend_send');
+            let send_job= document.getElementById('popular_job_form');
+            send.get_local.value = send_job.get_local.value;
+            send.get_skill.value = send_job.get_skill.value;
+            send.trend_function.value = 'job_count_trend';
+            send.extends_type.value= send_job.extends_type.value;
+            send.extends_local.value= send_job.extends_local.value;
+            send.job.value = send_job.job.value;
+            send.submit();
+        })
+        document.getElementById('company_submit').addEventListener('click',function(){
+            let send_comp= document.getElementById('company_send');
+            let send_job= document.getElementById('popular_job_form');
+            send_comp.get_local.value = send_job.get_local.value;
+            send_comp.extends_type.value= send_job.extends_type.value;
+            send_comp.extends_local.value= send_job.extends_local.value;
+            send_comp.get_skill.value = send_job.get_skill.value;
+            send_comp.job.value = send_job.job.value;
+            send_comp.submit()
+        })
+    }
+    function addinput(event){
+        skill_input = document.getElementById('skill1')
+        if(!skill_input.value.toLowerCase().replace(',','、').split('、').includes(event.id.toLowerCase())){
+            if(skill_input.value.replace(" ","") ==''){
+                skill_input.value +=event.id
+            }else{
+                skill_input.value +='、'+event.id
+            }
+        }
+        
+    }
+    function user_good(jobid,count){
+        data_like = {
+            'jobid':jobid,
+        }
+        if("{{user_name}}" !=""){
+            $.ajax({
+                    url:'{% url "popular_job_add" %}',
+                    type:'POST',
+                    data:data_like,
+                    dataType:'json',
+
+                    success:function(mesg){
+                        if(mesg.status == "no-login"){
+                            swal({
+                            title: "請登入",
+                            text: mesg.message,
+                            icon: "info",
+                            button: "好的",
+                            })
+                        }else if(mesg.status == true){
+                        nogood= document.getElementById(jobid).classList.toggle('user-nogood');
+                        document.getElementById(jobid).classList.toggle('user-good');
+                        if(nogood){
+                        $("#"+jobid).next().html(parseInt($("#"+jobid).next().html())+1)
+                        }else{
+                        $("#"+jobid).next().html(parseInt($("#"+jobid).next().html())-1)
+                        }
+                        if($("#"+jobid).next().html()=='0')
+                            $("#"+jobid).parent().parent().parent().fadeOut("slow")
+                        }
+                    },
+                    error:function(mesg){
+                        console.log(mesg)
+                    }
+
+            })
+        }else{
+            swal({
+            title: "請登入",
+            text: "請您先登入才可以推薦工作",
+            icon: "info",
+            button: "好的",
+            })
+        }
+    }
+    document.getElementById('reset2').addEventListener('click',function(){
+        document.getElementById("count").value = "1"
+        document.getElementById("fraction").value = "3"
+        document.getElementById("recommend").value = "2"
+        })
+    document.getElementById('story2').addEventListener('click',function(){
+            document.getElementById('popular_job_form').submit()
+    })
+    document.getElementById('select_date').addEventListener('click',select)
+    function select(){
+    let cover = document.getElementsByClassName('cover')[0]
+        let select_box = document.getElementById('select_box2')
+        cover.style.visibility='visible';
+        cover.style.opacity='0.35';
+        select_box.style.visibility='visible';
+        select_box.style.opacity = '1';
+        let out_select = document.getElementById('out_select2')
+        out_select.addEventListener('click',function(){
+            cover.style.visibility='hidden';
+            cover.style.opacity='0';
+            select_box.style.visibility='hidden';
+            select_box.style.opacity = '0';
+        })
+        }
+</script>
+
+
+
+{% for i in local %}
+<script>
+      var oox = new Set()
+    $("#{{i.id}}").click(function(){
+      $("#total_counny").hide()
+      $("#inner_{{i.id}}").show()
+      local_close()
+      oox.add("{{i.id}}")
+      local_type = "inner_{{i.id}}";
+      if(document.getElementById("lo_screen").clientHeight>108){ document.getElementById("lo_screen").style.height = "103px" 
+        document.getElementById("local_champ").style.display = "inline-block"; 
+       document.getElementById('local_open').style.display = "none";
+      }
+    })
+</script>
+{% endfor %}
+
+<script>
+        var remove_local = []
+    $('#out_select_local').click(function(){
+        $('.cover:first').css({
+        visibility: 'hidden',
+        opacity: '0'
+    });
+
+    $('#select_box3').css({
+        visibility: 'hidden',
+        opacity: '0'
+    });
+
+    if ($('#lo_screen').height() > 108) {
+        $('#lo_screen').height('80px');
+        $('#local_champ').css('display', 'inline-block');
+        $('#local_open').css('display', 'none');
+    }
+
+      $("#total_counny").show()
+      if(local_type !=""){
+        $("#"+ local_type).hide();
+    }
+      $("#last_page").hide()
+      $("#ok_local").show()
+      $("#ok_local_inner").hide()
+        })
+    var local_type =""
+    var total_local = {}
+    var ppa = {}
+    var extend_local =   new Set();
+    $("#ok_local").click(function(){
+      let change_count = document.getElementsByClassName("local_inner_span").length
+      if(change_count != 0){
+        document.getElementById("skill2").innerHTML ="篩選地點"+" ("+document.getElementsByClassName("local_inner_span").length+")";
+        document.getElementById("skill2").style.backgroundColor = "rgb(188, 230, 207)"
+      }else{
+        document.getElementById("skill2").innerHTML = "篩選地點";
+        document.getElementById("skill2").style.backgroundColor = "rgb(75, 64, 49,0.2)"
+      }
+      document.getElementsByName("extends_local")[0].value = Array.from(extend_local);
+      document.getElementsByName("extends_type")[0].value = Array.from(oox);
+    })
+    
+
+
+    document.getElementById('get_local_submit').value =  '{{get_local | safe}}'
+    let array_list = "{{extends_local}}"
+    if(array_list != ""){
+        array_list = array_list.split(",")
+        for(let i=0;i<array_list.length;i++){
+            if(array_list[i].includes('total')){
+                let true_local = document.getElementsByClassName("input"+array_list[i].replace("total",""))
+                for(let i=0;i<true_local.length;i++){
+                    true_local[i].disabled = true
+                }
+            }
+            document.getElementById(array_list[i]).checked = true;
+        }
+        
+        let change_count = array_list.length
+        if(change_count != 0){
+            document.getElementById("skill2").innerHTML ="篩選地點"+" ("+array_list.length+")";
+            document.getElementById("skill2").style.backgroundColor = "rgb(188, 230, 207)"
+        }else{
+            document.getElementById("skill2").innerHTML = "篩選地點";
+            document.getElementById("skill2").style.backgroundColor = "rgb(75, 64, 49,0.2)"
+        }
+        let extends_type = "{{extends_type |safe }}".split(",")
+        for(let i=0;i<extends_type.length;i++){
+            oox.add(extends_type[i])
+            local_type = "inner_"+extends_type[i];
+            ok_local_function()
+        }
+    }
+
+    var ppa = []
+    $("#remove_local").click(function(){
+
+        ok_lo_funct()
+        $(".local_inner_span").hide()
+
+        let inner_county = document.getElementsByClassName("inner_county")
+        for(let i=0;i<inner_county.length;i++){
+          if(inner_county[i].style.background =="rgb(168, 205, 233)"){
+            inner_county[i].style.background = "rgb(255,255,255)"
+            ppa.push({"i":i,"inner":inner_county[i].innerHTML})
+            inner_county[i].innerHTML = inner_county[i].innerHTML.split(" ")[0]
+          }
+        }
+        document.getElementById("remove_local").style.display = "none";
+        document.getElementById("local_open").style.display = "none";
+        document.getElementById("local_champ").style.display = "none";
+        document.getElementById('lo_screen').style.height = "auto"
+        document.getElementById("lo_screen").style.height = "auto" 
+        document.getElementById("local_champ").style.display = "none"; 
+       document.getElementById('local_open').style.display = "none";
+      })
+
+
+
+      function ok_lo_funct(){
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+          // 将所有 checkbox 的选中状态重置为未选中状态
+          checkboxes.forEach((checkbox) => {
+            checkbox.disabled = false;
+            checkbox.checked = false;
+          });
+        $(".local_inner_span").remove()
+        document.getElementsByName("extends_local")[0].value = "";
+        document.getElementsByName("extends_type")[0].value = "";
+        total_local = {}
+        extend_local = new Set();
+        oox = new Set();
+        change_count = document.getElementsByClassName("local_inner_span").length
+        if(change_count != 0){
+            document.getElementById("skill2").innerHTML ="篩選地點"+" ("+document.getElementsByClassName("local_inner_span").length+")";
+            document.getElementById("skill2").style.backgroundColor = "rgb(188, 230, 207)"
+        }else{
+            document.getElementById("skill2").innerHTML = "篩選地點";
+            document.getElementById("skill2").style.backgroundColor = "rgb(75, 64, 49,0.2)"
+        }
+        document.getElementById('get_local_submit').value = '';
+      }
+
+      function none_out_select_local(){
+        $(".local_inner_span").show()
+        let inner_county = document.getElementsByClassName("inner_county")
+        for(let i=0;i<ppa.length;i++){
+            inner_county[ppa[i]["i"]].innerHTML = ppa[i]["inner"]
+            inner_county[ppa[i]["i"]].style.background ="rgb(168, 205, 233)";
+        }
+        ppa = []
+        if(document.getElementById("lo_screen").clientHeight>108){ document.getElementById("lo_screen").style.height = "103px" 
+        document.getElementById("local_champ").style.display = "inline-block"; 
+       document.getElementById('local_open').style.display = "none";
+      }
+      }
+
+
+
+
+    $('#skill2').click(function(){
+      let cover = document.getElementsByClassName('cover')[0] 
+      let select_box = document.getElementById('select_box3')
+        cover.style.visibility='visible';
+        cover.style.opacity='0.55';
+        select_box.style.visibility='visible';
+        select_box.style.opacity = '1';
+        document.getElementById("ok_local_inner").style.display = "none";
+        if(document.getElementsByClassName("local_inner_span").length != 0 &&document.getElementById("remove_local").style.display != "inline-block")
+        {
+          let remove_local = document.getElementById("remove_local")
+          remove_local.style.display = "inline-block"
+          remove_local.innerHTML = "清除("+document.getElementsByClassName("local_inner_span").length +")"
+        }else if(document.getElementsByClassName("local_inner_span").length == 0){
+          document.getElementById("remove_local").style.display = "none"
+        }
+        else{
+          remove_local.innerHTML = "清除("+document.getElementsByClassName("local_inner_span").length +")"
+        }
+    })
+    
+    $("#last_page").click(function(){
+      $("#total_counny").show()
+      $("#"+local_type).hide()
+      $("#last_page").hide()
+      $("#ok_local").show()
+      $("#ok_local_inner").hide()
+      if(document.getElementsByClassName("local_inner_span").length != 0 &&document.getElementById("remove_local").style.display != "inline-block")
+        {
+          let remove_local = document.getElementById("remove_local")
+          remove_local.style.display = "inline-block"
+          remove_local.innerHTML = "清除("+document.getElementsByClassName("local_inner_span").length +")"
+        }else if(document.getElementsByClassName("local_inner_span").length == 0){
+          document.getElementById("remove_local").style.display = "none"
+        }
+        else{
+          remove_local.innerHTML = "清除("+document.getElementsByClassName("local_inner_span").length +")"
+        }
+        if(document.getElementById("lo_screen").clientHeight>108){
+        document.getElementById("lo_screen").style.height = "103px"
+       document.getElementById("local_champ").style.display = "inline-block";
+       document.getElementById('local_open').style.display = "none";
+      }
+    })
+    $("#ok_local_inner").click(ok_local_function)
+
+    function ok_local_function(){
+        $("#total_counny").show()
+        $("#"+local_type).hide()
+        $("#last_page").hide()
+        $("#ok_local").show()
+        $("#ok_local_inner").hide()
+        let zz = document.getElementsByClassName(local_type.replace("inner","input"));
+        let name = document.getElementById(local_type.replace("inner_","")).innerHTML.split(' ')[0];
+        
+        let add_local = []
+        let total_checkbox= document.getElementById(local_type.replace("inner","total"));
+        if( !total_checkbox.checked){
+            for(let i=0;i<zz.length;i++){
+                if(zz[i].checked){
+                    if(name in total_local){
+                    if(!total_local[name].includes(zz[i].value))
+                        total_local[name].push(zz[i].value)
+                    }else{
+                    total_local[name] =[zz[i].value]
+                    }
+                    add_local.push(zz[i].id)
+                    extend_local.add(zz[i].id)
+                }else{
+                    if(total_local[name] != null){
+                    const index = total_local[name].indexOf(zz[i].value);
+                        if (index > -1) { // only splice array when item is found
+                            total_local[name].splice(index, 1); // 2nd parameter means remove one item only
+                            remove_local.push("_"+zz[i].id)
+                            extend_local.delete(zz[i].id);
+                        }
+                    }
+                }
+            }
+            if(total_local[name] != null){
+            const index = total_local[name].indexOf(total_checkbox.value);
+                if (index > -1) { // only splice array when item is found
+                    total_local[name].splice(index, 1); // 2nd parameter means remove one item only
+                    remove_local.push("_"+total_checkbox.id)
+                    extend_local.delete(total_checkbox.className);
+                }
+            }
+        }else{
+            if(name in total_local){
+                if(!total_local[name].includes(total_checkbox.value))
+                    total_local[name].push(total_checkbox.value)
+            }else{
+                total_local[name] =[total_checkbox.value]
+            }
+            add_local.push(total_checkbox.id)
+            extend_local.add(total_checkbox.id)
+            for(let i=0;i<zz.length;i++){
+            if(zz[i].checked){
+                if(name in total_local){
+                if(!total_local[name].includes(zz[i].value))
+                    total_local[name].push(zz[i].value)
+                }else{
+                total_local[name] =[zz[i].value]
+                }
+                add_local.push(zz[i].id)
+                extend_local.add(zz[i].id)
+            }else{
+                if(total_local[name] != null){
+                const index = total_local[name].indexOf(zz[i].value);
+                if (index > -1) { // only splice array when item is found
+                    total_local[name].splice(index, 1); // 2nd parameter means remove one item only
+                    remove_local.push("_"+zz[i].id)
+                    extend_local.delete(zz[i].id);
+                }
+                }
+            }
+            }
+            }
+            if(name in total_local){
+            let type_first = document.getElementById(local_type.replace("inner_",""))
+            if(type_first.style.background !="rgb(168, 205, 233)"){
+                type_first.style.background = "rgb(168, 205, 233)";
+            }
+            if( !total_checkbox.checked){
+            if(total_local[name].length !=0 ){
+                type_first.innerHTML = document.getElementById(local_type.replace("inner_","")).innerHTML.split(' ')[0] +"  "+ total_local[name].length;
+            }else if(total_local[name].length ==0){
+                type_first.style.background = "rgb(255, 255, 255)"
+                type_first.innerHTML = document.getElementById(local_type.replace("inner_","")).innerHTML.split(' ')[0];
+            }
+            for(let i=0;i<total_local[name].length;i++){
+            if(document.getElementById("_"+add_local[i]) == null){
+                let span = document.createElement('span');
+                span.textContent = name +" "+ total_local[name][i];
+                span.style.backgroundColor = "rgb(169,197,231,0.5)";
+                span.style.padding = "5px";
+                span.style.marginLeft = "10px";
+                span.style.borderRadius = "10px";
+                span.style.display = "inline-block";
+                span.style.marginTop = "5px";
+                span.style.marginBottom = "5px";
+                span.classList.add("local_inner_span")
+                span.id = "_"+add_local[i]
+                document.getElementById('local_area').appendChild(span);
+            }
+            }
+            }else{
+                if(total_local[name].length !=0 ){
+                    type_first.innerHTML = document.getElementById(local_type.replace("inner_","")).innerHTML.split(' ')[0] +"  "+zz.length;
+                }else if(total_local[name].length ==0){
+                    type_first.style.background = "rgb(255, 255, 255)"
+                    type_first.innerHTML = document.getElementById(local_type.replace("inner_","")).innerHTML.split(' ')[0];
+                }
+                if(document.getElementById("_"+total_checkbox.id) == null){
+                    let span = document.createElement('span');
+                    span.textContent = name;
+                    span.style.backgroundColor = "rgb(169,197,231,0.5)";
+                    span.style.padding = "5px";
+                    span.style.marginLeft = "10px";
+                    span.style.borderRadius = "10px";
+                    span.style.display = "inline-block";
+                    span.style.marginTop = "5px";
+                    span.style.marginBottom = "5px";
+                    span.classList.add("local_inner_span")
+                    span.id = "_"+total_checkbox.id
+                    document.getElementById('local_area').appendChild(span);
+                }
+            }
+            for(let i=0;i<remove_local.length;i++){
+                document.getElementById(remove_local[i]).remove();
+            }
+            if(document.getElementsByClassName("local_inner_span").length != 0)
+            {
+                let remove_local = document.getElementById("remove_local")
+                remove_local.style.display = "inline-block"
+                remove_local.innerHTML = "清除("+document.getElementsByClassName("local_inner_span").length +")"
+            }else if(document.getElementsByClassName("local_inner_span").length == 0){
+                document.getElementById("remove_local").style.display = "none"
+            }
+            }
+            // $('#out_select_local').click(change_select_local_now)
+            if(document.getElementById("lo_screen").clientHeight>108){
+                document.getElementById("lo_screen").style.height = "103px"
+                document.getElementById("local_champ").style.display = "inline-block";
+                document.getElementById('local_open').style.display = "none";
+            }
+    }
+    // function change_select_local_now(){
+    //     for(let i=0;i<remove_local.length;i++){
+    //         $('#'+remove_local[i].replace('_','')).trigger('click');
+    //         ok_local_function()
+    //     }
+    //     ok_local_function()
+    //     remove_local = []
+    // }
+
+  function add_local_total(event){
+      let local_class = "input"+event.id.replace("total","") 
+      if(event.checked){  
+        let true_local = document.getElementsByClassName(local_class)
+        for(let i=0;i<true_local.length;i++){
+          true_local[i].checked = false;
+          true_local[i].disabled = true
+        }
+      }else{
+        let false_local = document.getElementsByClassName(local_class)
+        for(let i=0;i<false_local.length;i++){
+          false_local[i].disabled  = false;
+        }
+      }
+    }
+
+    function open_local_title(){
+        document.getElementById('lo_screen').style.height = "auto";
+        document.getElementById('local_open').style.display = "inline-block"
+        document.getElementById("local_champ").style.display = "none";
+      }
+
+      function close_local_title(){
+        document.getElementById('lo_screen').style.height = "103px";
+        document.getElementById('local_open').style.display = "none"
+        document.getElementById("local_champ").style.display = "inline-block";
+      }
+    $("#ok_local").click(function(){
+        document.getElementById('get_local_submit').value =  JSON.stringify(total_local);
+        let cover = document.getElementsByClassName('cover')[0] 
+      let select_box = document.getElementById('select_box3')
+        cover.style.visibility='hidden';
+        cover.style.opacity='0';
+        select_box.style.visibility='hidden';
+        select_box.style.opacity = '0';
+        if($('#lo_screen').height() > 108) {
+          $('#lo_screen').height('80px');
+          $('#local_champ').css('display', 'inline-block');
+          $('#local_open').css('display', 'none');
+      }
+
+    })
+        function local_close(){
+        document.getElementById("ok_local").style.display = "none";
+      document.getElementById("last_page").style.display = "inline-block";
+      document.getElementById("ok_local_inner").style.display = "inline-block";
+      }
+
+
+</script>
+{% endblock %}

@@ -6,12 +6,8 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.98.0">
-    <title>sing_up</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/modals/">
-
-
-
+    <title>註冊</title>
+    <link rel="shortcut icon"   href="../../static/images/logo/logo-removebg-preview.png" type="image/x-icon" />
 
 
     {% load static %}
@@ -57,7 +53,23 @@
         height: 2.75rem;
         overflow-y: hidden;
       }
-
+      .relative{
+        position:relative;
+      }
+      .lookyes,.lookyes2{
+        display: block;
+        top: 20px;
+        position:absolute;
+        right:15px;
+        z-index: 5;
+      }
+      .lookno,.lookno2{
+        top: 20px;
+        position:absolute;
+        right: 15px;
+        z-index: 5;
+        display: none;
+      }
       .nav-scroller .nav {
         display: flex;
         flex-wrap: nowrap;
@@ -81,7 +93,7 @@
         padding: 10px;
         background-color: rgb(238, 191, 200);
         display: none;
-
+        margin-bottom: 10px;
       }
       #id_user_name:focus{
         transition: 0.5s;
@@ -99,7 +111,7 @@
         border-radius: 50px;
         box-shadow: 10px 10px;
         background-color: rgb(255, 254, 253);
-        width: 110%;
+        width: 130%;
         height: 115%;
         top:-10%;
         left: -5%;
@@ -121,22 +133,23 @@
         margin-left:27%;
       }
 
+
     </style>
 
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this template
     {% load static %}
-    <link href="{% static 'modals.css' %}" rel="stylesheet">
+    <link href="{% static 'modals.css' %}" rel="stylesheet"> -->
   </head>
   <body>
 <!----position-static:static py-5:1--->
-<div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin">
+<div class="modal modal-signin position-static d-block bg-secondary py-5" style="background-color: rgb(133, 138, 138) !important" tabindex="-1" role="dialog" id="modalSignin">
   <div class="modal-dialog" role="document">
     <div class="modal-content rounded-4 shadow">
       <div class="modal-header p-5 pb-4 border-bottom-0">
         <!-- <h5 class="modal-title">Modal title</h5> -->
-        <h2 class="fw-bold mb-0">Sign up</h2>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h2 class="fw-bold mb-0">註冊</h2>
+        <a href="{% url 'sing_in' %}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
       </div>
       <div class="long_in" id="long_in">
         {% load static %}
@@ -156,22 +169,50 @@
             </svg>
             {{message}}
           </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control rounded-3" id="id_user_name" value=""  name="user_name"autofocus >
+          <div class="form-floating mb-3" >
+            <input type="email" class="form-control rounded-3" id="id_email" value="{{email}}"  name="email" required/>
+            <label for="id_email">Email</label>
+          </div>
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control rounded-3" id="id_user_name" value="{{user_name}}"  name="user_name" autofocus autocomplete="off"  required/>
             <label for="id_user_name">帳號</label>
           </div>
-          <div class="form-floating mb-3">
-            <input type="password" class="form-control rounded-3" id="id_user_password"  name="user_password"  value="">
+          <div class="form-floating mb-3 relative">
+            <input type="password" class="form-control rounded-3" id="id_user_password"  name="user_password"  value="{{pass_word}}" autocomplete="off"  required/>
             <label for="id_user_password">密碼</label>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye lookyes" viewBox="0 0 16 16">
+              <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+              <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash lookno" viewBox="0 0 16 16">
+              <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+              <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+              <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+            </svg>
           </div>
-          <input type="radio" name="lookpass" id="lookpass" onclick="getpass()">
-          <label for="lookpass" onclick="getpass()">密碼可見</label>
+          <div class="form-floating mb-3 relative">
+            <input type="password" class="form-control rounded-3" id="id_user_password2"  name="user_password2"  value="{{password2}}"  required/>
+            <label for="id_user_password">確認密碼</label>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye lookyes2" viewBox="0 0 16 16">
+              <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+              <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash lookno2" viewBox="0 0 16 16">
+              <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+              <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+              <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+            </svg>
+          </div>
+          <div class="progress ml-1">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%"></div>
+          </div>
           <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" style="background-color: rgb(64, 77, 101); margin-top: 10px;"type="submit">註冊</button>
         </form>
         <form hidden action="/member/long-in/"id="sing-in"  method="POST">
           {% csrf_token %}
           <input hidden  type="text" class="form-control rounded-3" id="user_name" value="{{usernapo.user_name}}" name='user_name' placeholder="username" >
           <input hidden type="password" class="form-control rounded-3" id="user_password" name='user_password' placeholder="Password" value="{{usernapo.user_password}}">
+          <input hidden name="first" value="1">
         </form>
       </div>
       </div>
@@ -183,7 +224,11 @@
   {% if message %}
     {% if message == "註冊成功!" %}
       <script>
-          x = document.getElementById('long_in').style.display="block";
+          document.getElementById('long_in').style.display="block";
+          document.getElementsByClassName('lookyes')[0].style.display = 'none';
+              document.getElementsByClassName('lookno')[0].style.display = 'none';
+              document.getElementsByClassName('lookyes2')[0].style.display = 'none';
+              document.getElementsByClassName('lookno2')[0].style.display = 'none';
           let time = 3;
           for(var c =1;c<=3;c++){
             setTimeout(function(){
@@ -196,6 +241,43 @@
             },1000*c);
           }
       </script>
+    {% elif message == "兩次輸入的密碼不同!" %}
+    <script>
+      x = document.getElementById('mistake')
+      x.style.display="block";
+      document.getElementById('id_user_name').style.marginTop="15px";
+      document.getElementById('id_user_password').style.outline ="3px solid rgb(255,0,0,0.5)";
+      document.getElementById('id_user_password2').style.outline ="3px solid rgb(255,0,0,0.5)";
+    </script>
+    {% elif message == "用戶名只能出現大小寫英文和數字!" or  message == '用戶名重複!' %}
+    <script>
+      x = document.getElementById('mistake')
+      x.style.display="block";
+      document.getElementById('id_user_name').style.marginTop="15px";
+      document.getElementById('id_user_name').style.outline ="3px solid rgb(255,0,0,0.5)";
+    </script>
+    {% elif message == "密碼只能出現大小寫英文和數字!" %}
+        <script>
+          x = document.getElementById('mistake')
+          x.style.display="block";
+          document.getElementById('id_user_name').style.marginTop="15px";
+          document.getElementById('id_user_password').style.outline ="3px solid rgb(255,0,0,0.5)";
+        </script>
+    {% elif message == "帳號密碼為6~16位數!" %}
+      <script>
+        x = document.getElementById('mistake')
+        x.style.display="block";
+        document.getElementById('id_user_name').style.marginTop="15px";
+        document.getElementById('id_user_name').style.outline ="3px solid rgb(255,0,0,0.5)"
+        document.getElementById('id_user_password').style.outline ="3px solid rgb(255,0,0,0.5)";
+      </script>
+    {% elif message == "email以被註冊!" or message == 'email不可用' or message == 'email格式錯誤' %}
+      <script>
+        x = document.getElementById('mistake')
+        x.style.display="block";
+        document.getElementById('id_user_name').style.marginTop="15px";
+        document.getElementById('id_email').style.outline ="3px solid rgb(255,0,0,0.5)"
+      </script>
     {% else %}
       <script>
         x = document.getElementById('mistake')
@@ -205,15 +287,42 @@
     {% endif %}
   {% endif %}
     <script>
-      function getpass(){
-        type =document.getElementById('id_user_password')
-        if(type.type=='text'){
-          type.type='password';
-          document.getElementById('lookpass').checked  = false;
-        }else{
-          type.type='text';
+      window.onload = function(){
+        document.getElementsByClassName('lookyes')[0].addEventListener('click',look1)
+        document.getElementsByClassName('lookno')[0].addEventListener('click',look1)
+        document.getElementsByClassName('lookyes2')[0].addEventListener('click',look2)
+        document.getElementsByClassName('lookno2')[0].addEventListener('click',look2)
         }
-      }
+          function look1(){
+            let lookyes =document.getElementsByClassName('lookyes')[0]
+          let lookno = document.getElementsByClassName('lookno')[0]
+            if(getComputedStyle(lookyes,'display').display=='block'){
+              lookyes.style.display = 'none';
+              lookno.style.display = 'block';
+              type =document.getElementById('id_user_password');
+              type.type='text';
+            }else{
+              lookyes.style.display = 'block';
+              lookno.style.display = 'none';
+              type =document.getElementById('id_user_password');
+              type.type='password';
+            }
+          }
+          function look2(){
+            let lookyes =document.getElementsByClassName('lookyes2')[0]
+          let lookno = document.getElementsByClassName('lookno2')[0]
+            if(getComputedStyle(lookyes,'display').display=='block'){
+              lookyes.style.display = 'none';
+              lookno.style.display = 'block';
+              type =document.getElementById('id_user_password2');
+              type.type='text';
+            }else{
+              lookyes.style.display = 'block';
+              lookno.style.display = 'none';
+              type =document.getElementById('id_user_password2');
+              type.type='password';
+            }
+          }
 
     </script>
   </body>

@@ -1,0 +1,590 @@
+<style>
+
+    @media screen and(max-width:600px) {
+        div.main div #recommend_skill{
+            width: 80% !important;
+        }
+
+    }
+    #recommend_local{
+        width: 90px;
+        height: 30px;
+        border-radius: 10px;
+        margin-top: 20px;
+        margin-left: 5px;
+    }
+     #recommend_cer{
+        width: 60%;
+        height: 40px;
+        border-radius: 10px;
+        margin-top: 15px;
+        margin-left: 30px;
+    }
+    #Experience_number{
+        height: 30px;
+        width: 50px;
+        border-radius: 100px;
+        transition: 1s;
+    }
+</style>
+{% extends 'member/member_server.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/hint.css' %}" type="text/css">
+<div id="content1" >
+    <div class="title_0">
+        <a class="amember"><div class="Table_of_contents" id="control_center">管理 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </div></a>
+        <a class="amember2"  href="{% url 'control_center' %}"><div class="control">管理中心</div></a>
+        <a class="amember2"  href="{% url 'recommend_log' %}"><div class="control">推送紀錄</div></a>
+        <a class="amember2"  href="{% url 'notice' %}"><div class="control" >通知中心</div></a>
+    </div>
+    <div class="title_1">
+        <a class="amember"><div class="Table_of_contents" id="love" >收藏
+             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </div></a>
+        <a class="amember2"  href="{% url 'user' %}"><div class="Table_of_content" >全部</div></a>
+        <a class="amember2" href="{% url 'like_like' %}"><div class="Table_of_content" >我的最愛</div></a>
+        <a class="amember2" href="{% url 'like_recommend' %}"><div class="Table_of_content" >推薦</div></a>
+
+    </div>
+    <div class="title_2">
+            <a class="amember" ><div class="Table_of_contents super_function active2" id="super_function">功能 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg></div></a>
+            <a class="amember2"  href="{% url 'user_recommend' %}"><div class="function active2" >推薦功能</div></a>
+    </div>
+    <div class="title_3">
+            <a class="amember"><div class="Table_of_contents" id="member_user">設定 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg></div></a>
+            <a class="amember2"  href="{% url 'change' %}"><div class="Table_of_content_member " >帳號安全</div></a>
+            <a class="amember2" href="{% url 'opinion' %}"><div class="Table_of_content_member " >意見箱</div></a>
+    </div>
+</div>
+<div style="width:100%">
+    <form method="post" action="{% url 'recommend_set' %}" id="recommend_set">
+    {% csrf_token %}
+    <div class="main" style="color:  rgb(88, 81, 81) !important;">
+        <div>
+            用戶名 : {{user_name}}
+        </div>
+        <div class="flex flex_warp_warp">
+            {% if open == 'true' %}
+                <label>是否啟用推薦</label>
+                <div id="openbutt" class="openbutt in-active">
+                    <input hidden  id="openrecommend" name="openrecommend" value="true">
+                    <div class="circle" onclick="toggle()"></div>
+                </div>
+            {% else %}
+                <label>是否啟用推薦</label>
+                <div id="openbutt" class="openbutt">
+                    <input hidden id="openrecommend"  name="openrecommend" value="false">
+                    <div class="circle" onclick="toggle()"></div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="flex flex_warp_warp">
+            <label  class="white-space">選擇推薦的工作類:</label>
+            <select name="recommend_job_type" id="type" style="width: 200px;" >
+                {% for i,v in dict_jobname.items %}
+                <optgroup label="{{i}}" style="padding: 20px;" >
+                    {% for z in v %}
+                        {% if z == type_skill %}
+                        <option value="{{z}}" class="opin" selected>{{z}}</option>
+                        {% else %}
+                        {{type_skill}}
+                            <option value="{{z}}" class="opin">{{z}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </optgroup>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="flex flex_warp_warp">
+            <label class="white-space">請輸入篩選的技能:</label>
+            {% if skill != None %}
+            <input type="text" name="recommend_skill" id="recommend_skill" autocomplete="off" value="{{skill}}" placeholder="請個技能請用、或,隔開每個技能">
+            {% else %}
+            <input type="text" name="recommend_skill" id="recommend_skill" autocomplete="off"  placeholder="請個技能請用、或,隔開每個技能"value="">
+            {% endif %}
+            <span class="hint--right" data-hint="請個技能請用、或,隔開每個技能，
+            如果您不確定技能可以去查詢中查看技能">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-question-circle mt-3 " viewBox="0 0 16 16" style="margin-left: 15px">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                  </svg>
+               </span>
+        </div>
+
+        <div class="flex flex flex_warp_warp">
+            <label>請勾職缺技能符合程度:</label>
+            {% if fraction == "0"  %}
+            <label for="fraction0" class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction0" value="0" checked>完全符合</label>
+            <label for="fraction3" class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction3" value="3" >符合7成</label>
+            <label for="fraction5"  class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction5" value="5">符合5成</label>
+            <label for="fraction7"  class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction7" value="7">符合3成</label>
+            <label for="fractionmax"  class="white-space left30" ><input type="radio" name="recommend_fraction" class="fraction" id="fractionmax" value="max">不限制</label>
+            {% elif fraction == "3"  %}
+            <label for="fraction0" class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction0" value="0" >完全符合</label>
+            <label for="fraction3"class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction3" value="3" checked>符合7成</label>
+            <label for="fraction5"  class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction5" value="5">符合5成</label>
+            <label for="fraction7"  class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction7" value="7">符合3成</label>
+            <label for="fractionmax"  class="white-space left30" ><input type="radio" name="recommend_fraction" class="fraction" id="fractionmax" value="max">不限制</label>
+            {% elif fraction == "5"  %}
+            <label for="fraction0" class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction0" value="0" >完全符合</label>
+            <label for="fraction3" class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction3" value="3" >符合7成</label>
+            <label for="fraction5"  class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction5" value="5"checked>符合5成</label>
+            <label for="fraction7"  class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction7" value="7">符合3成</label>
+            <label for="fractionmax"  class="white-space left30" ><input type="radio" name="recommend_fraction" class="fraction" id="fractionmax" value="max">不限制</label>
+            {% elif fraction == "7"  %}
+            <label for="fraction0" class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction0" value="0">完全符合</label>
+            <label for="fraction3" class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction3" value="3" >符合7成</label>
+            <label for="fraction5"  class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction5" value="5">符合5成</label>
+            <label for="fraction7"  class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction7" value="7"checked>符合3成</label>
+            <label for="fractionmax"  class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fractionmax" value="max">不限制</label>
+            {% elif fraction == "max"  %}
+            <label for="fraction0" class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction0" value="0" >完全符合</label>
+            <label for="fraction3" class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction3" value="3" >符合7成</label>
+            <label for="fraction5"  class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction5" value="5">符合5成</label>
+            <label for="fraction7"  class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction7" value="7">符合3成</label>
+            <label for="fractionmax"  class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fractionmax" value="max"checked>不限制</label>
+            {% else %}
+            <label for="fraction0" class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction0" value="0">完全符合</label>
+            <label for="fraction3" class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction3" value="3" >符合7成</label>
+            <label for="fraction5" class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction5" value="5">符合5成</label>
+            <label for="fraction7"  class="white-space left30"><input type="radio" name="recommend_fraction" class="fraction" id="fraction7" value="7">符合3成</label>
+            <label for="fractionmax"  class="white-space left30" ><input type="radio" name="recommend_fraction" class="fraction" id="fractionmax" value="max">不限制</label>
+            {% endif %}
+        </div>
+        <div class="flex flex_warp_warp">
+            <label class="white-space">證照篩選:</label>
+            {% if certificate_select == 'true' %}
+                <label for="certificate_select_open" class="white-space left30 "><input type="radio" name="certificate_select" class="certificate_cla" id="certificate_select_open" value="true" checked>開啟</label>
+                <label for="certificate_select_close" class="white-space left30"><input type="radio" name="certificate_select" class="certificate_cla" id="certificate_select_close" value="false">關閉</label>
+            {% else %}
+            <label for="certificate_select_open" class="white-space left30 "><input type="radio" name="certificate_select" class="certificate_cla" id="certificate_select_open" value="true" >開啟</label>
+            <label for="certificate_select_close" class="white-space left30"><input type="radio" name="certificate_select" class="certificate_cla" id="certificate_select_close" value="false" checked>關閉</label>
+            {% endif %}
+        </div>
+        <div class="flex flex_warp_warp">
+            <label class="white-space">請輸入篩選的證照:</label>
+            {% if user_certificate != None and  user_certificate != "" %}
+            <input type="text" name="user_certificate" id="recommend_cer" autocomplete="off" value="{{user_certificate}}" placeholder="請個技能請用、或,隔開每個證照">
+            {% else %}
+            <input type="text" name="user_certificate" id="recommend_cer" autocomplete="off"  placeholder="請個技能請用、或,隔開每個證照" >
+            {% endif %}
+            <span class="hint--right" data-hint="請個技能請用、或,隔開每個證照，
+            如果您不確定技能可以去查詢中查看證照">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-question-circle mt-3 " viewBox="0 0 16 16" style="margin-left: 15px">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                  </svg>
+               </span>
+        </div>
+        <div class="flex flex flex_warp_warp" >
+            請選擇篩選工作經歷:
+                <input type="radio" name="Experience" id="Experience_none" class="Experience_c" value="">
+                <label for="Experience_none">不拘</label>
+                <input type="radio" name="Experience" class="Experience_c" id="Experience_no" value="0">
+                <label for="Experience_no">無經驗</label>
+                <input type="radio" name="Experience" id="Experience_select" class="Experience_c" value="Experience_select">
+                <label style="width:200px;" for="Experience_select">幾年以下<input type="number" id="Experience_number" min="1" name="Experience_year" disabled></label>
+        </div>
+        <div class="flex flex flex_warp_warp" >
+            請選擇推薦地區:
+                <input type="radio"  class="local_recom" name="zza" value="" >
+                 <select id="recommend_local" name="recom_local"  >
+                    <optgroup label="北部">
+                        <option class="inner_county" value="台北市">台北市</option>
+                        <option class="inner_county" value="新北市">新北市</option>
+                        <option class="inner_county" value="基隆市">基隆市</option>
+                        <option class="inner_county" value="桃園市">桃園市</option>
+                        <option class="inner_county" value="新竹市">新竹市</option>
+                        <option class="inner_county" value="新竹縣">新竹縣</option>
+                        <option class="inner_county" value="苗栗縣">苗栗縣</option>
+                    </optgroup>
+                    <optgroup label="中部">
+                        <option class="inner_county" value="台中市">台中市</option>
+                        <option class="inner_county" value="南投縣">南投縣</option>
+                        <option class="inner_county" value="彰化縣">彰化縣</option>
+                        <option class="inner_county" value="雲林縣">雲林縣</option>
+                    </optgroup>
+                    <optgroup label="南部">
+                        <option class="inner_county" value="嘉義市">嘉義市</option>
+                        <option class="inner_county" value="嘉義縣">嘉義縣</option>
+                        <option class="inner_county" value="台南市">台南市</option>
+                        <option class="inner_county" value="高雄市">高雄市</option>
+                        <option class="inner_county" value="屏東縣">屏東縣</option>
+                    </optgroup>
+                    <optgroup label="東部">
+                        <option class="inner_county" value="宜蘭縣">宜蘭縣</option>
+                        <option class="inner_county" value="花蓮縣">花蓮縣</option>
+                        <option class="inner_county" value="台東縣">台東縣</option>
+                    </optgroup>
+                    <optgroup label="離島">
+                        <option class="inner_county" value="澎湖縣">澎湖縣</option>
+                        <option class="inner_county" value="金門縣">金門縣</option>
+                        <option class="inner_county" value="連江縣">連江縣</option>
+                    </optgroup>
+            </select>
+            <input type="radio" id="local_none" name="zza" class="local_recom" value="" ><label for="local_none">不拘</label>
+        </div>
+        <div class="flex flex flex_warp_warp" >
+            <label  class="white-space">請選擇推送的筆數:</label>
+            {% if count == "30" %}
+            <label for="recommend_count30" class="white-space left30"><input type="radio" name="recommend_count" class="recommend_count" id="recommend_count30" value="30" checked>30筆</label>
+            <label for="recommend_count60" class="white-space left30 "><input type="radio" name="recommend_count" class="recommend_count"  id="recommend_count60" value="60">60筆</label>
+            <label for="recommend_countmax" class="white-space left30"><input type="radio" name="recommend_count" class="recommend_count"  id="recommend_countmax" value="max">不限制</label>
+            <label for="recommend_countother" class="white-space left30"><input type="radio" name="recommend_count" class="countotherlab recommend_count"  id="recommend_countother"  value="other">其他:
+            <input type="number" max="500"  class="countother recommend_count " id="recommend_count"  name="recommend_count_other" ></label>
+            {% elif count == "60" %}
+            <label for="recommend_count30" class="white-space left30" ><input type="radio" name="recommend_count" class="recommend_count" id="recommend_count30" value="30" >30筆</label>
+            <label for="recommend_count60" class="white-space left30"><input type="radio" name="recommend_count" class="recommend_count"  id="recommend_count60" value="60" checked>60筆</label>
+            <label for="recommend_countmax" class="white-space left30 "><input type="radio" name="recommend_count" class="recommend_count"  id="recommend_countmax" value="max">不限制</label>
+            <label for="recommend_countother" class="white-space left30"><input type="radio" name="recommend_count" class="countotherlab recommend_count"  id="recommend_countother"  value="other">其他:
+            <input type="number" max="500"  class="countother recommend_count left30" id="recommend_count"  name="recommend_count_other" ></label>
+            {% elif count == "max" %}
+            <label for="recommend_count30" class="white-space left30"><input type="radio" name="recommend_count" class="recommend_count" id="recommend_count30" value="30" >30筆</label>
+            <label for="recommend_count60" class="white-space left30"><input type="radio" name="recommend_count" class="recommend_count"  id="recommend_count60" value="60">60筆</label>
+            <label for="recommend_countmax" class="white-space left30"><input type="radio" name="recommend_count" class="recommend_count"  id="recommend_countmax" value="max" checked>不限制</label>
+            <label for="recommend_countother" class="white-space left30"><input type="radio" name="recommend_count" class="countotherlab recommend_count"  id="recommend_countother"  value="other">其他:
+            <input type="number" max="500"  class="countother recommend_count left30" id="recommend_count"  name="recommend_count_other" ></label>
+            {% elif count == "other" %}
+            <label for="recommend_count30" class="white-space left30"><input type="radio" name="recommend_count" class="recommend_count" id="recommend_count30" value="30" >30筆</label>
+            <label for="recommend_count60" class="white-space left30"><input type="radio" name="recommend_count" class="recommend_count"  id="recommend_count60" value="60">60筆</label>
+            <label for="recommend_countmax" class="white-space left30"><input type="radio" name="recommend_count" class="recommend_count"  id="recommend_countmax" value="max">不限制</label>
+            <label for="recommend_countother" class="white-space left30"><input type="radio" name="recommend_count" class="countotherlab recommend_count"  id="recommend_countother"  checked value="other">其他:
+            <input type="number" max="500"  class="countother recommend_count " id="recommend_count"  name="recommend_count_other" value="{{user_count}}" ></label>
+            {% else %}
+            <label for="recommend_count30" class="white-space left30"><input type="radio" name="recommend_count" class="recommend_count" id="recommend_count30" value="30" >30筆</label>
+            <label for="recommend_count60" class="white-space left30"><input type="radio" name="recommend_count" class="recommend_count"  id="recommend_count60" value="60">60筆</label>
+            <label for="recommend_countmax" class="white-space left30"><input type="radio" name="recommend_count" class="recommend_count"  id="recommend_countmax" value="max">不限制</label>
+            <label for="recommend_countother" class="white-space left30"><input type="radio" name="recommend_count" class="countotherlab recommend_count"  id="recommend_countother"  value="other">其他:
+            <input type="number" max="500" class="countother recommend_count"  id="recommend_count"  name="recommend_count_other" ></label>
+            {% endif %}
+        </div>
+        <div class="flex flex_warp_warp" >
+            <label  class="white-space">是否開啟email通知</label>
+            <span class="hint--bottom" style="z-index:0 !important;position:relative !important" data-hint="您可以收到最即時的推送通知!">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+              </svg>:</span>
+              {% if email %}
+                <input type="radio" name="recommend_email" id="yes_email" value="true" checked><label for="yes_email">是</label>
+                <input type="radio" name="recommend_email" id="no_email"  value="false"><label for="no_email">否</label>
+              {% else %}
+              <input type="radio" name="recommend_email" id="yes_email" value="true" ><label for="yes_email">是</label>
+              <input type="radio" name="recommend_email" id="no_email"  value="false" checked><label for="no_email">否</label>
+              {% endif %}
+        </div>
+        <div class="flex flex_warp_warp" >
+            <label  class="white-space">是否開啟line-bot通知</label>
+            <span class="hint--bottom" style="z-index:0 !important;position:relative !important" data-hint="您可以在line中收到通知，也可以在line中查看推送，您可以到設定中的帳號安全訪問line-bot，並綁定帳戶!!!">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+              </svg>:</span>
+              {% if line_bot %}
+                <input type="radio" name="recommend_line_bot" id="yes_line_bot" value="true" checked><label for="yes_line_bot">是</label>
+                <input type="radio" name="recommend_line_bot" id="no_line_bot"  value="false"><label for="no_line_bot">否</label>
+              {% else %}
+              <input type="radio" name="recommend_line_bot" id="yes_line_bot" value="true" ><label for="yes_line_bot">是</label>
+              <input type="radio" name="recommend_line_bot" id="no_line_bot"  value="false" checked><label for="no_line_bot">否</label>
+              {% endif %}
+        </div>
+            <button class="btn btn-secondary" type="button" id="recommend_set_submit">保存</button>
+    </div>
+    </form>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+{% if Experience == None %}
+<script>
+ document.getElementById('Experience_none').checked = true;
+</script>
+{% elif Experience == 0 %}
+<script>
+    document.getElementById('Experience_no').checked = true;
+</script>
+{% else %}
+<script>
+    document.getElementById('Experience_select').checked = true;
+    document.getElementById('Experience_number').value = "{{Experience}}"
+</script>
+{% endif %}
+
+
+{% if local != None %}
+<script>
+    document.getElementsByClassName("local_recom")[0].checked = true;
+    document.getElementById("recommend_local").value = "{{local}}"
+</script>
+{% else %}
+<script>
+    document.getElementsByClassName("local_recom")[1].checked = true;
+    document.getElementById("recommend_local").disabled = true;
+</script>
+{% endif %}
+
+
+
+<script>
+    jQuery(document).ajaxSend(function(event, xhr, settings) {
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    function sameOrigin(url) {
+        // url could be relative or scheme relative or absolute
+        var host = document.location.host; // host + port
+        var protocol = document.location.protocol;
+        var sr_origin = '//' + host;
+        var origin = protocol + sr_origin;
+        // Allow absolute or scheme relative URLs to same origin
+        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+            // or any other URL that isn't scheme relative or absolute i.e relative.
+            !(/^(\/\/|http:|https:).*/.test(url));
+    }
+    function safeMethod(method) {
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    }
+});
+</script>
+<script>
+
+    $('.certificate_cla').click(function(event){
+        if (document.getElementById('certificate_select_open').checked != true){
+            $('[name=user_certificate]').attr('disabled',true);
+
+        }else{
+            $('[name=user_certificate]').attr('disabled',false);
+
+        }
+    })
+    if (document.getElementById('certificate_select_open').checked != true){
+            $('[name=user_certificate]').attr('disabled',true);
+
+        }else{
+            $('[name=user_certificate]').attr('disabled',false);
+
+        }
+    window.onload = function(){
+        document.getElementsByClassName('Table_of_contents')[1].innerHTML = '推薦功能'
+
+    }
+    window.addEventListener('load',check);
+    let openbutt = document.getElementById('openbutt')
+    openbutt.addEventListener('click',check)
+    let countother = document.getElementsByClassName('countotherlab')[0]
+    let Experience_select = document.getElementById('Experience_select')
+    recommend_count = document.querySelectorAll(".recommend_count");
+    for(let i=0;i<recommend_count.length-1;i++){
+        recommend_count[i].addEventListener('click',checkotherfun)
+    }
+    Experience = document.querySelectorAll(".Experience_c");
+    for(let i=0;i<Experience.length;i++){
+        Experience[i].addEventListener('click',checkotherfun2)
+    }
+    document.getElementsByClassName("local_recom")[0].addEventListener('click', function() {
+        if(this.checked) {
+            document.getElementById('recommend_local').disabled = false;
+        } else {
+            document.getElementById('recommend_local').disabled = true;
+        }
+    });
+    document.getElementsByClassName("local_recom")[1].addEventListener('click', function() {
+        if(!this.checked) {
+            document.getElementById('recommend_local').disabled = false;
+        } else {
+            document.getElementById('recommend_local').disabled = true;
+        }
+    });
+
+    function check(){
+        let x= document.getElementsByClassName('in-active')
+        if(x[0]==undefined){
+            let input = document.querySelectorAll("#recommend_skill");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = true
+            }
+            input = document.querySelectorAll("#type");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = true;
+            }
+            input = document.querySelectorAll(".fraction");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = true;
+            }
+            input = document.querySelectorAll(".recommend_count");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = true;
+            }
+            document.getElementById('Experience_number').disabled = true;
+            $(".local_recom").attr('disabled',true);
+            $('[name=recommend_email]').attr('disabled',true);
+            $('[name=recommend_line_bot]').attr('disabled',true);
+            $('[name=Experience]').attr('disabled',true);
+            $('[name=user_certificate]').attr('disabled',true);
+            $('[name=certificate_select]').attr('disabled',true);
+            document.getElementById('openrecommend').value  = 'false';
+        }else{
+            let input = document.querySelectorAll("#recommend_skill");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = false
+            }
+            input = document.querySelectorAll("#type");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = false
+            }
+            input = document.querySelectorAll(".fraction");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = false
+            }
+            input = document.querySelectorAll(".recommend_count");
+            for(let i=0;i<input.length;i++){
+                input[i].disabled = false
+            }
+            if(countother.checked){
+                let countother = document.getElementsByClassName('countother')[0]
+                countother.disabled = false;
+            }else{
+                let countother = document.getElementsByClassName('countother')[0]
+                countother.disabled = true;
+            if(Experience_select.checked){
+                document.getElementById('Experience_number').disabled = false;
+            }else{
+                document.getElementById('Experience_number').disabled = true;
+            }
+            if(countother.checked){
+                let countother = document.getElementsByClassName('countother')[0]
+                countother.disabled = false;
+            }else{
+                let countother = document.getElementsByClassName('countother')[0]
+                countother.disabled = true;
+            }
+
+            }$(".local_recom").attr('disabled',false);
+            $('[name=recommend_email]').attr('disabled',false);
+            $('[name=recommend_line_bot]').attr('disabled',false);
+            $('[name=Experience]').attr('disabled',false);
+            document.getElementById('openrecommend').value  = 'true';
+            $('[name=certificate_select]').attr('disabled',false);
+            if (document.getElementById('certificate_select_open').checked == true){
+                $('[name=user_certificate]').attr('disabled',false);
+            }
+        }
+    }
+    function toggle() {
+        document.getElementById('openbutt').classList.toggle('in-active');
+    }
+    function checkotherfun(){
+        if(countother.checked){
+            let countother = document.getElementsByClassName('countother')[0]
+            countother.disabled = false;
+        }else{
+            let countother = document.getElementsByClassName('countother')[0]
+            countother.disabled = true;
+        }
+    }
+    function checkotherfun2(){
+        if(Experience_select.checked){
+            document.getElementById('Experience_number').disabled = false;
+        }else{
+            document.getElementById('Experience_number').disabled = true;
+        }
+    }
+    document.getElementById('recommend_set_submit').addEventListener('click',function(){
+        data_dict = {}
+        forms = document.getElementById('recommend_set')
+        data_dict['openrecommend'] = document.getElementById('openrecommend').value
+        data_dict['recommend_skill'] = forms.recommend_skill.value
+        data_dict['recommend_fraction'] = forms.recommend_fraction.value
+        data_dict['recommend_count'] = forms.recommend_count.value
+        data_dict['recommend_job_type'] = forms.recommend_job_type.value
+        data_dict['recommend_email'] = forms.recommend_email.value
+        data_dict['recommend_line_bot'] = forms.recommend_line_bot.value
+        data_dict['recommend_cer_boo'] = forms.certificate_select.value
+        if(data_dict['recommend_cer_boo'] == "true"){
+            data_dict['user_certificate'] = forms.user_certificate.value
+        }
+        if(!forms.Experience.value==""){
+            data_dict['Experience'] = forms.Experience.value
+        }
+        if(!document.getElementById('recommend_local').disabled){
+            data_dict['recom_local'] = forms.recom_local.value
+        }
+            if (data_dict['recommend_count'] == "other" && isNaN(parseInt(forms.recommend_count_other.value)) || data_dict['Experience']=='Experience_select' && isNaN(parseInt(forms.Experience_year.value))) {
+                swal({
+                        title: "不可為空值",
+                        text: '請檢檢查您的資料，欄位不可為空',
+                        icon: "info",
+                        button: "好的",
+                        })
+            }else{
+                if(data_dict['recommend_count'] == "other"){
+                    data_dict['recommend_count_other'] = forms.recommend_count_other.value
+                }
+                if(data_dict['Experience'] == 'Experience_select'){
+                    data_dict['Exper_year'] = forms.Experience_number.value;
+                }
+                $.ajax({
+            url:'{% url "recommend_set" %}',
+            type:'POST',
+            data:data_dict,
+            dataType:'json',
+            success:function(mesg){
+                if(mesg.status == "error"){
+                        swal({
+                        title: "資料錯誤",
+                        text: '請檢檢查您的資料，如果真的沒錯可以到意見箱反饋，我們會盡快解決您的問題!',
+                        icon: "error",
+                        button: "好的",
+                        })
+                    }else{
+                    swal({
+                        title: "您已更新成功!",
+                        text: "You change the data!",
+                        icon: "success",
+                        button: "好的",
+                        }).then((value) => {
+                            window.location.reload();
+                        });
+                    }
+                },
+                error:function(mesg){
+                    swal({
+                        title: "資料錯誤!",
+                        text: mesg.statusText,
+                        icon: "error",
+                        button: "好的",
+                        }).then((value) => {
+                    });
+                }
+        })
+            }
+    })
+
+</script>
+{% endblock %}

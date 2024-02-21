@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.98.0">
+    <title>找回密碼</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/modals/">
+    {% load static %}
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <script src="../../static/js/jquery.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="shortcut icon"   href="../../static/images/logo/logo-removebg-preview.png" type="image/x-icon" />
+  </head>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      .alert{
+        position:absolute;
+        top:-120px;
+        left:-20px;
+        width: 120%;
+        height: 100%;
+        background-color: rgb(255, 255, 255);
+        display: none;
+      }
+      .mistake{
+        border:2px groove rgb(224, 118, 118);
+        color:rgb(190, 86, 86);
+        padding: 10px;
+        background-color: rgb(238, 191, 200);
+        display: none;
+      }
+      #user_name:focus{
+        transition: 0.5s;
+      }
+      button:hover{
+        transition: 1s;
+      }
+      a div:hover{
+        background-color: rgb(22, 22, 22);
+        transition: 0.5s;
+      }
+      .flex{
+        display: flex;
+      }
+      .inemail{
+        width: 300px !important;
+        height: 60px !important;
+      }
+      .incode{
+        width: 200px !important;
+        height: 60px !important;
+      }
+      .code{
+        margin-top: 25px;
+        margin-bottom: 20px;
+      }
+      .email{
+        margin-top: 20px;
+      }
+      .incode:focus,.inemail:focus{
+        background-color: rgb(218, 236, 255);
+      }
+      .buttontest{
+        background-color: rgb(217, 217, 216,0.5);
+        margin-left: 15px;
+        width: 95px;
+        border-radius: 5px;
+      }
+      .buttonsubmit{
+        margin-left: 46%;
+        margin-top: 5%;
+      }
+    </style>
+  <body>
+<!----position-static:static py-5:1--->
+<div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <!-- <h5 class="modal-title">Modal title</h5> -->
+        <h2 class="fw-bold mb-0">找回密碼</h2>
+        <a href="{% url 'sing_in' %}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+      </div>
+      <div class="modal-body p-5 pt-0">
+        <form action="{% url 'forget_check' %}" method="POST" id="form2">
+            {% csrf_token %}
+            <input hidden value="{{time}}" name="time" class='time'>
+            <div class="content">
+              <div class="flex email">
+                <p style="margin-right:15px;padding-top: 14px;font-size:blod;font-size: 20px;"><strong>Email:</strong></p>
+                <div class="form-floating"  style="width: 80%;">
+                  <input type="text" class="form-control rounded-3 inemail" style="width: 100% !important;min-width:100px" id="email"  name='email' value="{{email}}"  placeholder="email">
+                    <label for="email">Email</label>
+                </div>
+              </div>
+              <div class="flex code" id="check_code">
+                <input hidden value="{{time}}" class="time" name='time'>
+                  <p style="margin-right:10px;padding-top: 14px;font-size:blod;font-size: 20px;"><strong>驗證碼:</strong></p>
+                  <div class="form-floating" >
+                      <input type="text" class="form-control rounded-3 incode" id="vertical" placeholder="驗證碼" required name="vertical" >
+                      <label for="vertical">驗證碼</label>
+                  </div>
+                  <input type="button"  value="重新發送{{time}}"  class="buttontest" id="buttontest">
+              </div>
+                  <input type="button" value="提交" class="buttonsubmit" id="buttonsubmit" >
+                  <input type="submit" value="提交" class="buttonsubmit" id="buttonsubmit2" >
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+</body>
+<script>
+    jQuery(document).ajaxSend(function(event, xhr, settings) {
+function getCookie(name) {
+var cookieValue = null;
+if (document.cookie && document.cookie != '') {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+        }
+    }
+}
+return cookieValue;
+}
+function sameOrigin(url) {
+// url could be relative or scheme relative or absolute
+var host = document.location.host; // host + port
+var protocol = document.location.protocol;
+var sr_origin = '//' + host;
+var origin = protocol + sr_origin;
+// Allow absolute or scheme relative URLs to same origin
+return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+    (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+    // or any other URL that isn't scheme relative or absolute i.e relative.
+    !(/^(\/\/|http:|https:).*/.test(url));
+}
+function safeMethod(method) {
+return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
+xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+}
+});
+
+</script>
+{% if state == 'False' %}
+<script>
+$('#buttonsubmit').hide()
+$('#buttonsubmit2').show()
+document.getElementById('buttontest').disabled = true;
+
+let timecheck = setInterval(timer,1000)
+let time = parseInt('{{time}}')
+function timer(){
+  document.getElementById('buttontest').value = '重新發送'+time;
+    document.getElementsByClassName('time')[0].value=time;
+    document.getElementsByClassName('time')[1].value=time;
+    if(time==0 || time<0){
+    document.getElementById('buttontest').disabled = false;
+    document.getElementById('buttontest').value = '重新發送';
+    document.getElementsByClassName('time')[0].value=0;
+    document.getElementsByClassName('time')[1].value=0;
+    clearInterval(timecheck);
+    }
+    time = time-1
+}
+swal({
+      title: "驗證碼錯誤!",
+      text: '請檢查您的驗證碼否正確!',
+      icon: "error",
+      button: "好的",
+      }).then((value) => {
+  });
+</script>
+{% else %}
+<script>
+   $('#buttonsubmit2').hide()
+    $('#check_code').hide()
+    document.getElementById('buttonsubmit').addEventListener('click',function(){
+
+        var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if(!regex.test(document.getElementById('email').value)) {
+            swal({
+                title: "Email格式錯誤!",
+                text: '請檢查您的Email格式是否正確!',
+                icon: "error",
+                button: "好的",
+                }).then((value) => {
+            });
+        }else{
+            data_dict = {
+                'Email':document.getElementById('email').value,
+                'type':'get1'
+            }
+            $.ajax({
+                url:'{% url "forget_get" %}',
+                type:'POST',
+                data:data_dict,
+                dataType:'json',
+                success:function(mesg){
+                    if(mesg.message == 'success'){
+                        $('#check_code').show()
+                        swal({
+                        title: "驗證碼已發送!",
+                        text: "請去Email查看驗證碼!",
+                        icon: "success",
+                        button: "好的",
+                        })
+                        document.getElementById('buttontest').disabled = true;
+                        document.getElementById("email").readOnly = true;
+                        $('#buttonsubmit').hide()
+                        $('#buttonsubmit2').show()
+                        let timecheck = setInterval(timer,1000)
+                        let time = parseInt(60)
+                        function timer(){
+                          document.getElementById('buttontest').value = '重新發送'+time;
+                            document.getElementsByClassName('time')[0].value=time;
+                            document.getElementsByClassName('time')[1].value=time;
+                            if(time==0 || time<0){
+                            document.getElementById('buttontest').disabled = false;
+                            document.getElementById('buttontest').value = '重新發送';
+                            document.getElementsByClassName('time')[0].value=0;
+                            document.getElementsByClassName('time')[1].value=0;
+                            clearInterval(timecheck);
+                            }
+                            time = time-1
+                        }
+
+                    }else{
+                        swal({
+                            title: "查無此Email!",
+                            text: '請檢查您的Email是否正確!',
+                            icon: "error",
+                            button: "好的",
+                        })
+                    }
+
+                }
+            })
+        }
+    })
+</script>
+{% endif %}
+<script>
+    document.getElementById('buttontest').addEventListener('click',function(){
+      data_dict = {
+                'Email':document.getElementById('email').value,
+                'type':'get2'
+            }
+            $.ajax({
+                url:'{% url "forget_get" %}',
+                type:'POST',
+                data:data_dict,
+                dataType:'json',
+                success:function(mesg){
+                    if(mesg.message == 'success'){
+                        $('#check_code').show()
+                        swal({
+                        title: "驗證碼已發送!",
+                        text: "請去Email查看驗證碼!",
+                        icon: "success",
+                        button: "好的",
+                        })
+                        document.getElementById('buttontest').disabled = true;
+                        let timecheck = setInterval(timer,1000)
+                        let time = parseInt(60)
+                        function timer(){
+                          document.getElementById('buttontest').value = '重新發送'+time;
+                            document.getElementsByClassName('time')[0].value=time;
+                            document.getElementsByClassName('time')[1].value=time;
+                            if(time==0 || time<0){
+                            document.getElementById('buttontest').disabled = false;
+                            document.getElementById('buttontest').value = '重新發送';
+                            document.getElementsByClassName('time')[0].value=0;
+                            document.getElementsByClassName('time')[1].value=0;
+                            clearInterval(timecheck);
+                            }
+                            time = time-1
+                        }
+                    }
+                }
+            })
+    })
+</script>

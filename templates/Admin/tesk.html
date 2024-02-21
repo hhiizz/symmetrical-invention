@@ -1,0 +1,411 @@
+{% extends 'Admin/index.html' %}
+{% block main %}
+<style>
+        .hidd_div div{
+        margin-bottom: 20PX;
+    }
+    .hidd_div div span{
+        margin-bottom: 20PX;
+        margin-left: 50px;
+    }
+    .hidd_div{
+        margin-left: 3%;
+    }
+    .table_change{
+        float: left;
+        margin-right:30px;
+    }
+    .table_change th,.table_change td{
+        padding-bottom: 30px;
+        margin-bottom: 10px;
+    }
+    .table_change input,.table_change select{
+        margin-left: 20px;
+    }
+    #upandno{
+        clear: left;
+        display: flex;
+        justify-content: center;
+    }
+    #upandno button{
+        margin-right: 10px;
+    }
+    .ver_1{
+        vertical-align: -1px;
+    }
+    #tesk_manage{
+        color: rgb(207, 255, 226);
+    }
+</style>
+<div class="container-fluid px-4">
+    <h1 class="mt-4">總分類管理</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">您可以刪除、暫停例行任務</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            任務表單
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <button type="button" class="btn btn-danger m-1" id="remove">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle ver_1" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                          </svg> 刪除</button>
+                    <tr>
+                        <th>操作功能</th>
+                        <th>id</th>
+                        <th>觸發器类型</th>
+                        <th>觸發時間</th>
+                        <th>當前狀態</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in current_page %}
+                    <tr class="crawler_total"   onclick="change_member(event,'{{forloop.counter}}')">
+                        <td>
+                            <input type="checkbox" class="delect_box" name="delect_box" value="{{i.id}}">
+                        </td>
+                        <td>{{i.id}}</td>
+                        <td>{{i.trigger}}</td>
+                        <td>{{i.time}}</td>
+                        <td>
+                            {% if i.next_run_time == None %}
+                                關閉
+                            {% else %}
+                                開啟
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div  class="hidd_div p-5">
+            <table class="table_change" >
+                <tbody>
+                    <tr class="id">
+                        <th>id</th>
+                        <td><input class="inner" readonly type="text" value=""></td>
+                    </tr>
+                    <tr>
+                        <th>觸發器类型</th>
+                            <td>
+                                <select class="inner" style="width: 183px;height: 30px;" onchange="trigger()" >
+                                    <option value="interval" >間格時間</option>
+                                    <option value="cron">固定時間</option>
+                                    <option value="date">特定日期</option>
+                                </select>
+                            </td>
+                    </tr>
+                    <tr>
+                        <th>觸發時間</th>
+                        <td>
+                            <span id="interval"><input class="inner" placeholder="如 int (days or hours or minutes or seconds)請按照格式!!" type="text" value=""></span>
+                            <span id="cron"><input class="inner" placeholder="請輸入總類名稱..." type="time" value=""></span>
+                            <span id="date"><input class="inner" placeholder="請輸入總類名稱..." type="datetime-local" value=""></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>當前狀態:</th>
+                        <td>
+                            <div class="form-check form-switch inner" style="margin-left: 20px;">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="margin-top: 10px;width: 50px;height: 23px;">
+                              </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div  id="upandno">
+                <button type="button"  class="btn btn-success" id="update">儲存</button>
+                <button type="button"  class="btn btn-danger" id="none_data">取消</button>
+            </div>
+        </div>
+    </div>
+    <form id="getjob_submit" method="GET" action="{% url 'crawler_log_set' %}" >
+        <nav id="page_search"  aria-label="Page navigation example">
+            <ul class="pagination justify-content-center page_nav">
+            {% if current_page.has_previous %}
+            <li class="page-item">
+                <span class="page-link" onclick="page_fun('last')"><<</span>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link" ><<</span>
+            </li>
+            {% endif %}
+            {% if page_start_end.start %}
+                <li class="page-item" onclick="page_fun('1')"><a class="page-link" >1</a></li>
+                <li class="page-item" ><a class="page-link" >...</a></li>
+            {% endif %}
+            {% for item in page_range %}
+                {% if page == item %}
+                    <li class="page-item active">
+                        <span class="page-link">
+                        {{item}}
+                        </span>
+                    </li>
+                {% else %}
+                    <li class="page-item" onclick="page_fun('{{item}}')"><a class="page-link" >{{item}}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if page_start_end.end %}
+                <li class="page-item"><a class="page-link" >...</a></li>
+                <li class="page-item" onclick="page_fun('{{page_start_end.max_page}}')" ><a class="page-link" >{{page_start_end.max_page}}</a></li>
+            {% endif %}
+            {% if current_page.has_next %}
+            <li class="page-item">
+                <a class="page-link" onclick="page_fun('next')" >>></a>
+            </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">>></a>
+                </li>
+            {% endif %}
+            </ul>
+        </nav>
+        <input name="page" id="page" hidden value="{{page}}">
+    </form>
+</div>
+<script>
+                document.getElementById('tesk_inner').classList.add('show')
+    document.getElementById('tesk_title_nav').classList.remove('collapsed')
+    document.getElementById('remove').addEventListener('click',function(){
+    let id= ""
+    let count = 0
+    let z = document.getElementsByClassName('delect_box')
+    for(let i=0;i<z.length;i++){
+        if(z[i].checked){
+            count+=1
+            id+=z[i].value+'、)'
+        }
+    }
+    if(count==0){
+        swal({
+        title: "您沒有要刪除的資料!",
+        text: "You have no data to delete!",
+        icon: "error",
+        dangerMode: true,
+        })
+    }else{
+        swal({
+        title: "是否刪除"+count+"筆資料!",
+        text: "Please confirm whether to delete the data !",
+        icon: "warning",
+        buttons:['我再考慮一下','刪除'],
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            data_dict = {
+                'id':id,
+                'type':'delete'
+            }
+            $.ajax({
+                url:'{% url "tesk_change" %}',
+                type:'POST',
+                data:data_dict,
+                dataType:'json',
+                success:function(mesg){
+                    swal({
+                        title: "恭喜您更改成功!",
+                        text: "You change the data!",
+                        icon: "success",
+                        button: "好的",
+                        }).then((value) => {
+                            window.location.reload();
+                        });
+                },
+                error:function(mesg){
+                    swal({
+                        title: "資料錯誤!",
+                        text: mesg.statusText,
+                        icon: "error",
+                        button: "好的",
+                        }).then((value) => {
+                    });
+                }
+            })
+        }
+        });
+    }
+})
+    window.onload = function(){
+        $('.hidd_div').hide()
+    }
+    function trigger(){
+        if(document.getElementsByClassName('inner')[1].value=="interval"){
+            $('#cron').hide()
+            $('#date').hide()
+            $("#interval").show()
+        }else if(document.getElementsByClassName('inner')[1].value=="cron"){
+            $('#cron').show()
+            $('#date').hide()
+            $("#interval").hide()
+        }else{
+            $('#cron').hide()
+            $('#date').show()
+            $("#interval").hide()
+        }
+
+    }
+
+    function page_fun(state){
+    page = document.getElementById('getjob_submit')
+    page2 = document.getElementById('page').value
+    if(state == 'last'){
+        page.page.value =parseInt(page2,10)-1
+        page.submit()
+    }else if(state == 'next'){
+        page.page.value =parseInt(page2,10)+1
+        page.submit()
+    }else{
+        page.page.value = parseInt(state,10)
+        page.submit()
+    }
+
+}
+function change_member(event,count){
+    if(event.target.nodeName !='INPUT'){
+    $('.card-body').hide()
+    $('#page_search').hide()
+    z =  document.getElementsByClassName('crawler_total')[count-1]
+    let inner =  document.getElementsByClassName('inner')
+    z=z.children
+    for(let i=1;i<z.length;i++){
+        if(i==4){
+            if($.trim(z[i].innerHTML)=="開啟"){
+                inner[5].children[0].checked = true
+            }
+        }
+        else if(i==3){
+            if(z[2].innerHTML=="interval"){
+                $('#cron').hide()
+                $('#date').hide()
+                inner[2].value =  z[3].innerHTML;
+            }else if(z[2].innerHTML=="cron"){
+                o = z[3].innerHTML.split(':')
+                if(o[0].length <2 ){
+                    o[0] = "0"+o[0]
+                }
+                inner[3].value = o[0]+":"+o[1]
+                $('#interval').hide()
+                $('#date').hide()
+            }else{
+                $('#cron').hide()
+                $('#interval').hide()
+                x = z[i].innerHTML.replace('年','-').replace('月','-').replace('日','').split('-')
+                for(let i=0;i<x.length;i++){
+                    if(x[i].length<2){
+                        x[i]="0"+x[i]
+                    }
+                }
+                inner[4].value =  x[0]+'-'+x[1]+'-'+x[2];
+            }
+        }
+        else{
+            inner[i-1].value =  z[i].innerHTML;
+        }
+    }
+    $('.hidd_div').show()
+    }
+
+document.getElementById('update').addEventListener('click',update_submit)
+}
+function update_submit(){
+    let update = document.getElementsByClassName('inner')
+    data_dict  ={}
+    data_dict['id'] = update[0].value
+    data_dict['trigger'] = update[1].value
+    if(data_dict['trigger'] =="interval"){
+        data_dict['time'] = update[2].value
+    }else if(data_dict['trigger'] =="cron"){
+        data_dict['time'] = update[3].value
+    }else{
+        data_dict['time'] = update[4].value
+    }
+    if(update[5].children[0].checked){
+        data_dict['state'] = true
+    }else{
+        data_dict['state'] = false
+    }
+    data_dict['type'] = 'update';
+    console.log(data_dict)
+    $.ajax({
+                url:'{% url "tesk_change" %}',
+                type:'POST',
+                data:data_dict,
+                dataType:'json',
+                success:function(mesg){
+                    if(mesg.status == "error"){
+                        message = JSON.parse(mesg.message)
+                        var m = "";
+                        var n = message;
+                        for(var error in message){
+                            m+=message[error][0]['message']+'\n\n';
+                        }
+                        swal({
+                        title: "資料錯誤",
+                        text: m,
+                        icon: "error",
+                        button: "好的",
+                        })
+
+                    }
+                    else if(mesg.status == "error_other"){
+                        swal({
+                        title: "資料錯誤",
+                        text: mesg.message,
+                        icon: "error",
+                        button: "好的",
+                        })
+                    }else{
+                        swal({
+                            title: "恭喜您更改成功!",
+                            text: "You change the data!",
+                            icon: "success",
+                            button: "好的",
+                            }).then((value) => {
+                                window.location.reload();
+                            });
+                        }
+                },
+                error:function(mesg){
+                    swal({
+                        title: "資料錯誤!",
+                        text: mesg.statusText,
+                        icon: "error",
+                        button: "好的",
+                        }).then((value) => {
+                    });
+                }
+            })
+}
+
+
+
+document.getElementById('none_data').addEventListener('click',function(){
+    $('.hidd_div').hide()
+    $('.card-body').show()
+    $('#interval').show()
+    $('#cron').show()
+    $('#date').show()
+    $('#page_search').show()
+    let inner =  document.getElementsByClassName('inner')
+    for(let i=0;i<inner.length;i++){
+            inner[i].value =  '';
+    }
+    document.getElementById('update').removeEventListener('click',update_submit)
+})
+document.getElementById('btnNavbarSearch').addEventListener('click',function(){
+
+let search  = JSON.parse('{{list_search | safe}}')[document.getElementById('search_index').value]
+search = document.URL.replace('/total_type_admin/',search)
+document.getElementById('search_form').action = search
+document.getElementById('search_form').submit()
+})
+</script>
+{% endblock %}

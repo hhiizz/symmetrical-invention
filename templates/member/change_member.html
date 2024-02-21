@@ -1,0 +1,401 @@
+{% extends 'member/member_server.html' %}
+{% block content %}
+<style>
+        .member{
+                width: 100%;
+                background-color: rgb(211, 207, 207);
+                height:auto !important;
+                min-height: 100% !important;
+        }
+        .content_member{
+                background-color: rgb(255, 255, 255);
+                margin: 50px;
+                height: auto;
+                box-shadow: 3px 3px 3px rgb(159, 159, 159);
+        }
+        .content_member h4{
+                padding: 10px;
+                background-color: rgb(148, 145, 145);
+                box-shadow: 3px 3px 0px rgb(159, 159, 159);
+        }
+        .inner{
+                background-color: rgb(221, 227, 227);
+                box-shadow: 3px 3px 3px rgb(159, 159, 159);
+                height: auto;
+                width: 100%;
+                color: rgb(13, 77, 114);
+                padding: 50px;
+                text-align: left;
+                font-size: 20px;
+                line-height: 60px;
+                padding-left: 70px;
+        }
+        .inner p input{
+                background-color: rgb(83, 145, 145,0);
+                border: none;
+                border-bottom: 3px solid rgb(13, 77, 114,0.5);
+                height: 30px;
+                width: 300px;
+                transition: 2s;
+        }
+        .inner p input:focus{
+                outline: none;
+                width: 50%;
+                background-color: rgb(82, 199, 199,0);
+        }
+        .amember2{
+        width:100%;border:none;padding:0px;
+        }
+        div.Table_of_content{
+                visibility: hidden;
+                height: 0px;
+                background-color :rgb(212, 209, 209);
+                text-align:left;
+                text-align: center;
+                line-height:55px;
+                color: rgb(90, 63, 22);
+                transition: 1s;
+                width: 100%;
+                }
+        .amember2{
+        text-decoration: none;
+        }
+        #changebut{
+                height: 30px;
+                text-align: center;
+                line-height: 0px;
+                width: 80px;
+                background-color: rgb(118, 193, 196);
+                border-radius: 10px;
+                margin-left: 44%;
+                margin-right: auto;
+                translate: (-44%,-56%);
+                transition: 1s;
+        }
+        #changebut:hover{
+                background-color: aliceblue;
+        }
+        .warn{
+                visibility: hidden;
+        }
+        .cover{
+                visibility: hidden;
+                transition: 1s;
+                position:fixed;
+                top: 0;
+                left: 0;
+                background-color: rgb(64, 62, 62);
+                opacity: 0;
+                height:100%;
+                width: 100%;
+                z-index: 5;
+        }
+        .reminder_box{
+                z-index: 5;
+                border-radius: 5px;
+                transform: translate(-50%, -50%);
+                visibility: hidden;
+                transition: 1s;
+                opacity: 0;
+                top: 50%;
+                left: 50%;
+                background-color: rgb(255, 255, 255);;
+                position: absolute;
+                width: 25%;
+                border: 3px solid rgb(89, 87, 87);
+                min-width: 300px;
+                height: auto;
+                font-family: "Gill Sans", sans-serif;;
+        }
+        .reminder_box h4{
+                padding: 10px;
+                color: rgba(106, 75, 68, 0.711);
+                text-align: center;
+                background-color: rgb(203, 199, 199);
+                box-shadow: 0px 3px 2px  rgb(68, 68, 68);
+                border-radius: 5px 5px 0px 0px ;
+                z-index: 1;
+        }
+        .reminder_inner p{
+                padding: 10px;
+                font-family: system-ui;
+                margin-left: 8%;
+                text-align: left;
+                width: 80%;
+                height:auto;
+                color: rgb(139, 161, 169);
+                border-radius: 10px;
+        }
+        .reminder_inner input{
+                transform: translate(-80%, -20%);
+                height: auto;
+                margin-left: 90%;
+                line-height:20px;
+                background-color: rgba(221, 216, 216, 0.7);
+                padding: 10px;
+                border: none;
+                transition: 1s;
+                border-radius: 10px;
+        }
+        .reminder_inner input:hover{
+                background-color: rgb(183, 182, 182);
+        }
+        #remove_user{
+                transition: 1s;
+                background-color: rgb(185, 181, 179);
+                margin-left: 10px;
+                border-radius: 5px;
+                padding: 3px;
+                line-height:25px;
+                font-size: 18px !important;
+        }
+        #remove_user:hover{
+                background-color: rgb(236, 162, 159);
+        }
+        #remove_user:active,#changebut:active{
+        transform: scale(0.85);
+        }
+        @media screen and (max-width:850px) {
+                .inner p input{
+                width: 90%;
+
+                }
+                .inner p input:focus{
+                width: 95%;
+                }
+                main.content{
+                        height: auto !important;
+                }
+        }
+        @media screen and (max-width:600px) {
+                .content_member{
+                        margin: 10px;
+                }
+                .inner p input{
+                width: 90%;
+
+                }
+                .inner p input:focus{
+                width: 95%;
+                }
+                .inner{
+                        padding: 30px;
+                }
+
+        }
+        @media screen and (max-width:419px ) {
+                .reminder_box{
+                        width: 80%;
+                }
+        }
+
+
+</style>
+<div id="content1" >
+        <div class="title_0">
+                <a class="amember"><div class="Table_of_contents" id="control_center">管理 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                  </svg>
+                </div></a>
+                <a class="amember2"  href="{% url 'control_center' %}"><div class="control">管理中心</div></a>
+                <a class="amember2"  href="{% url 'recommend_log' %}"><div class="control">推送紀錄</div></a>
+                <a class="amember2"  href="{% url 'notice' %}"><div class="control" >通知中心</div></a>
+            </div>
+        <div class="title_1">
+            <a class="amember total"><div class="Table_of_contents" id="love" >收藏 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </div></a>
+            <a class="amember2"  href="{% url 'user' %}"><div class="Table_of_content" >全部</div></a>
+            <a class="amember2" href="{% url 'like_like' %}"><div class="Table_of_content" >我的最愛</div></a>
+            <a class="amember2" href="{% url 'like_recommend' %}"><div class="Table_of_content">推薦</div></a>
+            <a class="amember2" href="{% url 'user_great' %}"><div class="Table_of_content " >點讚紀錄</div></a>
+        </div>
+        <div class="title_2">
+                <a class="amember" ><div class="Table_of_contents super_function" id="super_function">功能 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                  </svg></div></a>
+                <a class="amember2"  href="{% url 'user_recommend' %}"><div class="function" >推薦功能</div></a>
+        </div>
+        <div class="title_3">
+                <a class="amember"><div class="Table_of_contents active2" id="member_user">設定 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right img_abs" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                  </svg></div></a>
+                <a class="amember2"  href="{% url 'change' %}"><div class="Table_of_content_member active2" >帳號安全</div></a>
+                <a class="amember2" href="{% url 'opinion' %}"><div class="Table_of_content_member " >意見箱</div></a>
+
+        </div>
+    </div>
+<div class="member">
+        <div class="content_member">
+                <h4>更改密碼</h4>
+                <div class="inner">
+                        <div class="cover"></div>
+                        <div class="reminder_box">
+                                <h4>訊息</h4>
+                                <div class="reminder_inner">
+                                        <p style="overflow-wrap:normal;">{{message}}</p>
+                                        <input type="button" value="確定" id="reminder_buttom">
+                                </div>
+                        </div>
+                        <form action="{% url 'update' %}" method="POST" id="change_form">
+                                {% csrf_token %}
+                                <p><strong>帳號:</strong>{{user_name}}</p>
+                                <p><strong>請輸入舊密碼密碼: </strong><input autocomplete="off" type="password" name="old_password" id="old_password" value="{{password}}"> <svg  xmlns="http://www.w3.org/2000/svg" width="18" height="20" fill="currentColor" class="bi bi-exclamation-circle-fill warn" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                                      </svg></p>
+                                <p><strong>請輸入新密碼密碼:</strong> <input autocomplete="off" type="password" name="new_password"  id="new_password" value="{{new_password}}">
+                                        <svg  xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-exclamation-circle-fill warn" viewBox="0 0 16 16">
+                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                                              </svg>
+                                        </p>
+                                <p><strong>Email:</strong> <input type="email" name="Email" autocomplete="off" value="{{email}}" id="Email">
+                                        <svg  xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-exclamation-circle-fill warn" viewBox="0 0 16 16">
+                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                                              </svg>
+                                </p>
+                                <p><strong>註銷帳號:</strong><button id="remove_user" type="button">註銷帳號</button></p>
+                                <input type="button" value="提交" id="changebut">
+                        </form>
+                </div>
+        </div>
+</div>
+<script src="../../static/js/sweetalert.js"></script>
+<script>
+        //jquery 實現django { CSRF }
+jQuery(document).ajaxSend(function(event, xhr, settings) {
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    function sameOrigin(url) {
+        // url could be relative or scheme relative or absolute
+        var host = document.location.host; // host + port
+        var protocol = document.location.protocol;
+        var sr_origin = '//' + host;
+        var origin = protocol + sr_origin;
+        // Allow absolute or scheme relative URLs to same origin
+        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+            // or any other URL that isn't scheme relative or absolute i.e relative.
+            !(/^(\/\/|http:|https:).*/.test(url));
+    }
+    function safeMethod(method) {
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    }
+});
+</script>
+<script>
+window.onload = function(){
+        document.getElementsByClassName('Table_of_contents')[2].innerHTML = '更改密碼'
+}
+// $(document).mouseup(function (e) {
+//   if(e.target.id != 'love' && e.target.id != 'super_function' && e.target.id !='member_user'){
+//     if(window.innerWidth<600)
+//     $("#content1").css({ "left": "-135px" });
+//     $('.cover_base').css({'visibility':'hidden'})
+//     $('.cover_base').css({'opacity':'0'})
+//     let height_con = (document.getElementsByClassName('content')[0].clientHeight);
+//   }
+// })
+document.getElementById('remove_user').addEventListener('click',function(){
+                swal({
+                title: "是否註銷帳號!",
+                text: "Please confirm whether to delete the data !",
+                icon: "warning",
+                buttons:['我再考慮一下','刪除'],
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                        if(willDelete){
+                                $.ajax({
+                                url:'{% url "remove_user" %}',
+                                type:'POST',
+                                dataType:'json',
+                                success:function(mesg){
+                                        swal({
+                                        title: "恭喜您註銷成功!",
+                                        text: "You change the data!",
+                                        icon: "success",
+                                        button: "好的",
+                                        }).then((value) => {
+                                        window.location.reload();
+                                        });
+                                },
+                                error:function(mesg){
+                                        console.log(mesg)
+                                }
+                        })
+                        }
+                })
+        })
+document.getElementsByClassName('mb-auto')[0].style.height='91.3%';
+document.getElementById('reminder_buttom').addEventListener('click',ok)
+function ok(){
+        document.getElementsByClassName('reminder_box')[0].style.visibility='hidden';
+        document.getElementsByClassName('reminder_box')[0].style.opacity='0';
+        document.getElementsByClassName('cover')[0].style.visibility='hidden';
+        document.getElementsByClassName('cover')[0].style.opacity='0';
+}
+document.getElementById('changebut').addEventListener('click',function(){
+        form =  document.getElementById('change_form')
+        if(form.old_password.value =="" && form.new_password.value =="" && form.Email.value =="{{email}}"){
+                swal({
+                title: "您沒有要修改的資料",
+                text: "You have no data to change",
+                icon: "info",
+                button: "好的",
+                })
+        }else{
+                form.submit()
+        }
+        }
+)
+</script>
+{% if message %}
+<script>
+        document.getElementsByClassName('cover')[0].style.visibility='visible';
+        document.getElementsByClassName('reminder_box')[0].style.visibility='visible';
+        document.getElementsByClassName('cover')[0].style.opacity='0.75';
+        document.getElementsByClassName('reminder_box')[0].style.opacity='1';
+</script>
+{% endif %}
+{% if message == '舊密碼錯誤' %}
+<script>
+        let warn = document.getElementsByClassName('warn')[0]
+        document.getElementById('old_password').style.borderBlockColor='rgb(227, 131, 131)';
+        warn.style.visibility='visible';
+        warn.style.color='rgb(227, 131, 131)';
+</script>
+{% elif message == '新密碼只能出現大小寫英文和數字' or  message == '新密碼為6~16位數' %}
+<script>
+        let warn = document.getElementsByClassName('warn')[1]
+        document.getElementById('new_password').style.borderBlockColor='rgb(227, 131, 131)';
+        warn.style.visibility='visible';
+        warn.style.color='rgb(227, 131, 131)';
+</script>
+{% elif message == 'email 已被註冊'  or  message == 'email不可用' %}
+<script>
+        let warn = document.getElementsByClassName('warn')[2]
+        document.getElementById('Email').style.borderBlockColor='rgb(227, 131, 131)';
+        warn.style.visibility='visible';
+        warn.style.color='rgb(227, 131, 131)';
+</script>
+
+{% endif %}
+{% endblock %}

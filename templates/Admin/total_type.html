@@ -1,0 +1,420 @@
+{% extends 'Admin/index.html' %}
+{% block main %}
+<style>
+        .hidd_div div{
+        margin-bottom: 20PX;
+    }
+    .hidd_div div span{
+        margin-bottom: 20PX;
+        margin-left: 50px;
+    }
+    .hidd_div{
+        margin-left: 3%;
+    }
+    .table_change{
+        float: left;
+        margin-right:30px;
+    }
+    .table_change th,.table_change td{
+        padding-bottom: 30px;
+        margin-bottom: 10px;
+    }
+    .table_change input,.table_change select{
+        margin-left: 20px;
+    }
+    #upandno{
+        clear: left;
+        display: flex;
+        justify-content: center;
+    }
+    #upandno button{
+        margin-right: 10px;
+    }
+    .ver_1{
+        vertical-align: -1px;
+    }
+    #crawler_manage{
+        color: rgb(207, 255, 226);
+    }
+</style>
+<div class="container-fluid px-4">
+    <h1 class="mt-4">總分類管理</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">您可以新增刪除總分類中的類別</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            總分類
+        </div>
+        <div class="card-body">
+            <form  action="{% url 'total_type_admin' %}" method="get" >
+            <table id="datatablesSimple">
+                <thead>
+                    <button type="button" class="btn btn-success m-1" id="add">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle ver_1" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                          </svg>
+                          添加
+                    </button>
+                    <button type="button" class="btn btn-danger m-1" id="remove">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle ver_1" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                          </svg> 刪除</button>
+                          <span style="margin-top: 10px; position: absolute;right: 70px;width: 240px;">
+                            <select id="search_key_type" name="search_key_type"  onchange="change_button(this)">
+                                <option value="id">id</option>
+                                <option value="type_name" >type_name</option>
+                            </select>
+                        </span>
+                        <span style="margin-top: 10px; position: absolute;right: 30px;">
+                            <input id="search_key" name="key_word_submit_2" type="text" value="{{keyword}}">
+                            <button type="submit" id="key_word_submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg></button>
+                        </span>
+                    </form>
+                    <tr>
+                        <th>操作功能</th>
+                        <th>id</th>
+                        <th>總類名稱</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in current_page %}
+                    <tr class="crawler_total"   onclick="change_member(event,'{{forloop.counter}}')">
+                        <td>
+                            <input type="checkbox" class="delect_box" name="delect_box" value="{{i.id}}">
+                        </td>
+                        <td>{{i.id}}</td>
+                        <td>{{i.total_type_name}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div  class="hidd_div p-5">
+            <table class="table_change" >
+                <tbody>
+                    <tr class="id">
+                        <th>id</th>
+                        <td><input class="inner" readonly type="text" value=""></td>
+                    </tr>
+                    <tr>
+                        <th>總類名稱</th>
+                        <td>
+                            <input class="inner" placeholder="請輸入總類名稱..." type="text" value=""></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div  id="upandno">
+                <button type="button"  class="btn btn-success" id="update">儲存</button>
+                <button type="button"  class="btn btn-danger" id="none_data">取消</button>
+            </div>
+        </div>
+    </div>
+    <form id="getjob_submit" method="GET" action="{% url 'total_type_admin' %}" >
+        <input hidden name="key_word_submit_2" value="{{keyword}}" >
+        <input hidden name="search_key_type"  value="{{type_keyword}}">
+        <nav id="page_search"  aria-label="Page navigation example">
+            <ul class="pagination justify-content-center page_nav">
+            {% if current_page.has_previous %}
+            <li class="page-item">
+                <span class="page-link" onclick="page_fun('last')"><<</span>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link" ><<</span>
+            </li>
+            {% endif %}
+            {% if page_start_end.start %}
+                <li class="page-item" onclick="page_fun('1')"><a class="page-link" >1</a></li>
+                <li class="page-item" ><a class="page-link" >...</a></li>
+            {% endif %}
+            {% for item in page_range %}
+                {% if page == item %}
+                    <li class="page-item active">
+                        <span class="page-link">
+                        {{item}}
+                        </span>
+                    </li>
+                {% else %}
+                    <li class="page-item" onclick="page_fun('{{item}}')"><a class="page-link" >{{item}}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if page_start_end.end %}
+                <li class="page-item"><a class="page-link" >...</a></li>
+                <li class="page-item" onclick="page_fun('{{page_start_end.max_page}}')" ><a class="page-link" >{{page_start_end.max_page}}</a></li>
+            {% endif %}
+            {% if current_page.has_next %}
+            <li class="page-item">
+                <a class="page-link" onclick="page_fun('next')" >>></a>
+            </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">>></a>
+                </li>
+            {% endif %}
+            </ul>
+        </nav>
+        <input name="page" id="page" hidden value="{{page}}">
+    </form>
+</div>
+<script>
+    document.getElementById('collapseLayouts').classList.add('show')
+    document.getElementById('crawler_title_nav').classList.remove('collapsed')
+        if("{{type_keyword}}" != ""){
+        document.getElementById('search_key_type').value ="{{type_keyword}}"
+    }else{
+        document.getElementById('search_key_type').value ="id"
+    }
+    change_button(document.getElementById('search_key_type'))
+    function change_button(event){
+        if(event.value=="id"){
+            document.getElementById('search_key').type = "number"
+        }else{
+            document.getElementById('search_key').type = "text"
+        }
+        document.getElementById('search_key').value = ""
+    }
+    document.getElementById('search_key').value = "{{keyword}}"
+    document.getElementById('remove').addEventListener('click',function(){
+    let id= ""
+    let count = 0
+    let z = document.getElementsByClassName('delect_box')
+    for(let i=0;i<z.length;i++){
+        if(z[i].checked){
+            count+=1
+            id+=z[i].value+'、)'
+        }
+    }
+    if(count==0){
+        swal({
+        title: "您沒有要刪除的資料!",
+        text: "You have no data to delete!",
+        icon: "error",
+        dangerMode: true,
+        })
+    }else{
+        swal({
+        title: "是否刪除"+count+"筆資料!",
+        text: "Please confirm whether to delete the data !",
+        icon: "warning",
+        buttons:['我再考慮一下','刪除'],
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            data_dict = {
+                'id':id,
+                'type':'delete'
+            }
+            $.ajax({
+                url:'{% url "total_type_admin_change" %}',
+                type:'POST',
+                data:data_dict,
+                dataType:'json',
+                success:function(mesg){
+                    swal({
+                        title: "恭喜您更改成功!",
+                        text: "You change the data!",
+                        icon: "success",
+                        button: "好的",
+                        }).then((value) => {
+                            window.location.reload();
+                        });
+                },
+                error:function(mesg){
+                    swal({
+                        title: "資料錯誤!",
+                        text: mesg.statusText,
+                        icon: "error",
+                        button: "好的",
+                        }).then((value) => {
+                    });
+                }
+            })
+        }
+        });
+    }
+})
+    window.onload = function(){
+        $('.hidd_div').hide()
+    }
+    function page_fun(state){
+    page = document.getElementById('getjob_submit')
+    page2 = document.getElementById('page').value
+    if(state == 'last'){
+        page.page.value =parseInt(page2,10)-1
+        page.submit()
+    }else if(state == 'next'){
+        page.page.value =parseInt(page2,10)+1
+        page.submit()
+    }else{
+        page.page.value = parseInt(state,10)
+        page.submit()
+    }
+
+}
+function change_member(event,count){
+    if(event.target.nodeName !='INPUT'){
+    $('.card-body').hide()
+    $('#page_search').hide()
+    z =  document.getElementsByClassName('crawler_total')[count-1]
+    let inner =  document.getElementsByClassName('inner')
+    z=z.children
+    for(let i=1;i<z.length;i++){
+            inner[i-1].value =  z[i].innerHTML;
+    }
+    $('.hidd_div').show()
+    }
+
+document.getElementById('update').addEventListener('click',total_type_update)
+}
+
+function total_type_update(){
+    let update = document.getElementsByClassName('inner')
+    data_dict  ={}
+    data_dict['id'] = update[0].value
+    data_dict['total_type'] = update[1].value
+    data_dict['type'] = 'update';
+    $.ajax({
+                url:'{% url "total_type_admin_change" %}',
+                type:'POST',
+                data:data_dict,
+                dataType:'json',
+                success:function(mesg){
+                    if(mesg.status == "error"){
+                        message = JSON.parse(mesg.message)
+                        var m = "";
+                        var n = message;
+                        for(var error in message){
+                            m+=message[error][0]['message']+'\n\n';
+                        }
+                        swal({
+                        title: "資料錯誤",
+                        text: m,
+                        icon: "error",
+                        button: "好的",
+                        })
+
+                    }
+                    else if(mesg.status == "error_other"){
+                        swal({
+                        title: "資料錯誤",
+                        text: mesg.message,
+                        icon: "error",
+                        button: "好的",
+                        })
+                    }else{
+                        swal({
+                            title: "恭喜您更改成功!",
+                            text: "You change the data!",
+                            icon: "success",
+                            button: "好的",
+                            }).then((value) => {
+                                window.location.reload();
+                            });
+                        }
+                },
+                error:function(mesg){
+                    swal({
+                        title: "資料錯誤!",
+                        text: mesg.statusText,
+                        icon: "error",
+                        button: "好的",
+                        }).then((value) => {
+                    });
+                }
+            })
+}
+
+document.getElementById('add').addEventListener('click',function(){
+    $('.card-body').hide()
+    $('#page_search').hide()
+    $('.hidd_div').show()
+    $('.id').hide()
+    document.getElementsByClassName('inner')[0].value = '{{max_id}}'
+    document.getElementById('update').addEventListener('click',add)
+})
+function add(){
+    let update = document.getElementsByClassName('inner')
+    data_dict  ={}
+    data_dict['id'] = 0
+    data_dict['total_type'] = update[1].value
+    data_dict['type'] = 'add';
+    $.ajax({
+                url:'{% url "total_type_admin_change" %}',
+                type:'POST',
+                data:data_dict,
+                dataType:'json',
+                success:function(mesg){
+                    if(mesg.status == "error"){
+                        message = JSON.parse(mesg.message)
+                        var m = "";
+                        var n = message;
+                        for(var error in message){
+                            m+=message[error][0]['message']+'\n\n';
+                        }
+                        swal({
+                        title: "資料錯誤",
+                        text: m,
+                        icon: "error",
+                        button: "好的",
+                        })
+
+                    }else if(mesg.status == "error_other"){
+                        swal({
+                        title: "資料錯誤",
+                        text: mesg.message,
+                        icon: "error",
+                        button: "好的",
+                        })
+                    }
+                    else{
+                        swal({
+                            title: "恭喜您新增成功!",
+                            text: "You change the data!",
+                            icon: "success",
+                            button: "好的",
+                            }).then((value) => {
+                                window.location.reload();
+                            });
+                        }
+                },
+                error:function(mesg){
+                    swal({
+                        title: "資料錯誤!",
+                        text: mesg.statusText,
+                        icon: "error",
+                        button: "好的",
+                        }).then((value) => {
+                    });
+                }
+            })
+}
+
+
+document.getElementById('none_data').addEventListener('click',function(){
+    $('.hidd_div').hide()
+    $('.card-body').show()
+    $('#page_search').show()
+    let inner =  document.getElementsByClassName('inner')
+    for(let i=0;i<inner.length;i++){
+            inner[i].value =  '';
+    }
+    document.getElementById('update').removeEventListener('click',add)
+    document.getElementById('update').removeEventListener('click',total_type_update)
+})
+document.getElementById('btnNavbarSearch').addEventListener('click',function(){
+
+let search  = JSON.parse('{{list_search | safe}}')[document.getElementById('search_index').value]
+search = document.URL.replace('/total_type_admin/',search)
+console.log(search)
+document.getElementById('search_form').action = search
+document.getElementById('search_form').submit()
+})
+</script>
+{% endblock %}

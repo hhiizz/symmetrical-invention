@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en" class="h-100" style="background-color: rgb(243, 232, 232);">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.98.0">
+    <title>會員中心</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    {% load static %}
+    <link href="{% static 'css/member.css' %}" rel="stylesheet" type="text/css">
+    {% load static %}
+    <link href="{% static 'css/cover.css' %}" rel="stylesheet" type="text/css">
+
+      {% load static %}
+      <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+      <link rel="stylesheet" href="{% static 'css/hint.css' %}" type="text/css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+      <link rel="shortcut icon"   href="../../static/images/logo/logo-removebg-preview.png" type="image/x-icon" />
+
+  </head>
+
+
+<!-- 879 改　768　錯誤的話 -->
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      /* @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+
+      } */
+      @media screen  and (min-width:600px){
+            nav.nav{
+            margin-left:25%  !important;
+
+        }
+    }
+    @media screen and(max-width:768px) {
+      div h3{
+          text-align: center;
+        }
+    }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      /*搜索框1*/
+
+        .bar1 button {
+            top: 0;
+            right: 0;
+            background: #7BA7AB;
+            width: 100%;
+            border-radius: 5px 5px 5px 5px;
+        }
+        #button_fun{
+          height: 45px;
+          width: 7%;
+        }
+        .flex-container {
+        width: 80%;
+        display: flex ;
+        flex-wrap: nowrap;
+        justify-content: center;
+        margin-left: 13%;
+        }
+        h3.mag{
+          margin-left:207px;
+        }
+
+        .backdiv2{
+          padding-top: 20px;
+          margin: -17px;
+          align-items: center;
+          background-color: rgb(61, 69, 77);
+          background-repeat: no-repeat;
+          width: cover;
+          height:100px;
+          position: sticky;
+          display: block !important;
+        }
+      .menu{
+        position: absolute;
+        left: 10px;
+        top: 30px;
+        margin-right: 10px;
+        display: none;
+      }
+      @media (max-width: 879px) {
+        #content1{
+        border-radius: 0px 5px 0px 0px;
+        display: block !important;
+          position:fixed;
+          left: -135px;
+          transition: 2s;
+          min-width: 70px !important;
+          overflow-y: hidden;
+        }
+        .menu{
+        display: block;
+      }
+      }
+
+
+      @media  (max-width: 600px) {
+      div.mb-auto div h3{
+        margin-left:-80%;
+        text-align: center;
+        display: inline-block;
+      }
+
+      div.mb-auto div nav{
+        position: static;
+        /* top: 1.8%;
+        left: 56%;
+        width: 50%;
+        margin: 0px; */
+        margin-left: 10px !important;
+        margin-left: 65% !important;
+        margin-top: -35px !important;
+      }
+      nav.nav{
+            margin-left:-10%  !important;
+        }
+        div h3.mag{
+          text-align: left !important;
+          margin-left:-40% !important;
+        }
+        #content1{
+                        width: 20% !important;
+                }
+    }
+    /* @media (max-width:510px){
+        nav.nav{
+          margin-left: 0px !important;
+        margin-left: 15% !important;
+        margin-top: -35px !important;
+        }
+        /* #content1{
+          width: 20% !important;
+        }
+        .divcolor{
+            overflow-x: hidden !important;
+          }
+    }
+    @media screen and (max-width:478px) {
+      nav.nav{
+          margin-left: 0px !important;
+        margin-left: 0% !important;
+        margin-top: -35px !important;
+        }
+    } */
+    .dropbtn{
+          border-radius: 0px 0px 15px 15px;
+          z-index: 1;
+          position:absolute;
+          top:35px;
+          display:none;
+          background:rgb(255, 255, 255);
+          box-shadow: 30px 8px 16px 2px rgba(0,0,0,0.2);
+          width:125px;
+        }
+        .ahe{
+        background-color: rgb(255, 255, 255);
+        padding: 12px 16px;
+        display: block;
+        text-align: left;
+        transition: 0.7s;
+        }
+        .ahe a{
+          text-decoration: none;
+          text-align: center;
+          display: block;
+          transition: 0.7s;
+          color: black;
+        }
+        h3.mag{
+          margin-left:207px;
+        }
+    #dropdown-toggle{
+      position: relative;;
+    }
+    #dropdown-toggle:hover .dropbtn ,.ahe:hover{
+        display: block;
+      }
+      .ahe:hover{
+      background-color: #b8acac;
+      color: rgb(216, 202, 202);
+      width: 127px;
+    }
+    .ahe a{
+      font-weight: bolder;
+      border:none;background-color: rgb(216, 202, 202,0);
+    }
+    .ahe :hover,.ahe:hover #zzz{
+      color: rgb(216, 202, 202);
+    }
+    .cover_base{
+                visibility:hidden;
+                transition: 1s;
+                position:fixed !important;
+                top: 0;
+                left: 0;
+                background-color: rgb(42, 38, 38);
+                opacity: 0;
+                height:100%;
+                width: 100%;
+                z-index: 3;
+      }
+      #zzz{
+      position: absolute;
+      bottom: 0px;
+      color: rgba(255, 0, 0, 0.678);
+      left: 36px;
+      transition: 0.7s;
+      font-size: 23px;
+    }
+
+    @media screen and (max-width:500px) {
+        div.mb-auto div nav{
+        position: static;
+        margin-left: 10px !important;
+        margin-left: 55% !important;
+        margin-top: -35px !important;
+      }
+    }
+    @keyframes tomenu{
+      from{
+        left:-130px;
+    }
+      to{
+          left:0px;
+      }
+    }
+    html{
+      overflow-x: hidden;
+    }
+    nav.nav a:hover,nav.nav div:hover{
+          color: white !important;
+      }
+    </style>
+
+    <!-- Custom styles for this template -->
+  </head>
+<body class="d-flex h-100 text-center text-white " style="width:99.8%; height: 99.7% !important; background-size: cover;min-width: 337px;;">
+  <div class="cover_base zindex-dropdown"></div>
+<div class="cover-container d-flex w-100 h-100 p-3  flex-column " style="max-width: 100%;">
+
+  <div class="mb-auto width" style="width:100%;z-index: auto !important;min-height: 92.5%;">
+
+    <div class="backdiv2 fixed-top zindex-sticky" >
+      <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-list menu" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+      </svg>
+      <h3 class="float-md-start mb-0 mag" style="margin-left:10%;"><a class="text-decoration-none text-white" href="{% url 'definepage' %}">Find job</a></h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end" style="margin-right:10%;">
+        <a class="nav-link fw-bold py-1 px-0" href="{% url 'definepage' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+          </svg>主頁</a>
+        <a class="nav-link fw-bold py-1 px-0 " aria-current="page" href="{% url 'search_job' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+          查詢</a>
+        <div class="btn dropdown-toggle nav-link fw-bold py-1 px-0 active" id="dropdown-toggle" style="font-size: 14px;" >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg>&thinsp;{{user_name |  truncatechars_html:4 }} ...的帳號
+          <div class="dropbtn" id="dropbtn">
+            <div class="ahe" >
+              <a id="userserver" href="{% url 'control_center' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16" style="margin-left:-8px;margin-right: 4px;">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                </svg><b>用戶中心</b></a>
+            </div>
+            <div class="ahe position-relative"><a href="{% url 'notice' %}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bell mr-2" viewBox="0 0 16 16">
+                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+              </svg>
+              {% if count_notice %}
+              <ul id="zzz"><li></li></ul>
+              {% endif %}
+            通知</a>
+          </div>
+          {%if power == 'manage' %}
+          <div class="ahe"><a href="{% url 'admin_index' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18"  height="18" fill="currentColor" class="bi bi-gear mr-2" viewBox="0 0 16 16">
+              <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+              <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+            </svg>
+          後臺管理</a>
+        </div>
+        {% endif %}
+            <div class="ahe" style="border-radius: 0px 0px 15px 15px;"><a href="{% url 'out' %}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unindent" viewBox="0 0 16 16" >
+                <path fill-rule="evenodd" d="M13 8a.5.5 0 0 0-.5-.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H12.5A.5.5 0 0 0 13 8Z"/>
+                <path fill-rule="evenodd" d="M3.5 4a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 1 0v-7a.5.5 0 0 0-.5-.5Z"/>
+              </svg>登出</a>
+            </div>
+          <div>
+        </div>
+      </nav>
+    </div>
+    {% block main2 %}{% endblock %}
+  </div>
+</div>
+</body>
+<script>
+$(document).mouseup(function (e) {
+  if(e.target.id != 'love' && e.target.id != 'super_function' && e.target.id !='member_user' && e.target.id!='control_center'){
+    if(window.innerWidth<879)
+    $("#content1").css({ "left": "-135px" });
+    $('.cover_base').css({'visibility':'hidden'})
+    $('.cover_base').css({'opacity':'0'})
+  }
+})
+window.addEventListener('scroll', function() {
+  if(window.innerWidth<879)
+    $("#content1").css({ "left": "-135px" });
+    $('.cover_base').css({'visibility':'hidden'})
+    $('.cover_base').css({'opacity':'0'})
+});
+$(".menu").mouseup(function(e){
+    if($("#content1").css("left")=='-135px'){
+      e.stopPropagation(); //阻止冒泡
+        $("#content1").css({ "left": "0px" });
+        $('.cover_base').css({'visibility':'visible'})
+        $('.cover_base').css({'opacity':'0.35'})
+    }
+})
+
+// ----------
+$('.title_0').mouseup(function () {
+  if( $(".control").css('visibility')=='visible'){
+    $(".control").css({ "visibility": "hidden" });
+    $(".control").css({ "height": "0px" });
+    $(".control").css({ "opacity": "0" });
+    document.getElementsByClassName('img_abs')[0].style.transform = 'rotate(0deg)';
+    // $('.img_abs').css({'transform':'ratate(0deg)'})
+  }else{
+    $(".control").css({ "visibility": "visible" });
+    $(".control").css({ "height": "60px" });
+    $(".control").css({ "opacity": "1" });
+    document.getElementsByClassName('img_abs')[0].style.transform = 'rotate(90deg)';
+    // $('.img_abs').css({'transform':'ratate(90deg)'})
+  }
+})
+$('.title_1').mouseup(function () {
+  if( $(".Table_of_content").css('visibility')=='visible'){
+    $(".Table_of_content").css({ "visibility": "hidden" });
+    $(".Table_of_content").css({ "height": "0px" });
+    $(".Table_of_content").css({ "opacity": "0" });
+    document.getElementsByClassName('img_abs')[1].style.transform = 'rotate(0deg)';
+  }else{
+    $(".Table_of_content").css({ "visibility": "visible" });
+    $(".Table_of_content").css({ "height": "60px" });
+    $(".Table_of_content").css({ "opacity": "1" });
+    document.getElementsByClassName('img_abs')[1].style.transform = 'rotate(90deg)';
+  }
+})
+$('.title_2').mouseup(function () {
+  if( $(".function").css('visibility')!='visible'){
+    $(".function").css({ "visibility": "visible" });
+    $(".function").css({ "height": "60px" });
+    $(".function").css({ "opacity": "1" });
+    document.getElementsByClassName('img_abs')[2].style.transform = 'rotate(90deg)';
+  }else{
+    $(".function").css({ "visibility": "hidden" });
+    $(".function").css({ "height": "0px" });
+    $(".function").css({ "opacity": "0" });
+    document.getElementsByClassName('img_abs')[2].style.transform = 'rotate(0deg)';
+  }
+
+})
+$('.title_3').mouseup(function () {
+  if( $(".Table_of_content_member").css('visibility')!='visible'){
+    $(".Table_of_content_member").css({ "visibility": "visible" });
+    $(".Table_of_content_member").css({ "height": "60px" });
+    $(".Table_of_content_member").css({ "opacity": "1" });
+    document.getElementsByClassName('img_abs')[3].style.transform = 'rotate(90deg)';
+  }else{
+    $(".Table_of_content_member").css({ "visibility": "hidden" });
+    $(".Table_of_content_member").css({ "height": "0px" });
+    $(".Table_of_content_member").css({ "opacity": "0" });
+    document.getElementsByClassName('img_abs')[3].style.transform = 'rotate(0deg)';
+  }
+})
+$(document).mouseup(function(e){
+  if( $(".Table_of_content").css('visibility')=='visible'){
+    $(".Table_of_content").css({ "visibility": "hidden" });
+    $(".Table_of_content").css({ "height": "0px" });
+    $(".Table_of_content").css({ "opacity": "0" });
+    document.getElementsByClassName('img_abs')[1].style.transform = 'rotate(0deg)';
+  }else if($(".function").css('visibility')=='visible'){
+    $(".function").css({ "visibility": "hidden" });
+    $(".function").css({ "height": "0px" });
+    $(".function").css({ "opacity": "0" });
+    document.getElementsByClassName('img_abs')[2].style.transform = 'rotate(0deg)';
+  }else if($(".Table_of_content_member").css('visibility')=='visible'){
+    $(".Table_of_content_member").css({ "visibility": "hidden" });
+    $(".Table_of_content_member").css({ "height": "0px" });
+    $(".Table_of_content_member").css({ "opacity": "0" });
+    document.getElementsByClassName('img_abs')[3].style.transform = 'rotate(0deg)';
+  }else if($(".control").css('visibility')=='visible'){
+    $(".control").css({ "visibility": "hidden" });
+    $(".control").css({ "height": "0px" });
+    $(".control").css({ "opacity": "0" });
+    document.getElementsByClassName('img_abs')[0].style.transform = 'rotate(0deg)';
+  }
+})
+
+// $(document).mouseup(function () {
+//   alert(123)
+//     $("#content1").css({ "height": "0px" });
+//     $(".Table_of_contents").css({ "width": "0px" });
+//     $(".Table_of_contents").css({ "display": "none" });
+// })
+
+// $(".menu").mouseup(function(e){
+//     if($("#content1").css("height")=='0px'){
+//       alert(456)
+//       e.stopPropagation(); //阻止冒泡
+//     $("#content1").css({ "height": "100%" });
+//     $(".Table_of_contents").css({ "display": "block" });
+//     }
+// })
+  window.onload = function(){
+  window.addEventListener('resize', zzy)
+  // if(window.innerWidth<600){
+  //   document.getElementById('content1').style.height=document.getElementsByClassName('content')[0].clientHeight +'px';
+  //   document.getElementsByClassName('cover_base')[0].style.height = (document.getElementsByClassName('content')[0].clientHeight+100)+'px';
+  // }
+  }
+  function zzy(){
+  $('.cover_base').css({'visibility':'hidden'})
+  $('.cover_base').css({'opacity':'0'})
+  // alert(document.getElementsByClassName('content')[0].clientHeight)
+    // document.getElementsByClassName('cover_base')[0].style.height = (document.getElementsByClassName('content')[0].clientHeight+100)+'px';
+    // if(window.innerWidth>600){
+    //       document.getElementById('content1').style.left='0px';
+    //       document.getElementById('content1').style.height='100%';
+    // }else{
+    //   document.getElementById('content1').style.height=document.getElementsByClassName('content')[0].clientHeight +'px';
+    // document.getElementsByClassName('cover_base')[0].style.height = (document.getElementsByClassName('content')[0].clientHeight+100)+'px';
+    //   document.getElementById('content1').style.left='-135px';
+    // }
+  }
+</script>
+</html>
